@@ -30,7 +30,7 @@
     <div class="p-3">
       <!-- Add title that acts as close button on mobile -->
       <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
-        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <a href="index.html" class="text-text-heading text-xl font-bold hover:text-text-primary">Forgotten Cycle</a>
         <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
       </div>
       <div class="flex flex-col divide-y divide-text-heading">
@@ -71,13 +71,15 @@
     <!-- Toolbar -->
     <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
       <div class="flex items-center justify-between">
-        <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
-        <!-- Center section with title and progress -->
-        <div class="flex items-center space-x-4">
+        <div>
+          <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
         </div>
-
-        <!-- Right section with bonus indicators -->
-        <div class="flex items-center space-x-2 text-text-primary">
+        <!-- Center section with title and progress -->
+        <div></div>
+        <!-- Right section with coins -->
+        <div class="flex items-center space-x-2 text-text-primary ml-auto">
+          <img src="images/coins.png" alt="Coins" class="h-6 w-6"/>
+          <span>16,000</span>
         </div>
       </div>
     </div>
@@ -94,45 +96,28 @@
               <div class="text-text-heading font-semibold mb-2">Combat</div>
               <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-spear.png" alt="Perfect Infernal Spear" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Spear</span>
+                  <img src="images/equipment/iron-sword.png" alt="Iron Sword" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Sword</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-shield.png" alt="Perfect Infernal Shield" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Shield</span>
+                  <img src="images/equipment/iron-shield.png" alt="Perfect Infernal Shield" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Shield</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-helmet.png" alt="Perfect Infernal Helmet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Helmet</span>
+                  <img src="images/equipment/iron-m-helmet.png" alt="Iron Medium Helmet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Medium Helmet</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-body.png" alt="Perfect Infernal Body" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Body</span>
+                  <img src="images/equipment/iron-m-body.png" alt="Iron Medium Body" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Medium Body</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-gloves.png" alt="Perfect Infernal Gloves" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Gloves</span>
+                  <img src="images/equipment/iron-m-gloves.png" alt="Iron Medium Gloves" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Medium Gloves</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-boots.png" alt="Perfect Infernal Boots" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Boots</span>
-                </div>
-              </div>
-
-              <!-- Accessories -->
-              <div class="text-text-heading font-semibold mt-4 mb-2">Accessories</div>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/citrine-loot-amulet.png" alt="Citrine Loot Amulet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Citrine Loot Amulet</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/topaz-efficiency-ring.png" alt="Topaz Efficiency Ring" class="h-8 w-8"/>
-                  <span class="text-text-primary">Topaz Efficiency Ring</span>
-                </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/citrine-wisdom-bracelet.png" alt="Citrine Wisdom Bracelet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Citrine Wisdom Bracelet</span>
+                  <img src="images/equipment/iron-m-boots.png" alt="Iron Medium Boots" class="h-8 w-8"/>
+                  <span class="text-text-primary">Iron Medium Boots</span>
                 </div>
               </div>
 
@@ -140,23 +125,31 @@
               <div class="text-text-heading font-semibold mt-4 mb-2">Tools</div>
               <div class="grid grid-cols-2 gap-2">
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-gold-hatchet.png" alt="Perfect Gold Hatchet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Gold Hatchet</span>
+                  <img src="images/tools/no-hatchet.png" alt="Select Hatchet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Hatchet</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-gold-pickaxe.png" alt="Perfect Gold Pickaxe" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Gold Pickaxe</span>
+                  <img src="images/tools/no-pickaxe.png" alt="Select Pickaxe" class="h-8 w-8"/>
+                  <span class="text-text-primary">Pickaxe</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-gold-spade.png" alt="Perfect Gold Spade" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Gold Spade</span>
+                  <img src="images/tools/no-hoe.png" alt="Select Hoe" class="h-8 w-8"/>
+                  <span class="text-text-primary">Hoe</span>
                 </div>
                 <div class="flex items-center space-x-2">
-                  <img src="images/equipment/perfect-infernal-rod.png" alt="Perfect Infernal Rod" class="h-8 w-8"/>
-                  <span class="text-text-primary">Perfect Infernal Rod</span>
+                  <img src="images/tools/no-fishing-rod.png" alt="Select Fishing Rod" class="h-8 w-8"/>
+                  <span class="text-text-primary">Fishing Rod</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/tools/no-bellow.png" alt="Select Bellows" class="h-8 w-8"/>
+                  <span class="text-text-primary">Bellows</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/tools/no-hammer.png" alt="Select Smithing Hammer" class="h-8 w-8"/>
+                  <span class="text-text-primary">Smithing Hammer</span>
                 </div>
               </div>
-            </div>
+              </div>
           </div>
 
           <!-- Skills Overview -->

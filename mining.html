@@ -30,7 +30,7 @@
     <div class="p-3">
       <!-- Add title that acts as close button on mobile -->
       <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
-        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <a href="index.html" class="text-text-heading text-xl font-bold hover:text-text-primary">Forgotten Cycle</a>
         <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
       </div>
       <div class="flex flex-col divide-y divide-text-heading">
@@ -75,17 +75,21 @@
         <!-- Center section with title and progress -->
         <div class="flex items-center space-x-4">
           <div class="flex items-center">
-            <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8 mr-2"/>
+            <img src="images/tools/iron-pickaxe.png" alt="Iron Pickaxe" class="h-8 w-8 mr-2"/>
             <span class="text-text-primary font-semibold">Mining</span>
           </div>
           <div class="w-48 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
             <div class="bg-button-bg h-full shadow-lg" style="width: 80%"></div>
           </div>
-          <span class="text-text-primary">Skill Level 12</span>
+          <span class="text-text-primary">Skill Level 22</span>
         </div>
 
         <!-- Right section with bonus indicators -->
         <div class="flex items-center space-x-2 text-text-primary">
+          <img src="images/blood-bonus.png" alt="Blood Bonus" class="h-6 w-6"/>
+          <span>lvl 16</span>
+          <img src="images/soul-bonus.png" alt="Soul Bonus" class="h-6 w-6 ml-4"/>
+          <span>lvl 1</span>
         </div>
       </div>
     </div>
@@ -93,74 +97,209 @@
     <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <!-- Left Column (5 panels) - Takes up 2/3 of the space -->
-          <div class="lg:col-span-2 space-y-4">
-            <!-- Panel 1 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Copper Ore</h2>
-              <div class="space-y-2">
-                <!-- Content for Panel 1 -->
-                 <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-16 w-16 mb-2"/>
-                 <progress id="copperOreProgress" value="0" max="100" class="w-full h-4 bg-bg-primary rounded-full shadow-inner"></progress>
-                 <span id="copperOreProgressText" class="text-text-primary">0/100</span>
-                 <button id="mineCopperOre" class="mt-4 px-4 py-2 bg-button-bg text-button-text rounded hover:bg-button-bg-hover">Start</button>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Ore stats -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="text-2xl font-bold text-text-heading">Copper</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">1</span>
+                    <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">20/20</span>
+                    <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <!-- Panel 2 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">XP</h2>
-              <div class="space-y-2">
-                <!-- Content for Panel 2 -->
-                <div class="flex justify-between items-center">
-                  <img src="images/strength.png" alt="Strength" class="h-8 w-8"/>
-                  <span class="text-text-primary">1 XP</span>
-                  <span class="text-text-primary">Per Attack</span>
+              <div class="flex flex-col items-center mt-4">
+                <img src="images/mining/copper-ore.png" alt="Copper" class="h-16 w-16 mb-2"/>
+                <div class="w-full flex justify-center">
+                  <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
+                    <div class="bg-button-bg h-full" style="width: 100%"></div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- Panel 3 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Inventory</h2>
+            <!-- Skills Overview -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">XP</h2>
               <div class="space-y-2">
-                <!-- Content for Panel 3 -->
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/strength.png" alt="Strength" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Strength 1 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Attack</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/tools/iron-pickaxe.png" alt="Mining" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Mining 300 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Ore</span>
+                </div>
               </div>
             </div>
 
-            <!-- Panel 4 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Statistics</h2>
+            <!-- Drops Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Drops</h2>
               <div class="space-y-2">
-                <!-- Content for Panel 4 -->
-              </div>
-            </div>
-
-            <!-- Panel 5 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Achievements</h2>
-              <div class="space-y-2">
-                <!-- Content for Panel 5 -->
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Copper Ore 1-3</span>
+                  </div>
+                  <span class="text-text-primary text-right">Always</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column (2 panels) - Takes up 1/3 of the space -->
+          <!-- Right Column -->
           <div class="space-y-4">
-            <!-- Right Panel 1 -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Skills</h2>
-              <div class="space-y-2">
-                <!-- Content for Right Panel 1 -->
+            <!-- Stats Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-2xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-pickaxe.png" alt="Iron Pickaxe" class="h-8 w-8"/>
+              </div>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <!-- Left Column -->
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Max Damage:</span>
+                    <span class="text-text-primary font-bold">5</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Accuracy:</span>
+                    <span class="text-text-primary font-bold">100%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Attack Speed:</span>
+                    <span class="text-text-primary font-bold">6s</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Crit Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Ore Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Right Panel 2 -->
+            <!-- Mine Panel -->
             <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Bonuses</h2>
-              <div class="space-y-2">
-                <!-- Content for Right Panel 2 -->
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Mine</h2>
+              <div class="space-y-1">
+                <!-- Ore rows -->
+                <div class="grid grid-cols-1 gap-2">
+                  <!-- Copper -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/mining/copper-ore.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Copper</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">20</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑 30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-pickaxe.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Iron -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/mining/iron-ore.png" alt="Tin" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Iron</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-pickaxe.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Locked levels at the bottom -->
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 30</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 40</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 50</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

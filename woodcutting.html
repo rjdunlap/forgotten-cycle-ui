@@ -30,7 +30,7 @@
     <div class="p-3">
       <!-- Add title that acts as close button on mobile -->
       <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
-        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <a href="index.html" class="text-text-heading text-xl font-bold hover:text-text-primary">Forgotten Cycle</a>
         <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
       </div>
       <div class="flex flex-col divide-y divide-text-heading">
@@ -97,148 +97,382 @@
     <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <div class="grid grid-cols-2 gap-4">
-          <!-- Equipment Stats -->
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Fir</h2>
-            <div class="space-y-2">
-              <div class="flex justify-between">
-                <span class="text-text-primary">Level</span>
-                <span class="text-text-primary font-bold">42</span>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Tree stats -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="text-2xl font-bold text-text-heading">Fir</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">1</span>
+                    <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">20/20</span>
+                    <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
+                  </div>
+                </div>
               </div>
-              <div class="flex justify-between">
-                <span class="text-text-primary">Experience</span>
-                <span class="text-text-primary font-bold">124,567 / 150,000</span>
+              <div class="flex flex-col items-center mt-4">
+                <img src="images/woodcutting/Fir.png" alt="Fir" class="h-16 w-16 mb-2"/>
+                <div class="w-full flex justify-center">
+                  <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
+                    <div class="bg-button-bg h-full" style="width: 100%"></div>
+                  </div>
+                </div>
               </div>
-              <div class="flex justify-between">
-                <span class="text-text-primary">Gold</span>
-                <span class="text-text-primary font-bold">1,234,567</span>
+            </div>
+
+            <!-- Skills Overview -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">XP</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/strength.png" alt="Strength" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Strength 1 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Attack</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/tools/iron-hatchet.png" alt="Woodcutting" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Woodcutting 300 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Tree</span>
+                </div>
               </div>
+            </div>
+
+            <!-- Drops Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Drops</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/logs/fir-log.png" alt="Fir Log" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Fir Log 1-3</span>
+                  </div>
+                  <span class="text-text-primary text-right">Always</span>
+                </div>
+              </div>
+            </div>
+            <!-- Start Button -->
+            <div class="mt-4">
+              <button class="w-full bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                Start
+              </button>
             </div>
           </div>
 
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">XP</h2>
-            <div class="space-y-2">
-              <div class="flex justify-between">
-                <span class="text-text-primary">Level</span>
-                <span class="text-text-primary font-bold">42</span>
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <!-- Stats Panel - Hidden -->
+            <div class="hidden bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-2xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8"/>
               </div>
-              <div class="flex justify-between">
-                <span class="text-text-primary">Experience</span>
-                <span class="text-text-primary font-bold">124,567 / 150,000</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-text-primary">Gold</span>
-                <span class="text-text-primary font-bold">1,234,567</span>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <!-- Left Column -->
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Max Damage:</span>
+                    <span class="text-text-primary font-bold">5</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Accuracy:</span>
+                    <span class="text-text-primary font-bold">100%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Attack Speed:</span>
+                    <span class="text-text-primary font-bold">6s</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Crit Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Log Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Skills Overview -->
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Stats</h2>
-            <div class="space-y-2">
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Woodcutting</span>
-                <span class="text-text-primary font-bold">82</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Mining</span>
-                <span class="text-text-primary font-bold">75</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Smithing</span>
-                <span class="text-text-primary font-bold">68</span>
-              </div>
-            </div>
-          </div>
+            <!-- Cut Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Cut</h2>
+              <div>
+                <!-- Tree rows -->
+                <div class="grid grid-cols-1 divide-y divide-text-heading">
+                  <!-- Fir -->
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Fir.png" alt="Fir" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Fir</span>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">20</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑 30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
 
-          <!-- Cut Panel -->
-          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-            <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Cut</h2>
-            <div class="space-y-1">
-              <!-- Tree rows -->
-              <div class="grid grid-cols-1 gap-2">
-                <!-- Fir -->
-                <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
-                  <div class="flex items-center">
-                    <img src="images/woodcutting/Fir.png" alt="Fir" class="h-8 w-8 mr-3"/>
-                    <span class="text-text-primary font-semibold">Fir</span>
-                  </div>
-                  <div class="flex items-center space-x-4">
+                  <!-- Elm -->
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
                     <div class="flex items-center">
-                      <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">20</span>
+                      <img src="images/woodcutting/Elm.png" alt="Elm" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Elm</span>
                     </div>
-                    <div class="flex items-center">
-                      <span class="text-text-primary">🕑 30s</span>
-                    </div>
-                    <div class="flex items-center">
-                      <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">10 xp/s</span>
-                    </div>
-                    <div class="flex items-center">
-                      <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">lvl 2 - 11/93</span>
+                    <div class="flex items-center space-x-3">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑 30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">15 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 15 - 45/93</span>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- Elm -->
-                <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
-                  <div class="flex items-center">
-                    <img src="images/woodcutting/Elm.png" alt="Elm" class="h-8 w-8 mr-3"/>
-                    <span class="text-text-primary font-semibold">Elm</span>
+                  <!-- Add more trees following the same pattern -->
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Beech.png" alt="Beech" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Beech</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center space-x-4">
-                    <div class="flex items-center">
-                      <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">40</span>
-                    </div>
-                    <div class="flex items-center">
-                      <span class="text-text-primary">🕑30s</span>
-                    </div>
-                    <div class="flex items-center">
-                      <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">10 xp/s</span>
-                    </div>
-                    <div class="flex items-center">
-                      <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
-                      <span class="text-text-primary">lvl 2 - 11/93</span>
-                    </div>
-                  </div>
-                </div>
 
-                <!-- Add similar blocks for other trees: Beech, Oak, Birch, Maple, Willow, Cypress, Rubra -->
-                <!-- Locked levels at the bottom -->
-                <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
-                  <div class="flex items-center">
-                    <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
-                    <span class="text-text-primary font-semibold">???</span>
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Oak.png" alt="Oak" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Oak</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center">
-                    <span class="text-text-primary">Locked lvl 90</span>
-                  </div>
-                </div>
 
-                <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
-                  <div class="flex items-center">
-                    <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
-                    <span class="text-text-primary font-semibold">???</span>
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Birch.png" alt="Birch" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Birch</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center">
-                    <span class="text-text-primary">Locked lvl 100</span>
-                  </div>
-                </div>
 
-                <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
-                  <div class="flex items-center">
-                    <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
-                    <span class="text-text-primary font-semibold">???</span>
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Maple.png" alt="Maple" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Maple</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center">
-                    <span class="text-text-primary">Locked lvl 110</span>
+
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Willow.png" alt="Willow" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Willow</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Cypress.png" alt="Cypress" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Cypress</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between py-1 hover:bg-bg-primary cursor-pointer">
+                    <div class="flex items-center">
+                      <img src="images/woodcutting/Rubra.png" alt="Rubra" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">Rubra</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Locked levels at the bottom -->
+                  <div class="flex items-center justify-between py-1 cursor-not-allowed bg-gray-800">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 90</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between py-1 cursor-not-allowed bg-gray-800">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 100</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between py-1 cursor-not-allowed bg-gray-800">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-2"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 110</span>
+                    </div>
                   </div>
                 </div>
               </div>
