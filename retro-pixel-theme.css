@@ -1,0 +1,9 @@
+:root {
+  --color-bg-primary: #4A148C; /* Bright purple */
+  --color-text-primary: #FFFFFF; /* Pure white */
+  --color-text-heading: #FFEB3B; /* Bold yellow */
+  --color-button-bg: #69F0AE; /* Neon green */
+  --color-button-bg-hover: #00C853; /* Darker neon green (derived) */
+  --color-button-text: #4A148C; /* Bright purple */
+  --color-panel-bg: #F06292; /* Pixel pink */
+}

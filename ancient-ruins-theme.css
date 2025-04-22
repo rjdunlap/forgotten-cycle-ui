@@ -1,0 +1,10 @@
+:root {
+  --color-bg-primary: #F5E0C3; /* Sandy beige */
+  --color-text-primary: #4E342E; /* Dark brown */
+  --color-text-heading: #B87333; /* Copper */
+  --color-button-bg: #8E9775; /* Ancient moss */
+  --color-button-bg-hover: #70785C; /* Darker moss (derived) */
+  --color-button-text: #F5E0C3; /* Sandy beige */
+  /* Add other variables if needed, e.g., for panel backgrounds */
+  --color-panel-bg: #C0A98E; /* Weathered stone */
+}

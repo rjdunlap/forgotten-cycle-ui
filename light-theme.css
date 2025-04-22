@@ -1,0 +1,8 @@
+:root {
+  --color-bg-primary: #f3f4f6; /* gray-100 */
+  --color-text-primary: #374151; /* gray-700 */
+  --color-text-heading: #2563eb; /* blue-600 */
+  --color-button-bg: #22c55e; /* green-500 */
+  --color-button-bg-hover: #16a34a; /* green-600 */
+  --color-button-text: #ffffff; /* white */
+}

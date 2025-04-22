@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link id="theme-style" rel="stylesheet" href="ancient-ruins-theme.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="navMenu" class="fixed top-0 left-0 h-full w-64 bg-panel-bg transform -translate-x-full xl:translate-x-0 transition-transform duration-300 border-r border-text-heading z-30">
+    <div class="p-3">
+      <!-- Add title that acts as close button on mobile -->
+      <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
+        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
+      </div>
+      <div class="flex flex-col divide-y divide-text-heading">
+        <a href="profile.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/profile.png" alt="Profile" class="h-6 w-6 mr-3"/>
+          Profile
+        </a>
+        <a href="inventory.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/inventory.png" alt="Inventory" class="h-6 w-6 mr-3"/>
+          Inventory
+        </a>
+        <a href="woodcutting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/woodcutting/Fir.png" alt="Woodcutting" class="h-6 w-6 mr-3"/>
+          Woodcutting
+        </a>
+        <a href="mining.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/mining/obsidien-ore.png" alt="Mining" class="h-6 w-6 mr-3"/>
+          Mining
+        </a>
+        <a href="smelting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smelting/mithril-bar.png" alt="Smelting" class="h-6 w-6 mr-3"/>
+          Smelting
+        </a>
+        <a href="smithing.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smithing.png" alt="Smithing" class="h-6 w-6 mr-3"/>
+          Smithing
+        </a>
+        <a href="ashen-forging.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/ashen-forging.png" alt="Ashen Forging" class="h-6 w-6 mr-3"/>
+          Ashen Forging
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <div>
+          <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        </div>
+        <!-- Center section with title and progress -->
+        <div></div>
+        <!-- Right section with coins -->
+        <div class="flex items-center space-x-2 text-text-primary ml-auto">
+          <img src="images/coins.png" alt="Coins" class="h-6 w-6"/>
+          <span>16,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div class="lg:col-span-2 space-y-4">
+            <!-- Inventory Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Inventory</h2>
+              <!-- Search Bar -->
+              <div class="relative mb-4">
+                <input type="text" placeholder="Search inventory" class="w-full bg-bg-primary text-text-primary px-4 py-2 rounded border border-text-heading focus:outline-none focus:ring-2 focus:ring-text-heading">
+                <span class="absolute right-3 top-2.5 text-text-primary">76 / 100 Slots</span>
+              </div>
+
+              <!-- Inventory Grid -->
+              <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                <!-- Example Item Slot -->
+                <div class="relative bg-bg-primary p-2 rounded border border-text-heading hover:border-text-primary cursor-pointer">
+                  <img src="images/woodcutting/Fir.png" alt="Fir Wood" class="w-full h-auto"/>
+                  <span class="absolute bottom-1 right-1 text-text-primary text-sm">5.5K</span>
+                </div>
+                <!-- Add more item slots as needed -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column - Item Details -->
+          <div class="space-y-4">
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Item</h2>
+              <div class="space-y-4">
+                <!-- Item Details when selected -->
+                <div class="text-center text-text-primary">
+                  Empty
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme selector -->
+    <div class="fixed bottom-4 right-4">
+      <label for="theme-select" class="sr-only">Select Theme:</label>
+      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
+        <option value="ancient-ruins">Ancient Ruins</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro-pixel">Retro Pixel</option>
+        <option value="dark-fantasy">Dark Fantasy</option>
+        <option value="mystic-winter">Mystic Winter</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="scripts.js" defer></script>
+  <script src="inventory.js" defer></script>
+</body>
+</html>

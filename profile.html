@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link id="theme-style" rel="stylesheet" href="ancient-ruins-theme.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="navMenu" class="fixed top-0 left-0 h-full w-64 bg-panel-bg transform -translate-x-full xl:translate-x-0 transition-transform duration-300 border-r border-text-heading z-30">
+    <div class="p-3">
+      <!-- Add title that acts as close button on mobile -->
+      <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
+        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
+      </div>
+      <div class="flex flex-col divide-y divide-text-heading">
+        <a href="profile.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/profile.png" alt="Profile" class="h-6 w-6 mr-3"/>
+          Profile
+        </a>
+        <a href="inventory.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/inventory.png" alt="Inventory" class="h-6 w-6 mr-3"/>
+          Inventory
+        </a>
+        <a href="woodcutting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/woodcutting/Fir.png" alt="Woodcutting" class="h-6 w-6 mr-3"/>
+          Woodcutting
+        </a>
+        <a href="mining.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/mining/obsidien-ore.png" alt="Mining" class="h-6 w-6 mr-3"/>
+          Mining
+        </a>
+        <a href="smelting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smelting/mithril-bar.png" alt="Smelting" class="h-6 w-6 mr-3"/>
+          Smelting
+        </a>
+        <a href="smithing.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smithing.png" alt="Smithing" class="h-6 w-6 mr-3"/>
+          Smithing
+        </a>
+        <a href="ashen-forging.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/ashen-forging.png" alt="Ashen Forging" class="h-6 w-6 mr-3"/>
+          Ashen Forging
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        <!-- Center section with title and progress -->
+        <div class="flex items-center space-x-4">
+        </div>
+
+        <!-- Right section with bonus indicators -->
+        <div class="flex items-center space-x-2 text-text-primary">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Equipment Stats -->
+          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Equipment</h2>
+            <div class="space-y-2">
+              <!-- Combat Equipment -->
+              <div class="text-text-heading font-semibold mb-2">Combat</div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-spear.png" alt="Perfect Infernal Spear" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Spear</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-shield.png" alt="Perfect Infernal Shield" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Shield</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-helmet.png" alt="Perfect Infernal Helmet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Helmet</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-body.png" alt="Perfect Infernal Body" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Body</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-gloves.png" alt="Perfect Infernal Gloves" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Gloves</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-boots.png" alt="Perfect Infernal Boots" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Boots</span>
+                </div>
+              </div>
+
+              <!-- Accessories -->
+              <div class="text-text-heading font-semibold mt-4 mb-2">Accessories</div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/citrine-loot-amulet.png" alt="Citrine Loot Amulet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Citrine Loot Amulet</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/topaz-efficiency-ring.png" alt="Topaz Efficiency Ring" class="h-8 w-8"/>
+                  <span class="text-text-primary">Topaz Efficiency Ring</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/citrine-wisdom-bracelet.png" alt="Citrine Wisdom Bracelet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Citrine Wisdom Bracelet</span>
+                </div>
+              </div>
+
+              <!-- Tools -->
+              <div class="text-text-heading font-semibold mt-4 mb-2">Tools</div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-gold-hatchet.png" alt="Perfect Gold Hatchet" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Gold Hatchet</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-gold-pickaxe.png" alt="Perfect Gold Pickaxe" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Gold Pickaxe</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-gold-spade.png" alt="Perfect Gold Spade" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Gold Spade</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <img src="images/equipment/perfect-infernal-rod.png" alt="Perfect Infernal Rod" class="h-8 w-8"/>
+                  <span class="text-text-primary">Perfect Infernal Rod</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Overview -->
+          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Skills</h2>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="text-text-primary">Woodcutting</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-primary">Mining</span>
+                <span class="text-text-primary font-bold">75</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-primary">Smelting</span>
+                <span class="text-text-primary font-bold">87</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-primary">Smithing</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-text-primary">Ashen Forging</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme selector -->
+    <div class="fixed bottom-4 right-4">
+      <label for="theme-select" class="sr-only">Select Theme:</label>
+      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
+        <option value="ancient-ruins">Ancient Ruins</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro-pixel">Retro Pixel</option>
+        <option value="dark-fantasy">Dark Fantasy</option>
+        <option value="mystic-winter">Mystic Winter</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="scripts.js" defer></script>
+</body>
+</html>

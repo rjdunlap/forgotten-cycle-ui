@@ -1,0 +1,9 @@
+:root {
+  --color-bg-primary: #E3F2FD; /* Ice blue */
+  --color-text-primary: #0D47A1; /* Navy */
+  --color-text-heading: #81D4FA; /* Glacier blue */
+  --color-button-bg: #CFD8DC; /* Soft silver */
+  --color-button-bg-hover: #B0BEC5; /* Darker soft silver (derived) */
+  --color-button-text: #0D47A1; /* Navy */
+  --color-panel-bg: #FFFFFF; /* Frost white */
+}

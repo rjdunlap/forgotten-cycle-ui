@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link id="theme-style" rel="stylesheet" href="ancient-ruins-theme.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="navMenu" class="fixed top-0 left-0 h-full w-64 bg-panel-bg transform -translate-x-full xl:translate-x-0 transition-transform duration-300 border-r border-text-heading z-30">
+    <div class="p-3">
+      <!-- Add title that acts as close button on mobile -->
+      <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
+        <h1 class="text-text-heading text-xl font-bold">Forgotten Cycle</h1>
+        <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
+      </div>
+      <div class="flex flex-col divide-y divide-text-heading">
+        <a href="profile.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/profile.png" alt="Profile" class="h-6 w-6 mr-3"/>
+          Profile
+        </a>
+        <a href="inventory.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/inventory.png" alt="Inventory" class="h-6 w-6 mr-3"/>
+          Inventory
+        </a>
+        <a href="woodcutting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/woodcutting/Fir.png" alt="Woodcutting" class="h-6 w-6 mr-3"/>
+          Woodcutting
+        </a>
+        <a href="mining.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/mining/obsidien-ore.png" alt="Mining" class="h-6 w-6 mr-3"/>
+          Mining
+        </a>
+        <a href="smelting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smelting/mithril-bar.png" alt="Smelting" class="h-6 w-6 mr-3"/>
+          Smelting
+        </a>
+        <a href="smithing.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/smithing.png" alt="Smithing" class="h-6 w-6 mr-3"/>
+          Smithing
+        </a>
+        <a href="ashen-forging.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
+          <img src="images/ashen-forging.png" alt="Ashen Forging" class="h-6 w-6 mr-3"/>
+          Ashen Forging
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        <!-- Center section with title and progress -->
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center">
+            <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8 mr-2"/>
+            <span class="text-text-primary font-semibold">Mining</span>
+          </div>
+          <div class="w-48 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
+            <div class="bg-button-bg h-full shadow-lg" style="width: 80%"></div>
+          </div>
+          <span class="text-text-primary">Skill Level 12</span>
+        </div>
+
+        <!-- Right section with bonus indicators -->
+        <div class="flex items-center space-x-2 text-text-primary">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <!-- Left Column (5 panels) - Takes up 2/3 of the space -->
+          <div class="lg:col-span-2 space-y-4">
+            <!-- Panel 1 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Copper Ore</h2>
+              <div class="space-y-2">
+                <!-- Content for Panel 1 -->
+                 <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-16 w-16 mb-2"/>
+                 <progress id="copperOreProgress" value="0" max="100" class="w-full h-4 bg-bg-primary rounded-full shadow-inner"></progress>
+                 <span id="copperOreProgressText" class="text-text-primary">0/100</span>
+                 <button id="mineCopperOre" class="mt-4 px-4 py-2 bg-button-bg text-button-text rounded hover:bg-button-bg-hover">Start</button>
+              </div>
+            </div>
+
+            <!-- Panel 2 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">XP</h2>
+              <div class="space-y-2">
+                <!-- Content for Panel 2 -->
+                <div class="flex justify-between items-center">
+                  <img src="images/strength.png" alt="Strength" class="h-8 w-8"/>
+                  <span class="text-text-primary">1 XP</span>
+                  <span class="text-text-primary">Per Attack</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 3 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Inventory</h2>
+              <div class="space-y-2">
+                <!-- Content for Panel 3 -->
+              </div>
+            </div>
+
+            <!-- Panel 4 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Statistics</h2>
+              <div class="space-y-2">
+                <!-- Content for Panel 4 -->
+              </div>
+            </div>
+
+            <!-- Panel 5 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Achievements</h2>
+              <div class="space-y-2">
+                <!-- Content for Panel 5 -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (2 panels) - Takes up 1/3 of the space -->
+          <div class="space-y-4">
+            <!-- Right Panel 1 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Skills</h2>
+              <div class="space-y-2">
+                <!-- Content for Right Panel 1 -->
+              </div>
+            </div>
+
+            <!-- Right Panel 2 -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Bonuses</h2>
+              <div class="space-y-2">
+                <!-- Content for Right Panel 2 -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme selector -->
+    <div class="fixed bottom-4 right-4">
+      <label for="theme-select" class="sr-only">Select Theme:</label>
+      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
+        <option value="ancient-ruins">Ancient Ruins</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro-pixel">Retro Pixel</option>
+        <option value="dark-fantasy">Dark Fantasy</option>
+        <option value="mystic-winter">Mystic Winter</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="scripts.js" defer></script>
+</body>
+</html>
