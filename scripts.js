@@ -49,3 +49,60 @@ document.getElementById('theme-select').addEventListener('change', (event) => {
   const selectedTheme = event.target.value; // Get the value of the selected option
   applyTheme(selectedTheme); // Apply the new theme
 });
+
+// Zone switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all zone buttons and content divs
+    const zoneButtons = document.querySelectorAll('[id^="zone"][id$="_button"]');
+    const zoneContents = document.querySelectorAll('[id^="zone"][id$="_content"]');
+
+    // Function to switch active zone
+    function switchZone(activeIndex) {
+        // Update button styles
+        zoneButtons.forEach((button, index) => {
+            if (index === activeIndex) {
+                button.classList.add('border-b-2', 'border-button-bg');
+                button.classList.remove('hover:text-text-heading');
+            } else {
+                button.classList.remove('border-b-2', 'border-button-bg');
+                button.classList.add('hover:text-text-heading');
+            }
+        });
+
+        // Show/hide content
+        zoneContents.forEach((content, index) => {
+            if (index === activeIndex) {
+                content.classList.remove('hidden');
+            } else {
+                content.classList.add('hidden');
+            }
+        });
+    }
+
+    // Add click event listeners to buttons
+    zoneButtons.forEach((button, index) => {
+        button.addEventListener('click', () => switchZone(index));
+    });
+
+    // Show Zone 1 by default
+    switchZone(0);
+});
+
+// Navigation for woodcutting buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // Start button in woodcutting.html
+    const startButton = document.getElementById('startWoodcuttingButton');
+    if (startButton) {
+        startButton.addEventListener('click', function() {
+            window.location.href = 'woodcutting-active.html';
+        });
+    }
+
+    // Stop button in woodcutting-active.html
+    const stopButton = document.getElementById('stopWoodcuttingButton');
+    if (stopButton) {
+        stopButton.addEventListener('click', function() {
+            window.location.href = 'woodcutting.html';
+        });
+    }
+});
