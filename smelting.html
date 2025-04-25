@@ -94,18 +94,199 @@
       </div>
     </div>
 
-    <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-text-heading mb-4">
-          Hello Tailwind CSS!
-        </h1>
-        <p class="text-text-primary">
-          This is a basic HTML page styled with Tailwind CSS via the Play CDN.
-        </p>
-        <button class="mt-4 px-4 py-2 bg-button-bg text-button-text rounded hover:bg-button-bg-hover">
-          Click Me
-        </button>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Ore stats -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="text-2xl font-bold text-text-heading">Copper</h2>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">1</span>
+                    <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
+                  </div>
+                  <div class="flex items-center">
+                    <span class="text-text-primary font-bold">20/20</span>
+                    <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col items-center mt-4">
+                <img src="images/mining/copper-ore.png" alt="Copper" class="h-16 w-16 mb-2"/>
+                <div class="w-full flex justify-center">
+                  <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
+                    <div class="bg-button-bg h-full" style="width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skills Overview -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">XP</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/strength.png" alt="Strength" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Strength 1 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Attack</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/tools/iron-pickaxe.png" alt="Mining" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Mining 300 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Ore</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drops Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Drops</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Copper Ore 1-3</span>
+                  </div>
+                  <span class="text-text-primary text-right">Always</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <!-- Stats Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-2xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-pickaxe.png" alt="Iron Pickaxe" class="h-8 w-8"/>
+              </div>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <!-- Left Column -->
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Smelt Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mine Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Smelt</h2>
+              <div class="space-y-1">
+                <!-- Ore rows -->
+                <div class="grid grid-cols-1 gap-2">
+                  <!-- Copper -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/mining/copper-ore.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Copper</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">20</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑 30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-bellows.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Iron -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/mining/iron-ore.png" alt="Tin" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Iron</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                      <div class="flex items-center">
+                        <img src="images/hp.png" alt="Health" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">40</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">🕑30s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-pickaxe.png" alt="XP" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">10 xp/s</span>
+                      </div>
+                      <div class="flex items-center">
+                        <img src="images/action-bonus3.png" alt="Level" class="h-4 w-4 mr-1"/>
+                        <span class="text-text-primary">lvl 2 - 11/93</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Locked levels at the bottom -->
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 30</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 40</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">???</span>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 50</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
