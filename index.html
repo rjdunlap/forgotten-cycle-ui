@@ -86,15 +86,82 @@
     <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-text-heading mb-4">
-          Hello Tailwind CSS!
-        </h1>
-        <p class="text-text-primary">
-          This is a basic HTML page styled with Tailwind CSS via the Play CDN.
-        </p>
-        <button class="mt-4 px-4 py-2 bg-button-bg text-button-text rounded hover:bg-button-bg-hover">
-          Click Me
-        </button>
+        <!-- Welcome Message and Date/Timer -->
+        <div class="text-center mb-6">
+          <h1 class="text-3xl font-bold text-text-heading mb-2">Welcome Adventurer!</h1>
+          <p class="text-text-primary text-sm">Today is Friday, April 25, 2025</p>
+          <p class="text-text-primary text-sm flex items-center justify-center">
+            🕑 Reset in 12h 45m 03s
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Main Content Area -->
+          <div class="flex-grow space-y-4">
+            <!-- Daily Bonuses Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-3 flex items-center">
+                Daily Bonuses
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center">
+                  <img src="images/tools/iron-pickaxe.png" alt="Gathering" class="h-8 w-8 mr-3"> <!-- Placeholder icon -->
+                  <div>
+                    <p class="font-medium text-text-heading">Gathering</p>
+                    <p class="text-sm text-text-primary">+20% Mining XP</p>
+                  </div>
+                </div>
+                <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center">
+                  <img src="images/tools/iron-bellows.png" alt="Crafting" class="h-8 w-8 mr-3"> <!-- Placeholder icon -->
+                  <div>
+                    <p class="font-medium text-text-heading">Crafting</p>
+                    <p class="text-sm text-text-primary">+10% Smelting Speed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Discord Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="images/icons/discord.png" alt="Discord" class="h-8 w-8 mr-3"> <!-- Placeholder icon -->
+                <div>
+                  <h3 class="text-lg font-semibold text-text-heading">Join our Discord community!</h3>
+                  <p class="text-sm text-text-primary">Trade, patch notes, and feedback!</p>
+                </div>
+              </div>
+              <button class="bg-button-bg hover:bg-button-bg-hover text-button-text font-bold py-2 px-4 rounded transition duration-150">
+                Join
+              </button>
+            </div>
+
+            <!-- Patch Notes Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-2 flex items-center">
+                 <img src="images/icons/patchnotes.png" alt="Patch Notes" class="h-5 w-5 mr-2 opacity-80"> <!-- Placeholder icon -->
+                Patch Notes - v0.3.2
+              </h2>
+              <p class="text-sm text-text-primary mb-3">Deployed on April 25th 2025</p>
+              <ul class="list-disc list-inside text-text-primary space-y-1 text-sm">
+                <li>Live</li>
+                <!-- Add more patch notes here -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Events Sidebar -->
+          <div class="w-full lg:w-1/4">
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-3 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Events
+              </h2>
+              <p class="text-text-primary text-sm">No current events</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
