@@ -1,8 +1,9 @@
+/*
 // JavaScript for theme switching using a dropdown
 const themeSelect = document.getElementById('theme-select'); // Target the select element
 const themeStyle = document.getElementById('theme-style');
 
-// Function to apply the theme based on the selected value (e.g., 'light', 'dark', 'ancient-ruins')
+ Function to apply the theme based on the selected value (e.g., 'light', 'dark', 'ancient-ruins')
 function applyTheme(themeName) {
   const themePath = `${themeName}-theme.css`; // Construct the CSS file path
   themeStyle.href = themePath;
@@ -17,11 +18,13 @@ let currentTheme = localStorage.getItem('theme') || 'light';
 // Apply the initial theme on page load
 applyTheme(currentTheme);
 
+
 // Add event listener to the dropdown for changes
 themeSelect.addEventListener('change', (event) => {
   const selectedTheme = event.target.value; // Get the value of the selected option
   applyTheme(selectedTheme); // Apply the new theme
 });
+*/
 
 // Navigation toggle functionality
 const hamburger = document.getElementById('hamburger');
