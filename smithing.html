@@ -95,22 +95,268 @@
       </div>
     </div>
 
-    <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <h1 class="text-3xl font-bold text-text-heading mb-4">
-          Hello Tailwind CSS!
-        </h1>
-        <p class="text-text-primary">
-          This is a basic HTML page styled with Tailwind CSS via the Play CDN.
-        </p>
-        <button class="mt-4 px-4 py-2 bg-button-bg text-button-text rounded hover:bg-button-bg-hover">
-          Click Me
-        </button>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Ore stats -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="text-2xl font-bold text-text-heading">Copper Hatchet</h2>
+                </div>
+              </div>
+              <div class="flex flex-col items-center mt-4">
+                <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-16 w-16 mb-2"/>
+                <div class="w-full flex justify-center">
+                  <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
+                    <div class="bg-button-bg h-full" style="width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              <!-- Drops Panel -->
+              <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+                <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Materials</h2>
+                <div class="space-y-2">
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                      <img src="images/smelting/copper-bar.png" alt="Copper Bar" class="h-4 w-4 mr-2"/>
+                      <span class="text-text-primary">1 Copper Bar</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <!-- Skills Overview -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Grants</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/constitution.png" alt="Constitution" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Constitution 1 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/tools/iron-bellows.png" alt="Bellows" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Smithing 300 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Copper Hatchet</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+              </div>
+            </div>
+            <!-- Start Button -->
+            <div class="mt-4 flex space-x-2"> <!-- Added flex container and spacing -->
+              <button id="setAmountButton" class="flex-grow bg-gray-600 hover:bg-gray-700 text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200"> <!-- New Amount Button -->
+                Amount
+              </button>
+              <button id="startSmeltingButton" class="flex-grow bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200"> <!-- Adjusted Create Button -->
+                Create
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <!-- Stats Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-2xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-hammer.png" alt="Iron Hammer" class="h-8 w-8"/>
+              </div>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <!-- Left Column -->
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Smelt Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mine Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+
+              <!-- Tabs -->
+              <div class="mb-4 border-b border-text-heading">
+                <nav class="flex space-x-4" aria-label="Tabs">
+                  <button class="border-button-bg text-2xl font-bold text-text-heading whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+                    Tools
+                  </button>
+                  <button class="border-transparent text-2xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+                    Weapons
+                  </button>
+                  <button class="border-transparent text-2xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm">
+                    Armor
+                  </button>
+                </nav>
+              </div>
+
+              <!-- Tab Content Area (Initially showing Tools) -->
+              <div id="toolsTabContent">
+                <div class="space-y-1 mb-4">
+                  <div class="grid grid-cols-5 gap-1">
+                    <div id="hatchetsCategory" class="flex items-center hover:bg-bg-primary rounded cursor-pointer border border-text-heading p-1"> <!-- Added id -->
+                      <img src="images/tools/iron-hatchet.png" alt="Hatchet" class="h-8 w-8 mr-1"/> <span class="text-text-primary text-xs">Hatchets</span>
+                    </div>
+                    <div id="bellowsCategory" class="flex items-center hover:bg-bg-primary rounded cursor-pointer border border-text-heading p-1"> <!-- Added id -->
+                      <img src="images/tools/iron-bellows.png" alt="Bellows" class="h-8 w-8 mr-1"/> <span class="text-text-primary text-xs">Bellows</span>
+                    </div>
+                    <div id="pickaxesCategory" class="flex items-center hover:bg-bg-primary rounded cursor-pointer border border-text-heading p-1"> <!-- Added id -->
+                      <img src="images/tools/iron-pickaxe.png" alt="Pickaxe" class="h-8 w-8 mr-1"/> <span class="text-text-primary text-xs">Pickaxes</span>
+                    </div>
+                    <div id="hammersCategory" class="flex items-center hover:bg-bg-primary rounded cursor-pointer border border-text-heading p-1"> <!-- Added id -->
+                      <img src="images/tools/iron-hammer.png" alt="Hammer" class="h-8 w-8 mr-1"/> <span class="text-text-primary text-xs">Hammers</span>
+                    </div>
+                    <div id="rodsCategory" class="flex items-center hover:bg-bg-primary rounded cursor-pointer border border-text-heading p-1"> <!-- Added id -->
+                      <img src="images/tools/fishing-rod.png" alt="Rod" class="h-8 w-8 mr-1"/> <span class="text-text-primary text-xs">Rods</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="hatchetsList" class="space-y-1"> <!-- This list corresponds to hatchetsCategory -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <!-- Copper -->
+                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                      <div class="flex items-center">
+                        <img src="images/tools/copper-hatchet.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Copper Hatchet</span>
+                      </div>
+                    </div>
+
+                    <!-- Iron -->
+                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-hatchet.png" alt="Iron" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Iron Hatchet</span>
+                      </div>
+                    </div>
+
+                    <!-- Locked levels at the bottom -->
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 30</span>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 40</span>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 50</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="bellowsList" class="space-y-1 hidden">
+                  <div class="grid grid-cols-3 gap-2">
+                    <!-- Copper -->
+                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                      <div class="flex items-center">
+                        <img src="images/tools/copper-bellows.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Copper Bellows</span>
+                      </div>
+                    </div>
+
+                    <!-- Iron -->
+                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                      <div class="flex items-center">
+                        <img src="images/tools/iron-bellows.png" alt="Iron" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Iron Bellows</span>
+                      </div>
+                    </div>
+
+                    <!-- Locked levels at the bottom -->
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 30</span>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 40</span>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                      <div class="flex items-center">
+                        <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="text-text-primary">Locked lvl 50</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="pickaxeList" class="space-y-1 hidden"></div>
+                <div id="hammerList" class="space-y-1 hidden"></div>
+                <div id="rodsList" class="space-y-1 hidden"></div>
+              </div>
+              <!-- Add divs for Weapons and Armor content here, initially hidden -->
+              <div id="weaponsTabContent" class="hidden">
+                <!-- Content for Weapons tab goes here -->
+                <p class="text-text-primary">Weapons content will appear here.</p>
+              </div>
+              <div id="armorTabContent" class="hidden">
+                <!-- Content for Armor tab goes here -->
+                <p class="text-text-primary">Armor content will appear here.</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Theme selector -->
+    <!-- Theme selector 
     <div class="fixed bottom-4 right-4">
       <label for="theme-select" class="sr-only">Select Theme:</label>
       <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
@@ -122,7 +368,7 @@
         <option value="mystic-winter">Mystic Winter</option>
       </select>
     </div>
-  </div>
+    -->
 
   <script src="scripts.js" defer></script>
 </body>

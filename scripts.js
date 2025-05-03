@@ -24,6 +24,11 @@ themeSelect.addEventListener('change', (event) => {
   const selectedTheme = event.target.value; // Get the value of the selected option
   applyTheme(selectedTheme); // Apply the new theme
 });
+
+document.getElementById('theme-select').addEventListener('change', (event) => {
+  const selectedTheme = event.target.value; // Get the value of the selected option
+  applyTheme(selectedTheme); // Apply the new theme
+});
 */
 
 // Navigation toggle functionality
@@ -48,10 +53,7 @@ document.getElementById('closeNav').addEventListener('click', function() {
     hamburger.classList.remove('hidden');
 });
 
-document.getElementById('theme-select').addEventListener('change', (event) => {
-  const selectedTheme = event.target.value; // Get the value of the selected option
-  applyTheme(selectedTheme); // Apply the new theme
-});
+
 
 // Zone switching functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -225,3 +227,134 @@ document.addEventListener('DOMContentLoaded', function() {
         updateStats(isCurrentlySelected ? null : this);
     });
 });
+
+// Single DOMContentLoaded listener for all initializations
+document.addEventListener('DOMContentLoaded', () => {
+    const toolCategories = [
+      { categoryId: 'hatchetsCategory', listId: 'hatchetsList' },
+      { categoryId: 'bellowsCategory', listId: 'bellowsList' },
+      { categoryId: 'pickaxesCategory', listId: 'pickaxeList' }, // Corrected ID based on previous turn
+      { categoryId: 'hammersCategory', listId: 'hammerList' },   // Corrected ID based on previous turn
+      { categoryId: 'rodsCategory', listId: 'rodsList' },       // Corrected ID based on previous turn
+    ];
+
+    const categoryElements = {};
+    const listElements = {};
+    let foundSmithingElements = false; // Flag to check if we are on the smithing page
+
+    // Get references to elements and add click listeners
+    toolCategories.forEach(item => {
+      const categoryEl = document.getElementById(item.categoryId);
+      const listEl = document.getElementById(item.listId);
+
+      if (categoryEl && listEl) {
+        foundSmithingElements = true; // Found at least one pair, assume it's the smithing page
+        categoryElements[item.categoryId] = categoryEl;
+        listElements[item.listId] = listEl;
+
+        // Add click listener to category selector
+        categoryEl.addEventListener('click', () => {
+          // Hide all lists and remove active style from all categories
+          toolCategories.forEach(innerItem => {
+            const innerListEl = listElements[innerItem.listId];
+            const innerCategoryEl = categoryElements[innerItem.categoryId];
+            if (innerListEl) {
+              innerListEl.classList.add('hidden');
+            }
+            if (innerCategoryEl) {
+              innerCategoryEl.classList.remove('border-button-bg', 'bg-bg-primary'); // Remove active styles
+              innerCategoryEl.classList.add('border-text-heading'); // Ensure default border is present
+            }
+          });
+
+          // Show the selected list and apply active style to selected category
+          listEl.classList.remove('hidden');
+          categoryEl.classList.add('border-button-bg', 'bg-bg-primary'); // Add active styles
+          categoryEl.classList.remove('border-text-heading'); // Remove default border if needed
+        });
+      } else {
+         // Don't log warning unless we expect these elements (i.e., foundSmithingElements is true later)
+         // This prevents console spam on pages without smithing elements.
+      }
+    });
+
+    // Set initial active state only if smithing elements were found
+    if (foundSmithingElements) {
+        const initialCategory = categoryElements['hatchetsCategory'];
+        const initialList = listElements['hatchetsList'];
+        if(initialCategory && initialList){
+            initialCategory.classList.add('border-button-bg', 'bg-bg-primary');
+            initialCategory.classList.remove('border-text-heading');
+            // Ensure others are hidden and styled correctly initially
+            Object.values(listElements).forEach(list => {
+                if (list && list.id !== 'hatchetsList') { // Check if list exists before accessing id
+                    list.classList.add('hidden');
+                }
+            });
+             Object.values(categoryElements).forEach(cat => {
+                if (cat && cat.id !== 'hatchetsCategory') { // Check if cat exists before accessing id
+                    cat.classList.remove('border-button-bg', 'bg-bg-primary');
+                    cat.classList.add('border-text-heading');
+                }
+            });
+        } else {
+             console.warn("Could not find initial smithing category ('hatchetsCategory') or list ('hatchetsList') to set active state.");
+        }
+    }
+
+    // Profile Equipment Selection Logic
+    const equippedItemIcon = document.getElementById('equippedItemIcon');
+    const equippedItemName = document.getElementById('equippedItemName');
+    const inventoryItems = document.querySelectorAll('.inventory-item'); // Select all items with the class
+    let currentlyEquippedItemElement = null; // Keep track of the currently equipped/hidden item element
+
+    // Check if we are on the profile-equip page by checking for elements
+    if (equippedItemIcon && equippedItemName && inventoryItems.length > 0) {
+
+        inventoryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Get data from the clicked item
+                const itemName = item.dataset.itemName;
+                const itemIcon = item.dataset.itemIcon;
+
+                // If an item is already equipped, make it visible again in the inventory
+                if (currentlyEquippedItemElement) {
+                    currentlyEquippedItemElement.style.display = ''; // Or remove 'hidden' class if you prefer using classes
+                }
+
+                // Update the equipped slot display
+                equippedItemIcon.src = itemIcon;
+                equippedItemIcon.alt = itemName; // Update alt text
+                equippedItemName.textContent = itemName;
+
+                // Hide the newly selected item from the inventory
+                item.style.display = 'none'; // Or add 'hidden' class
+
+                // Update the reference to the currently equipped item element
+                currentlyEquippedItemElement = item;
+            });
+        });
+
+        const equippedSlot = document.getElementById('equippedItemSlot');
+        if (equippedSlot) {
+            equippedSlot.addEventListener('click', () => {
+                 // Check if something other than 'Empty' is equipped
+                 if (equippedItemName.textContent !== 'Empty') {
+                    // Reset to default empty state
+                    equippedItemIcon.src = 'images/tools/no-hatchet.png'; // Default empty image
+                    equippedItemIcon.alt = 'Equipped Hatchet';
+                    equippedItemName.textContent = 'Empty';
+
+                    // Make the previously equipped item visible again in the inventory
+                    if (currentlyEquippedItemElement) {
+                        currentlyEquippedItemElement.style.display = ''; // Or remove 'hidden' class
+                        currentlyEquippedItemElement = null; // Clear the reference
+                    }
+                 }
+            });
+            // Add cursor pointer to equipped slot if it's meant to be clickable
+             equippedSlot.classList.add('cursor-pointer');
+        }
+    }
+
+}); // End of the single, main DOMContentLoaded listener

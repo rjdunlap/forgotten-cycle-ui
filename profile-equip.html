@@ -89,7 +89,7 @@
     <div class="p-4">
       <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Equipment Stats -->
+          <!-- Equipment Stats (Left Column) -->
           <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
             <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Equipment</h2>
             <div class="space-y-2">
@@ -125,10 +125,10 @@
               <!-- Tools -->
               <div class="text-text-heading font-semibold mt-4 mb-2">Tools</div>
               <div class="grid grid-cols-2 gap-2">
-                <a href="profile-equip.html" class="flex items-center space-x-2 p-1 rounded hover:bg-bg-primary cursor-pointer"> <!-- Added anchor tag -->
+                <div class="flex items-center space-x-2">
                   <img src="images/tools/no-hatchet.png" alt="Select Hatchet" class="h-8 w-8"/>
                   <span class="text-text-primary">Hatchet</span>
-                </a>
+                </div>
                 <div class="flex items-center space-x-2">
                   <img src="images/tools/no-pickaxe.png" alt="Select Pickaxe" class="h-8 w-8"/>
                   <span class="text-text-primary">Pickaxe</span>
@@ -153,29 +153,39 @@
               </div>
           </div>
 
-          <!-- Skills Overview -->
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Skills</h2>
-            <div class="space-y-2">
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Woodcutting</span>
-                <span class="text-text-primary font-bold">82</span>
+          <!-- Right Column Container -->
+          <div class="space-y-4">
+            <!-- Equipped -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Hatchet</h2>
+              <div id="equippedItemSlot" class="space-y-2"> <!-- Added ID -->
+                <!-- Content will be dynamically updated by JS -->
+                 <div class="flex items-center space-x-2">
+                    <img id="equippedItemIcon" src="images/tools/no-hatchet.png" alt="Equipped Hatchet" class="h-8 w-8"/> <!-- Added ID, default image -->
+                    <span id="equippedItemName" class="text-text-primary">Empty</span> <!-- Added ID -->
+                 </div>
               </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Mining</span>
-                <span class="text-text-primary font-bold">75</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Smelting</span>
-                <span class="text-text-primary font-bold">87</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Smithing</span>
-                <span class="text-text-primary font-bold">68</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Ashen Forging</span>
-                <span class="text-text-primary font-bold">68</span>
+            </div>
+            <!-- Selectable Items -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Inventory</h2>
+              <div class="space-y-2">
+                 <!-- Added inventory-item class, hover, cursor, padding, rounded, data attributes, and ID -->
+                <div id="inventoryCopperHatchet" class="inventory-item flex justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Copper Hatchet" data-item-icon="images/tools/copper-hatchet.png">
+                  <div class="flex items-center space-x-2">
+                    <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-8 w-8"/>
+                    <span class="text-text-primary">Copper Hatchet</span>
+                  </div>
+                  <!-- Add potential stats/buttons here if needed -->
+                </div>
+                 <!-- Added inventory-item class, hover, cursor, padding, rounded, data attributes, and ID -->
+                <div id="inventoryIronHatchet" class="inventory-item flex justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Iron Hatchet" data-item-icon="images/tools/iron-hatchet.png">
+                  <div class="flex items-center space-x-2">
+                    <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8"/>
+                    <span class="text-text-primary">Iron Hatchet</span>
+                  </div>
+                   <!-- Add potential stats/buttons here if needed -->
+                </div>
               </div>
             </div>
           </div>
