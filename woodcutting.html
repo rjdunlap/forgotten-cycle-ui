@@ -76,7 +76,7 @@
         <!-- Center section with title and progress -->
         <div class="flex items-center space-x-4">
           <div class="flex items-center">
-            <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8 mr-2"/>
+            <img src="images/woodcutting.png" alt="Woodcutting" class="h-8 w-8 mr-2"/>
             <span class="text-text-primary font-semibold">Woodcutting</span>
           </div>
           <div class="w-48 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
@@ -192,6 +192,13 @@
               </div>
             </div>
 
+            <!-- Start Button -->
+            <div class="mt-4">
+              <button id="startWoodcuttingButton" class="w-full bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                Start
+              </button>
+            </div>
+
             <!-- Item Content Overview -->
             <div id="zone1_item1_content1" class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
               <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
@@ -204,7 +211,7 @@
                     <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
                   </div>
                   <div class="flex items-center">
-                    <span class="text-text-primary font-bold">20/20</span>
+                    <span class="text-text-primary font-bold">20</span>
                     <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
                   </div>
                 </div>
@@ -246,7 +253,7 @@
                     <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
                   </div>
                   <div class="flex items-center">
-                    <span class="text-text-primary font-bold">40/40</span>
+                    <span class="text-text-primary font-bold">40</span>
                     <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
                   </div>
                 </div>
@@ -275,62 +282,11 @@
                 </div>
               </div>
             </div>
-            <!-- Start Button -->
-            <div class="mt-4">
-              <button id="startWoodcuttingButton" class="w-full bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200">
-                Start
-              </button>
-            </div>
           </div>
 
           <!-- Right Column -->
           <div class="space-y-4">
-            <!-- Stats Panel - -->
-            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
-                <h2 class="text-xl font-bold text-text-heading">Stats</h2>
-                <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8"/>
-              </div>
-              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Max Damage:</span>
-                    <span class="text-text-primary font-bold">5</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Accuracy:</span>
-                    <span class="text-text-primary font-bold">100%</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Bonus XP:</span>
-                    <span class="text-text-primary font-bold">80%</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Efficiency:</span>
-                    <span class="text-text-primary font-bold">1%</span>
-                  </div>
-                </div>
-                <div class="space-y-2 pl-8">
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Attack Speed:</span>
-                    <span class="text-text-primary font-bold">6s</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Crit Chance:</span>
-                    <span class="text-text-primary font-bold">2%</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Double XP Chance:</span>
-                    <span class="text-text-primary font-bold">3%</span>
-                  </div>
-                  <div class="flex justify-between">
-                    <span class="text-text-primary">Double Log Chance:</span>
-                    <span class="text-text-primary font-bold">2%</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Cut Panel -->
+            <!-- Zone Panel -->
             <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
               <h3 class="text-xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Zone</h3>
               <!-- Zone Tabs -->
@@ -386,12 +342,58 @@
                 </button>
               </div>
             </div>
+
+             <!-- Stats Panel - -->
+             <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8"/>
+              </div>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Max Damage:</span>
+                    <span class="text-text-primary font-bold">5</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Accuracy:</span>
+                    <span class="text-text-primary font-bold">100%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Attack Speed:</span>
+                    <span class="text-text-primary font-bold">6s</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Crit Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Log Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Theme selector -->
+    <!-- Theme selector
     <div class="fixed bottom-4 right-4">
       <label for="theme-select" class="sr-only">Select Theme:</label>
       <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
@@ -403,6 +405,7 @@
         <option value="mystic-winter">Mystic Winter</option>
       </select>
     </div>
+     -->
   </div>
 
   <script src="scripts.js" defer></script>

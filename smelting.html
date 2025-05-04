@@ -117,30 +117,45 @@
               </div>
             </div>
 
-              <!-- Drops Panel -->
-              <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-                <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Inputs</h2>
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                      <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
-                      <span class="text-text-primary">2 Copper Ore</span>
-                    </div>
+            <!-- Start Button -->
+            <div class="mt-4 flex space-x-2"> <!-- Added flex container and spacing -->
+              <!-- Number Input Field -->
+              <input
+                type="number"
+                id="setAmountInput"
+                min="1"
+                placeholder="Amount"
+                class="flex-1 bg-bg-primary text-text-primary border border-text-heading rounded-lg py-3 px-4 font-semibold shadow-inner focus:outline-none focus:ring-2 focus:ring-button-bg transition-colors duration-200"
+              />
+              <button id="startSmeltingButton" class="flex-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                Create
+              </button>
+            </div>
+
+            <!-- Drops Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-2xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Inputs</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">2 Copper Ore</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                      <img src="images/firemaking/charcoal.png" alt="Charcoal" class="h-4 w-4 mr-2"/>
-                      <span class="text-text-primary">1 Charcoal</span>
-                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/firemaking/charcoal.png" alt="Charcoal" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">1 Charcoal</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <div class="flex items-center">
-                      <img src="images/time.png" alt="Time" class="h-4 w-4 mr-2"/>
-                      <span class="text-text-primary">5 Seconds</span>
-                    </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/time.png" alt="Time" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">5 Seconds</span>
                   </div>
                 </div>
               </div>
+            </div>
 
             <!-- Skills Overview -->
             <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
@@ -168,20 +183,6 @@
                   <span class="text-text-primary text-right">Per Craft</span>
                 </div>
               </div>
-            </div>
-            <!-- Start Button -->
-            <div class="mt-4 flex space-x-2"> <!-- Added flex container and spacing -->
-              <!-- Number Input Field -->
-              <input
-                type="number"
-                id="setAmountInput"
-                min="1"
-                placeholder="Amount"
-                class="flex-1 bg-bg-primary text-text-primary border border-text-heading rounded-lg py-3 px-4 font-semibold shadow-inner focus:outline-none focus:ring-2 focus:ring-button-bg transition-colors duration-200"
-              />
-              <button id="startSmeltingButton" class="flex-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200">
-                Create
-              </button>
             </div>
           </div>
 
