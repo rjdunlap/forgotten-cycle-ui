@@ -467,6 +467,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Ashen Forging - Reforge Tier Selection Logic
+    const tierButtons = document.querySelectorAll('.tier-button');
+    const selectedBgClass = 'bg-button-bg';
+    const defaultBgClass = 'bg-transparent';
+    const selectedTextClass = 'text-button-text';
+    const defaultTextClass = 'text-text-primary';
+
+    if (tierButtons.length > 0) {
+        tierButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Reset all tier buttons to default state
+                tierButtons.forEach(btn => {
+                    btn.classList.remove(selectedBgClass, selectedTextClass, reforgeSelectedBorderClass);
+                    btn.classList.add(defaultBgClass, defaultTextClass);
+                });
+
+                // Apply selected state to the clicked button
+                button.classList.remove(defaultBgClass, defaultTextClass);
+                button.classList.add(selectedBgClass, selectedTextClass, reforgeSelectedBorderClass);
+            });
+        });
+
+        // Set initial state: Select the first button ("1")
+        const firstButton = tierButtons[0];
+        if (firstButton) {
+             // Ensure all buttons start in default state first (important for initial load)
+             tierButtons.forEach(btn => {
+                 btn.classList.remove(selectedBgClass, selectedTextClass, reforgeSelectedBorderClass);
+                 btn.classList.add(defaultBgClass, defaultTextClass);
+             });
+             // Apply selected state to the first button
+             firstButton.classList.remove(defaultBgClass, defaultTextClass);
+             firstButton.classList.add(selectedBgClass, selectedTextClass, reforgeSelectedBorderClass);
+        }
+    }
+
     // --- Add similar logic for '.recipe-item' if needed ---
     // const recipeItems = document.querySelectorAll('.recipe-item');
     // if (recipeItems.length > 0) { /* ... similar selection logic ... */ }
