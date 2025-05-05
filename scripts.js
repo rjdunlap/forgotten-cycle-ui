@@ -357,4 +357,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Ashen Forging Ingredient Selection Logic
+    const inputItemIcon = document.getElementById('inputItemIcon');
+    const inputItemName = document.getElementById('inputItemName');
+    const ingredientItems = document.querySelectorAll('.inventory-item');
+    const defaultBorderClass = 'border-[var(--color-bg-primary)]'; // Define default class
+    const selectedBorderClass = 'border-button-bg'; // Define selected class
+
+    if (inputItemIcon && inputItemName && ingredientItems.length > 0) {
+
+        ingredientItems.forEach(item => {
+            if (item.dataset.itemName && item.dataset.itemIcon) {
+                item.addEventListener('click', () => {
+                    const itemName = item.dataset.itemName;
+                    const itemIcon = item.dataset.itemIcon;
+
+                    inputItemIcon.src = itemIcon;
+                    inputItemIcon.alt = itemName;
+                    inputItemName.textContent = itemName;
+
+                    // Reset all items to default border first
+                    ingredientItems.forEach(el => {
+                        el.classList.remove(selectedBorderClass); // Remove selected border
+                        el.classList.add(defaultBorderClass);    // Add default border
+                    });
+                    // Apply selected border to the clicked item
+                    item.classList.remove(defaultBorderClass); // Remove default border
+                    item.classList.add(selectedBorderClass);   // Add selected border
+                });
+            }
+        });
+
+        // Set initial state
+        if (ingredientItems.length > 0 && ingredientItems[0].dataset.itemName && ingredientItems[0].dataset.itemIcon) {
+             const firstItem = ingredientItems[0];
+             inputItemIcon.src = firstItem.dataset.itemIcon;
+             inputItemIcon.alt = firstItem.dataset.itemName;
+             inputItemName.textContent = firstItem.dataset.itemName;
+
+             // Ensure all items have default border initially (redundant if HTML is correct, but safe)
+             ingredientItems.forEach(el => {
+                 el.classList.remove(selectedBorderClass);
+                 el.classList.add(defaultBorderClass);
+                 // Ensure border-2 is present if not added by defaultBorderClass definition
+                 if (!el.classList.contains('border-2')) {
+                     el.classList.add('border-2');
+                 }
+             });
+             // Mark the first one as selected
+             firstItem.classList.remove(defaultBorderClass);
+             firstItem.classList.add(selectedBorderClass);
+        }
+    }
+
 }); // End of the single, main DOMContentLoaded listener
