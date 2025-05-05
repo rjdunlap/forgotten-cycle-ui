@@ -410,4 +410,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Ashen Forging - Reforge Material Selection Logic
+    const materialItems = document.querySelectorAll('.material-item');
+    const reforgeDefaultBorderClass = 'border-[var(--color-panel-bg)]'; // Use specific names if needed
+    const reforgeSelectedBorderClass = 'border-button-bg';
+
+    // Check if we are on the Reforge page by checking for material items
+    if (materialItems.length > 0) {
+
+        materialItems.forEach(item => {
+            // Check for necessary data attributes (optional but good practice)
+            if (item.dataset.materialName && item.dataset.materialIcon) {
+                item.addEventListener('click', () => {
+                    // Get data from clicked item (optional for now, needed if updating Inputs)
+                    // const materialName = item.dataset.materialName;
+                    // const materialIcon = item.dataset.materialIcon;
+
+                    // --- Update Input Panel (Add this later if needed) ---
+                    // Example: document.getElementById('inputMaterialIcon').src = materialIcon;
+                    // Example: document.getElementById('inputMaterialName').textContent = materialName;
+                    // ---
+
+                    // Reset all material items to default border first
+                    materialItems.forEach(el => {
+                        el.classList.remove(reforgeSelectedBorderClass);
+                        el.classList.add(reforgeDefaultBorderClass);
+                    });
+                    // Apply selected border to the clicked item
+                    item.classList.remove(reforgeDefaultBorderClass);
+                    item.classList.add(reforgeSelectedBorderClass);
+                });
+            }
+        });
+
+        // Set initial state for the first material item
+        if (materialItems.length > 0 && materialItems[0].dataset.materialName && materialItems[0].dataset.materialIcon) {
+            const firstItem = materialItems[0];
+
+            // Ensure all items have default border initially
+            materialItems.forEach(el => {
+                el.classList.remove(reforgeSelectedBorderClass);
+                el.classList.add(reforgeDefaultBorderClass);
+                // Ensure border-2 is present
+                if (!el.classList.contains('border-2')) {
+                    el.classList.add('border-2');
+                }
+            });
+            // Mark the first one as selected
+            firstItem.classList.remove(reforgeDefaultBorderClass);
+            firstItem.classList.add(reforgeSelectedBorderClass);
+
+            // --- Update Input Panel Initially (Add this later if needed) ---
+            // Example: document.getElementById('inputMaterialIcon').src = firstItem.dataset.materialIcon;
+            // Example: document.getElementById('inputMaterialName').textContent = firstItem.dataset.materialName;
+            // ---
+        }
+    }
+
+    // --- Add similar logic for '.recipe-item' if needed ---
+    // const recipeItems = document.querySelectorAll('.recipe-item');
+    // if (recipeItems.length > 0) { /* ... similar selection logic ... */ }
+    // ---
+
 }); // End of the single, main DOMContentLoaded listener
