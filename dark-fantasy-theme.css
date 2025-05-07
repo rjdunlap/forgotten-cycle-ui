@@ -6,4 +6,41 @@
   --color-button-bg-hover: #B71C1C; /* Darker blood red (derived) */
   --color-button-text: #E0E0E0; /* Ash grey */
   --color-panel-bg: #2A2A40; /* Dark slate */
+  --color-scroll: #2A2A40; /* Dark slate */
+}
+
+.section-content {
+  max-height: 1000px; /* Start expanded */
+  overflow: hidden;
+  transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.section-content.collapsed {
+  max-height: 0;
+}
+.section-toggle {
+  transition: transform 0.2s ease;
+}
+
+/* Custom scrollbar styling */
+#navMenu::-webkit-scrollbar {
+  width: 8px;
+}
+
+#navMenu::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+#navMenu::-webkit-scrollbar-thumb {
+  background: var(--color-scroll);
+  border-radius: 4px;
+}
+
+#navMenu::-webkit-scrollbar-thumb:hover {
+  background: var(--color-button-bg-hover);
+}
+
+/* Firefox scrollbar styling */
+#navMenu {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scroll) var(--color-bg-primary);
 }
