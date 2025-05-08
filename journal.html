@@ -92,115 +92,73 @@
     <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:items-start">
-          <!-- Equipment Stats -->
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Equipment</h2>
-            <div class="space-y-2">
-              <!-- Combat Equipment -->
-              <div class="text-text-heading font-semibold mb-2">Combat</div>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-sword.png" alt="Iron Sword" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Sword</span>
+          <!-- Journal listings-->
+          <div class="space-y-4">
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Journal</h2>
+              <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-1 md:items-start" id="journalEntriesContainer">
+                <!-- Journal entries will be dynamically populated here -->
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="1">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-shield.png" alt="Perfect Infernal Shield" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Shield</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="2">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-m-helmet.png" alt="Iron Medium Helmet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Medium Helmet</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="3">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-m-body.png" alt="Iron Medium Body" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Medium Body</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="4">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-m-gloves.png" alt="Iron Medium Gloves" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Medium Gloves</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="5">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/equipment/iron-m-boots.png" alt="Iron Medium Boots" class="h-8 w-8"/>
-                  <span class="text-text-primary">Iron Medium Boots</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="6">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-              </div>
-
-              <!-- Tools -->
-              <div class="text-text-heading font-semibold mt-4 mb-2">Tools</div>
-              <div class="grid grid-cols-2 gap-2">
-                <a href="profile-equip.html" class="flex items-center space-x-2 p-1 rounded hover:bg-bg-primary cursor-pointer"> <!-- Added anchor tag -->
-                  <img src="images/tools/no-hatchet.png" alt="Select Hatchet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Hatchet</span>
-                </a>
-                <div class="flex items-center space-x-2">
-                  <img src="images/tools/no-pickaxe.png" alt="Select Pickaxe" class="h-8 w-8"/>
-                  <span class="text-text-primary">Pickaxe</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="7">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/tools/no-hoe.png" alt="Select Hoe" class="h-8 w-8"/>
-                  <span class="text-text-primary">Hoe</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="8">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/tools/no-fishing-rod.png" alt="Select Fishing Rod" class="h-8 w-8"/>
-                  <span class="text-text-primary">Fishing Rod</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="9">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/tools/no-bellow.png" alt="Select Bellows" class="h-8 w-8"/>
-                  <span class="text-text-primary">Bellows</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="10">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                  <img src="images/tools/no-hammer.png" alt="Select Smithing Hammer" class="h-8 w-8"/>
-                  <span class="text-text-primary">Smithing Hammer</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="11">
+                  <span class="text-text-primary">Loading...</span>
                 </div>
-              </div>
-              </div>
-          </div>
-
-          <!-- Skills Overview -->
-          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Skills</h2>
-            <div class="space-y-2">
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Woodcutting</span>
-                <span class="text-text-primary font-bold">82</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Mining</span>
-                <span class="text-text-primary font-bold">75</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Smelting</span>
-                <span class="text-text-primary font-bold">87</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Smithing</span>
-                <span class="text-text-primary font-bold">68</span>
-              </div>
-              <div class="flex justify-between items-center">
-                <span class="text-text-primary">Ashen Forging</span>
-                <span class="text-text-primary font-bold">68</span>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="12">
+                  <span class="text-text-primary">Loading...</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Theme selector -->
-    <div class="fixed bottom-4 right-4">
-      <label for="theme-select" class="sr-only">Select Theme:</label>
-      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
-        <option value="ancient-ruins">Ancient Ruins</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-        <option value="retro-pixel">Retro Pixel</option>
-        <option value="dark-fantasy">Dark Fantasy</option>
-        <option value="mystic-winter">Mystic Winter</option>
-      </select>
+  <!-- Entry Modal (Hidden by default) -->
+  <div id="entryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-panel-bg p-4 rounded-lg shadow-lg border border-text-heading max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-2 pb-2 border-b border-text-heading">
+        <h2 id="modalTitle" class="text-xl font-bold text-text-heading">Entry</h2>
+        <button class="text-text-primary hover:text-text-heading">✕</button>
+      </div>
+      <div id="modalContent" class="space-y-4">
+        <!-- Entry content will be inserted here -->
+        <div class="text-text-primary">
+          Empty
+        </div>
+      </div>
     </div>
   </div>
 
   <script src="scripts.js" defer></script>
+  <script src="journal.js" defer></script>
 </body>
 </html>
