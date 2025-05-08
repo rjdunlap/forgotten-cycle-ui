@@ -18,6 +18,7 @@
             'text-heading': 'var(--color-text-heading)',
             'button-bg': 'var(--color-button-bg)',
             'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-light': 'var(--color-button-light)',
             'button-text': 'var(--color-button-text)',
           }
         }
@@ -96,44 +97,12 @@
           <div class="space-y-4">
             <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
               <h2 class="text-xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Journal</h2>
-              <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-1 md:items-start" id="journalEntriesContainer">
+              <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-2" id="journalEntriesContainer">
                 <!-- Journal entries will be dynamically populated here -->
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="1">
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer journal-entry" data-entry-id="1">
                   <span class="text-text-primary">Loading...</span>
                 </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="2">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="3">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="4">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="5">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="6">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="7">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="8">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="9">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="10">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="11">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
-                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-text-primary cursor-pointer journal-entry" data-entry-id="12">
-                  <span class="text-text-primary">Loading...</span>
-                </div>
+
               </div>
             </div>
           </div>
@@ -144,7 +113,7 @@
 
   <!-- Entry Modal (Hidden by default) -->
   <div id="entryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-panel-bg p-4 rounded-lg shadow-lg border border-text-heading max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+    <div class="bg-bg-primary p-4 rounded-lg shadow-lg border border-text-heading max-w-2xl w-full max-h-[80vh] overflow-y-auto">
       <div class="flex justify-between items-center mb-2 pb-2 border-b border-text-heading">
         <h2 id="modalTitle" class="text-xl font-bold text-text-heading">Entry</h2>
         <button class="text-text-primary hover:text-text-heading">✕</button>
@@ -153,6 +122,10 @@
         <!-- Entry content will be inserted here -->
         <div class="text-text-primary">
           Empty
+        </div>
+        <div class="mt-4 border-t border-text-heading pt-2">
+          <h3 class="text-text-heading font-bold">Unlocks:</h3>
+          <ul id="modalUnlocks" class="list-disc pl-5 text-text-primary"></ul>
         </div>
       </div>
     </div>

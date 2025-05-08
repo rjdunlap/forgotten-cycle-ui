@@ -2,8 +2,9 @@
   --color-bg-primary: #1E1E2F; /* Charcoal black */
   --color-text-primary: #E0E0E0; /* Ash grey */
   --color-text-heading: #FFB300; /* Muted gold */
-  --color-button-bg: #D32F2F; /* Blood red */
-  --color-button-bg-hover: #B71C1C; /* Darker blood red (derived) */
+  --color-button-bg: #B71C1C; /* Darker blood red (derived) */
+  --color-button-bg-hover: #D32F2F; /* Blood red */
+  --color-button-light: #E57373; /* Lighter red */
   --color-button-text: #E0E0E0; /* Ash grey */
   --color-panel-bg: #2A2A40; /* Dark slate */
   --color-scroll: #2A2A40; /* Dark slate */
