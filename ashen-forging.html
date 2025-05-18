@@ -104,11 +104,11 @@
             <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
               <div class="flex justify-between items-center">
                 <div>
-                  <h2 class="text-xl font-bold text-text-heading">Copper Ash</h2>
+                  <h2 class="text-xl font-bold text-text-heading">Crude Copper Hatchet</h2>
                 </div>
               </div>
               <div class="flex flex-col items-center mt-4">
-                <img src="images/ashen/copper-ash.png" alt="Copper Ash" class="h-16 w-16 mb-2"/>
+                <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-16 w-16 mb-2"/>
                 <div class="w-full flex justify-center">
                   <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
                     <div class="bg-button-bg h-full" style="width: 100%"></div>
@@ -129,8 +129,14 @@
                   </div>
                   <div class="flex justify-between items-center">
                     <div class="flex items-center">
+                      <img id="inputItemIcon" src="images/ashen/copper-ash.png" alt="Copper Ash" class="h-4 w-4 mr-2"/> <!-- Added id -->
+                      <span class="text-text-primary">50 <span id="inputItemName">Copper Ash</span></span> <!-- Added id to inner span -->
+                    </div>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <div class="flex items-center">
                       <img src="images/time.png" alt="Time" class="h-4 w-4 mr-2"/>
-                      <span class="text-text-primary">2 Seconds</span>
+                      <span class="text-text-primary">10 Seconds</span>
                     </div>
                   </div>
                 </div>
@@ -156,8 +162,8 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <div class="flex items-center">
-                    <img src="images/ashen/copper-ash.png" alt="Copper Ash" class="h-4 w-4 mr-2"/>
-                    <span class="text-text-primary">Copper Ash</span>
+                    <img src="images/tools/copper-hatchet.png" alt="Crude Copper Hatchet" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Crude Copper Hatchet</span>
                   </div>
                   <span class="text-text-primary text-right">Per Craft</span>
                 </div>
@@ -188,15 +194,15 @@
               <div class="border-b border-text-heading">
                 <nav class="flex space-x-4" aria-label="Tabs">
                   <a href="ashen-forging.html">
-                    <button class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
+                    <button class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
                       Ash
                     </button>
-                    </a>
-                    <a href="ashen-forging-reforge.html">
-                      <button class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
-                        Reforge
-                      </button>
-                    </a>
+                  </a>
+                  <a href="ashen-forging-reforge.html">
+                    <button class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
+                      Reforge
+                    </button>
+                  </a>
                 </nav>
               </div>
 
@@ -205,18 +211,18 @@
                 <div class="space-y-1">
                   <div class="grid grid-cols-3 gap-2 pt-2">
                     <!-- Copper -->
-                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="material-item flex items-center justify-between p-2 rounded cursor-pointer border-2 border-[var(--color-panel-bg)] hover:bg-button-bg" data-material-name="Copper" data-material-icon="images/smelting/copper-bar.png"> <!-- Added classes and data attributes -->
                       <div class="flex items-center">
-                        <img src="images/ashen/copper-ash.png" alt="Copper" class="h-8 w-8 mr-3"/>
-                        <span class="text-text-primary font-semibold">Copper Ash</span>
+                        <img src="images/smelting/copper-bar.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Copper</span>
                       </div>
                     </div>
 
                     <!-- Iron -->
-                    <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="material-item flex items-center justify-between p-2 rounded cursor-pointer border-2 border-[var(--color-panel-bg)] hover:bg-button-bg" data-material-name="Iron" data-material-icon="images/smelting/iron-bar.png"> <!-- Added classes and data attributes -->
                       <div class="flex items-center">
-                        <img src="images/ashen/iron-ash.png" alt="Iron" class="h-8 w-8 mr-3"/>
-                        <span class="text-text-primary font-semibold">Iron Ash</span>
+                        <img src="images/smelting/iron-bar.png" alt="Iron" class="h-8 w-8 mr-3"/>
+                        <span class="text-text-primary font-semibold">Iron</span>
                       </div>
                     </div>
 
@@ -252,24 +258,33 @@
             </div>
           </div>
 
+          <!-- Container for the new buttons -->
+          <div class="flex justify-end space-x-1 mt-2 w-full"> <!-- Added w-full -->
+            <!-- Updated button classes -->
+            <button class="tier-button flex-grow bg-transparent border-2 border-[var(--color-text-heading)] text-text-primary hover:bg-panel-bg hover:border-button-bg px-3 py-1 rounded text-sm font-semibold shadow transition-colors duration-200">Crude</button>
+            <button class="tier-button flex-grow bg-transparent border-2 border-[var(--color-text-heading)] text-text-primary hover:bg-panel-bg hover:border-button-bg px-3 py-1 rounded text-sm font-semibold shadow transition-colors duration-200">Sturdy</button>
+            <button class="tier-button flex-grow bg-transparent border-2 border-[var(--color-text-heading)] text-text-primary hover:bg-panel-bg hover:border-button-bg px-3 py-1 rounded text-sm font-semibold shadow transition-colors duration-200">Refined</button>
+            <button class="tier-button flex-grow bg-transparent border-2 border-[var(--color-text-heading)] text-text-primary hover:bg-panel-bg hover:border-button-bg px-3 py-1 rounded text-sm font-semibold shadow transition-colors duration-200">Tempered</button>
+            <button class="tier-button flex-grow bg-transparent border-2 border-[var(--color-text-heading)] text-text-primary hover:bg-panel-bg hover:border-button-bg px-3 py-1 rounded text-sm font-semibold shadow transition-colors duration-200">Masterwork</button>
+          </div>
+
           <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
-            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Ingredient</h2>
+            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Recipe</h2>
             <div class="space-y-2">
-              <!-- Set default border color using CSS variable -->
-              <div class="inventory-item flex justify-between items-center p-1 rounded hover:bg-button-bg cursor-pointer border-2 border-[var(--color-panel-bg)]" data-item-name="Copper Hatchet" data-item-icon="images/tools/copper-hatchet.png">
+              <!-- Use recipe-item class here to distinguish from materials -->
+              <div class="recipe-item flex justify-between items-center p-1 rounded hover:bg-button-bg cursor-pointer border-2 border-[var(--color-panel-bg)]" data-item-name="Copper Hatchet" data-item-icon="images/tools/copper-hatchet.png">
                 <div class="flex items-center space-x-2">
                   <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-8 w-8"/>
-                  <span class="text-text-primary">Copper Hatchet</span>
-                  <span class="text-text-primary">198</span>
+                  <span class="text-text-primary">Crude Copper Hatchet</span>
                 </div>
               </div>
-              <div class="inventory-item flex justify-between items-center p-1 rounded hover:bg-button-bg cursor-pointer border-2 border-[var(--color-panel-bg)]" data-item-name="Copper Bellows" data-item-icon="images/tools/copper-bellows.png">
+              <div class="recipe-item flex justify-between items-center p-1 rounded hover:bg-button-bg cursor-pointer border-2 border-[var(--color-panel-bg)]" data-item-name="Copper Bellows" data-item-icon="images/tools/copper-bellows.png">
                 <div class="flex items-center space-x-2">
                   <img src="images/tools/copper-bellows.png" alt="Copper Bellows" class="h-8 w-8"/>
-                  <span class="text-text-primary">Copper Bellows</span>
-                  <span class="text-text-primary">453</span>
+                  <span class="text-text-primary">Crude Copper Bellows</span>
                 </div>
               </div>
+              <!-- Add more recipe items with recipe-item class -->
             </div>
           </div>
 
