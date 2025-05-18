@@ -145,7 +145,7 @@ function populateJournalEntries() {
     titleSpan.className = 'text-text-primary';
     titleSpan.textContent = requirementsMet ? entry.title : "???";
     entryElement.appendChild(titleSpan);
-    
+
     // Requirement text display removed from here
     container.appendChild(entryElement);
   });
@@ -159,37 +159,52 @@ function openEntryModal(entryId) {
   const modalTitle = document.getElementById('modalTitle');
   const modalContent = document.getElementById('modalContent');
   const entryModal = document.getElementById('entryModal');
-  
+
   if (modalTitle && modalContent && entryModal) {
     const entry = journalEntries[entryId];
-    
+
     if (entry) {
       const requirementsMet = meetsRequirements(entry.requirement, playerProfile);
 
       modalTitle.textContent = requirementsMet ? entry.title : "???";
       entryModal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
-      
+
       let requirementTextHtml = '';
+      let requirementListHtml = '';
       if (entry.requirement && entry.requirement.length > 0) {
-        let reqTextContent = "None";
         if (Array.isArray(entry.requirement)) {
           if (entry.requirement.length > 0) {
             const reqTexts = [];
+            const reqListItems = [];
+
             entry.requirement.forEach(req => {
               const key = Object.keys(req)[0];
               if (key) {
-                reqTexts.push(`${key} ${req[key]}`);
+                const reqText = `${key} ${req[key]}`;
+                reqTexts.push(reqText);
+                reqListItems.push(`<li class="text-text-primary">${reqText}</li>`);
               }
             });
-            reqTextContent = reqTexts.join(', ');
+
+            const reqTextContent = reqTexts.join(', ');
+            requirementTextHtml = `<div class="text-sm text-text-heading mb-1">Requires: ${reqTextContent}</div>`;
+            requirementListHtml = `
+              <p class="mb-2">Needs prerequisite:</p>
+              <ul class="list-disc pl-5 text-text-primary mb-4">
+                ${reqListItems.join('')}
+              </ul>
+            `;
           }
         } else if (typeof entry.requirement === 'string') {
-          reqTextContent = entry.requirement;
+          requirementTextHtml = `<div class="text-sm text-text-heading mb-1">Requires: ${entry.requirement}</div>`;
+          requirementListHtml = `
+            <p class="mb-2">Needs prerequisite:</p>
+            <ul class="list-disc pl-5 text-text-primary mb-4">
+              <li class="text-text-primary">${entry.requirement}</li>
+            </ul>
+          `;
         }
-        requirementTextHtml = `<div class="text-sm text-text-heading mb-1">Requires: ${reqTextContent}</div>`;
-        requirementListHtml = `<p>You do not meet the requirements for this entry.</p> <p>Requires: ${reqTextContent}</p>`;
-
       }
 
       // Display the entry content
