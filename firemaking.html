@@ -1,0 +1,276 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <button id="hamburger" class="text-text-primary text-xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        <!-- Center section with title and progress -->
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center">
+            <img src="images/smelting.png" alt="Smelting" class="h-8 w-8 mr-2"/>
+            <span class="text-text-primary font-semibold">Smelting</span>
+          </div>
+          <div class="w-48 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
+            <div class="bg-button-bg h-full shadow-lg" style="width: 80%"></div>
+          </div>
+          <span class="text-text-primary">Skill Level 13</span>
+        </div>
+
+        <!-- Right section with bonus indicators -->
+        <div class="flex items-center space-x-2 text-text-primary">
+          <img src="images/blood-bonus.png" alt="Blood Bonus" class="h-6 w-6"/>
+          <span>lvl 16</span>
+          <img src="images/soul-bonus.png" alt="Soul Bonus" class="h-6 w-6 ml-4"/>
+          <span>lvl 1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-4">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <!-- Left Column -->
+          <div class="space-y-4">
+            <!-- Recipe Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <!-- Tabs -->
+              <div class="mb-4 border-b border-text-heading">
+                <nav class="flex space-x-4" aria-label="Tabs">
+                  <button class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap py-2 px-1 border-b-2">
+                    Bars
+                  </button>
+                </nav>
+              </div>
+              <div class="space-y-1">
+                <!-- Ore rows -->
+                <div class="grid grid-cols-3 gap-2">
+                  <!-- Copper -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/smelting/copper-bar.png" alt="Copper" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Copper</span>
+                    </div>
+                  </div>
+
+                  <!-- Iron -->
+                  <div class="flex items-center justify-between p-2 hover:bg-bg-primary rounded cursor-pointer border border-text-heading">
+                    <div class="flex items-center">
+                      <img src="images/smelting/iron-bar.png" alt="Iron" class="h-8 w-8 mr-3"/>
+                      <span class="text-text-primary font-semibold">Iron</span>
+                    </div>
+                  </div>
+
+                  <!-- Locked levels at the bottom -->
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 30</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 40</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between p-2 rounded cursor-not-allowed bg-gray-800 border border-text-heading opacity-50">
+                    <div class="flex items-center">
+                      <img src="images/locked.png" alt="Locked" class="h-8 w-8 mr-3"/>
+                    </div>
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Locked lvl 50</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stats Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-xl font-bold text-text-heading">Stats</h2>
+                <img src="images/tools/iron-bellows.png" alt="Iron Bellows" class="h-8 w-8"/>
+              </div>
+              <div class="grid grid-cols-2 divide-x divide-text-heading gap-x-8 gap-y-2">
+                <!-- Left Column -->
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Bonus XP:</span>
+                    <span class="text-text-primary font-bold">80%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Speed Bonus:</span>
+                    <span class="text-text-primary font-bold">20%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Efficiency:</span>
+                    <span class="text-text-primary font-bold">1%</span>
+                  </div>
+                </div>
+                <!-- Right Column -->
+                <div class="space-y-2 pl-8">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double XP Chance:</span>
+                    <span class="text-text-primary font-bold">3%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Double Smelt Chance:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-text-primary">Preserve Materials:</span>
+                    <span class="text-text-primary font-bold">2%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-4">
+            <!-- Ore stats -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="text-xl font-bold text-text-heading">Copper Bar</h2>
+                </div>
+              </div>
+              <div class="flex flex-col items-center mt-4">
+                <img src="images/smelting/copper-bar.png" alt="Copper bar" class="h-16 w-16 mb-2"/>
+                <div class="w-full flex justify-center">
+                  <div class="w-1/2 bg-bg-primary rounded-full h-2 overflow-hidden border border-text-heading">
+                    <div class="bg-button-bg h-full" style="width: 100%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Start Button -->
+            <div class="mt-4 flex space-x-2"> <!-- Added flex container and spacing -->
+              <!-- Number Input Field -->
+              <input
+                type="number"
+                id="setAmountInput"
+                min="1"
+                placeholder="Amount"
+                class="flex-1 bg-bg-primary text-text-primary border border-text-heading rounded-lg py-3 px-4 font-semibold shadow-inner focus:outline-none focus:ring-2 focus:ring-button-bg transition-colors duration-200"
+              />
+              <button id="startSmeltingButton" class="flex-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-3 rounded-lg font-semibold shadow-lg transition-colors duration-200" onclick="window.location.href='smelting-amount.html'">
+                Create
+              </button>
+            </div>
+
+            <!-- Drops Panel -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Inputs</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/mining/copper-ore.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">2 Copper Ore</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/firemaking/charcoal.png" alt="Charcoal" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">1 Charcoal</span>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/time.png" alt="Time" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">5 Seconds</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skills Overview -->
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Grants</h2>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/constitution.png" alt="Constitution" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Constitution 1 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/smelting.png" alt="Smelting" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Smelting 300 xp</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                    <img src="images/smelting/copper-bar.png" alt="Copper Ore" class="h-4 w-4 mr-2"/>
+                    <span class="text-text-primary">Copper Bar 1</span>
+                  </div>
+                  <span class="text-text-primary text-right">Per Craft</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme selector 
+    <div class="fixed bottom-4 right-4">
+      <label for="theme-select" class="sr-only">Select Theme:</label>
+      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
+        <option value="ancient-ruins">Ancient Ruins</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro-pixel">Retro Pixel</option>
+        <option value="dark-fantasy">Dark Fantasy</option>
+        <option value="mystic-winter">Mystic Winter</option>
+      </select>
+    </div>
+    -->
+  </div>
+
+  <script src="scripts.js" defer></script>
+</body>
+</html>
