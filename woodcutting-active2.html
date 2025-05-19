@@ -27,83 +27,8 @@
 </head>
 <body class="bg-bg-primary">
   <!-- Sidebar navigation -->
-  <div id="navMenu" class="fixed top-0 left-0 h-full w-64 bg-panel-bg transform -translate-x-full xl:translate-x-0 transition-transform duration-300 border-r border-text-heading z-30">
-    <div class="p-3 h-full flex flex-col">
-      <!-- Add title that acts as close button on mobile -->
-      <div class="flex items-center justify-between mb-2 pb-2 border-b border-text-heading">
-        <a href="index.html" class="text-text-heading text-xl font-bold hover:text-text-primary">Forgotten Cycle</a>
-        <button id="closeNav" class="text-text-primary hover:text-text-heading xl:hidden">✕</button>
-      </div>
-      <div class="flex flex-col divide-y divide-text-heading flex-grow">
-        <a href="profile.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/profile.png" alt="Profile" class="h-6 w-6 mr-3"/>
-          Profile
-        </a>
-        <a href="inventory.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/inventory.png" alt="Inventory" class="h-6 w-6 mr-3"/>
-          Inventory
-        </a>
-        <a href="woodcutting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/woodcutting.png" alt="Woodcutting" class="h-6 w-6 mr-3"/>
-          Woodcutting
-        </a>
-        <a href="mining.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/mining.png" alt="Mining" class="h-6 w-6 mr-3"/>
-          Mining
-        </a>
-        <a href="smelting.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/smelting.png" alt="Smelting" class="h-6 w-6 mr-3"/>
-          Smelting
-        </a>
-        <a href="smithing.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/smithing.png" alt="Smithing" class="h-6 w-6 mr-3"/>
-          Smithing
-        </a>
-        <a href="ashen-forging.html" class="text-text-primary hover:text-text-heading px-4 py-2 hover:bg-bg-primary flex items-center">
-          <img src="images/ashen-forging.png" alt="Ashen Forging" class="h-6 w-6 mr-3"/>
-          Ashen Forging
-        </a>
-      </div>
-      <div class="mt-auto p-4 bg-panel-bg border-t border-text-heading">
-        <div class="flex items-center space-x-4">
-          <div class="relative w-12 h-12">
-            <svg class="w-full h-full" viewBox="0 0 36 36">
-              <!-- Background circle -->
-              <circle
-                cx="18"
-                cy="18"
-                r="16"
-                fill="none"
-                class="stroke-[--color-bg-primary]"
-                stroke-width="2"
-              />
-              <!-- Progress circle -->
-              <circle
-                id="woodcuttingProgress"
-                cx="18"
-                cy="18"
-                r="16"
-                fill="none"
-                class="stroke-[--color-button-bg] transition-all duration-100"
-                stroke-width="2"
-                stroke-dasharray="100 100"
-                stroke-dashoffset="100"
-                transform="rotate(-90 18 18)"
-              />
-            </svg>
-          </div>
-          <div class="flex-grow">
-            <div class="text-text-primary">Woodcutting</div>
-            <div class="text-text-primary">Village</div>
-            <div class="text-text-primary">Fir</div>
-          </div>
-          <div>
-            <img src="images/mobs/slime.png" alt="Slime" class="h-6 w-6 ml-2"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
 
   <!-- Main content wrapper -->
   <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
