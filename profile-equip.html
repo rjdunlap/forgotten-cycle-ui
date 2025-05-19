@@ -19,6 +19,7 @@
             'button-bg': 'var(--color-button-bg)',
             'button-bg-hover': 'var(--color-button-bg-hover)',
             'button-text': 'var(--color-button-text)',
+            'pill-bg': 'var(--color-pill-bg)',
           }
         }
       }
@@ -171,21 +172,35 @@
               <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Inventory</h2>
               <div class="space-y-2">
                  <!-- Added inventory-item class, hover, cursor, padding, rounded, data attributes, and ID -->
-                <div id="inventoryCopperHatchet" class="inventory-item flex justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Copper Hatchet" data-item-icon="images/tools/copper-hatchet.png">
+                <div id="inventoryCopperHatchet" class="inventory-item justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Copper Hatchet" data-item-icon="images/tools/copper-hatchet.png">
                   <div class="flex items-center space-x-2">
                     <img src="images/tools/copper-hatchet.png" alt="Copper Hatchet" class="h-8 w-8"/>
                     <span class="text-text-primary">Copper Hatchet</span>
                   </div>
                   <!-- Add potential stats/buttons here if needed -->
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Special Drop Chance</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+5 Damage</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Speed</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% XP</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Drop Rate</span>
+                    
+                  </div>
                 </div>
                  <!-- Added inventory-item class, hover, cursor, padding, rounded, data attributes, and ID -->
-                <div id="inventoryIronHatchet" class="inventory-item flex justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Iron Hatchet" data-item-icon="images/tools/iron-hatchet.png">
+                <div id="inventoryIronHatchet" class="inventory-item justify-between items-center p-1 rounded hover:bg-bg-primary cursor-pointer" data-item-name="Iron Hatchet" data-item-icon="images/tools/iron-hatchet.png">
                   <div class="flex items-center space-x-2">
                     <img src="images/tools/iron-hatchet.png" alt="Iron Hatchet" class="h-8 w-8"/>
                     <span class="text-text-primary">Iron Hatchet</span>
                   </div>
                    <!-- Add potential stats/buttons here if needed -->
-                </div>
+                   <div class="flex flex-wrap gap-2">
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+5 Damage</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Speed</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% XP</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Drop Rate</span>
+                    <span class="bg-pill-bg text-button-text text-xs px-2 py-1 rounded-full whitespace-nowrap">+10% Special Drop Chance</span>
+                    </div>
               </div>
             </div>
           </div>
