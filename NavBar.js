@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Update the toggle icon
             if (content.classList.contains('collapsed')) {
-                toggle.textContent = '►';
+                toggle.innerHTML = '<img src="images/right-white-arrow.png" alt="►" class="h-3 w-3">';
             } else {
-                toggle.textContent = '▼';
+                toggle.innerHTML = '<img src="images/down-white-arrow.png" alt="▼" class="h-3 w-3">';
             }
         });
     });
