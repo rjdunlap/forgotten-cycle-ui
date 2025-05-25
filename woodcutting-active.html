@@ -82,55 +82,95 @@
                   </a>
                 </div>
               </div>
-              <div id="firTree" class="flex flex-col items-center mt-4">
-                <div class="flex items-center space-x-4 mb-4">
-                  <div class="flex items-center">
-                    <span class="text-text-primary font-bold">Fir Tree:</span>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="text-text-primary font-bold">1</span>
-                    <img src="images/resistance.png" alt="Resistance" class="h-4 w-4 ml-1"/>
-                  </div>
-                  <div class="flex items-center">
-                    <span class="text-text-primary font-bold">20/20</span>
-                    <img src="images/hp.png" alt="Health" class="h-4 w-4 ml-1"/>
-                  </div>
-                </div>
-                <img src="images/woodcutting/Fir.png" alt="Fir" class="h-16 w-16 mb-2"/>
-                <div class="flex flex-col items-center w-full">
-                  <div class="w-1/2 bg-bg-primary h-2 overflow-hidden rounded-full border border-text-heading relative">
-                    <div id="treeHealth" class="bg-button-bg h-full transition-all duration-100 relative" style="width: 100%"></div>
-                    <!-- Health bar lines -->
-                    <div class="absolute inset-0 flex justify-between pointer-events-none">
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
-                      <div class="w-px h-full bg-text-heading opacity-30"></div>
+              <div class="flex flex-row items-center justify-between mt-4 space-x-8">
+                <!-- Character Display (Left) -->
+                <div class="flex flex-col items-center pl-[calc(20%)]">
+                  <div class="flex items-center space-x-4 mb-4">
+                    <div class="flex items-center">
+                      <span class="text-text-primary">rjdunlap</span>
                     </div>
                   </div>
-                  <!-- Attack Timer Progress Bar -->
-                  <div class="w-[calc(50%-16px)] bg-bg-primary h-2 border border-text-heading relative mt-2">
-                    <div id="attackTimer" class="bg-button-bg h-full transition-all duration-100 relative" style="width: 0%"></div>
-                    <!-- Timer indicator -->
-                    <div class="absolute -right-8 top-1/2 transform -translate-y-1/2 text-text-primary text-xs">
-                      🕑6s
+                  <img src="images/players/sword.png" alt="Character" class="h-16 w-16 mb-2"/>
+                  <div class="flex flex-col items-center w-full">
+                    <div class="w-full bg-bg-primary h-2 overflow-hidden rounded-full border border-text-heading relative">
+                      <div class="bg-button-bg h-full transition-all duration-100 relative" style="width: 100%"></div>
+                      <!-- Health bar lines -->
+                      <div class="absolute inset-0 flex justify-between pointer-events-none">
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                      </div>
+                    </div>
+                    <!-- Attack Timer Progress Bar -->
+                    <div class="w-[calc(100%)] bg-bg-primary h-2 border border-text-heading relative mt-2">
+                      <div id="attackTimer" class="bg-button-bg h-full transition-all duration-100 relative" style="width: 0%"></div>
+                      <!-- Timer indicator -->
+                      <div class="absolute -right-8 top-1/2 transform -translate-y-1/2 text-text-primary text-xs">
+                        🕑6s
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Tree Display (Right) -->
+                <div class="flex flex-col items-center pr-[calc(20%)]">
+                  <div class="flex items-center space-x-4 mb-4">
+                    <div class="flex items-center">
+                      <span class="text-text-primary">Fir Tree</span>
+                    </div>
+                  </div>
+                  <img src="images/woodcutting/Fir.png" alt="Fir" class="h-16 w-16 mb-2"/>
+                  <div class="flex flex-col items-center w-full">
+                    <div class="w-16 bg-bg-primary h-2 overflow-hidden rounded-full border border-text-heading relative">
+                      <div id="treeHealth" class="bg-button-bg h-full transition-all duration-100 relative" style="width: 100%"></div>
+                      <!-- Health bar lines -->
+                      <div class="absolute inset-0 flex justify-between pointer-events-none">
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                        <div class="w-px h-full bg-text-heading opacity-30"></div>
+                      </div>
+                    </div>
+                    <!-- Attack Timer Progress Bar -->
+                    <div class="w-16 bg-bg-primary h-2 border border-text-heading relative mt-2">
+                      <div id="attackTimer" class="bg-button-bg h-full transition-all duration-100 relative" style="width: 0%"></div>
+                      <!-- Timer indicator -->
+                      <div class="absolute -right-8 top-1/2 transform -translate-y-1/2 text-text-primary text-xs">
+                        🕑6s
+                      </div>
                     </div>
                   </div>
                 </div>
