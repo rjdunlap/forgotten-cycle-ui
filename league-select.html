@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <link rel="stylesheet" href="login.css">
+
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <div id="nav-placeholder"></div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64 flex items-center justify-center min-h-screen">
+    <!-- Page content -->
+    <div class="p-4 w-full max-w-5xl">
+      <div class="p-8">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-text-heading mb-2">Choose Your League</h1>
+          <p class="text-text-primary">Select a league to begin your journey in the Forgotten Cycle</p>
+        </div>
+        
+        <!-- League Selection Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Seasonal League -->
+          <div class="bg-[#2A2A40] border border-text-heading rounded-lg overflow-hidden hover:shadow-[0_0_15px_rgba(255,179,0,0.3)] transition-all duration-300 cursor-pointer">
+            <div class="p-4 border-b border-text-heading bg-[#1E1E2F]">
+              <h2 class="text-xl font-bold text-text-heading text-center">Blood Moon</h2>
+              <p class="text-sm text-text-primary text-center">Current Seasonal League</p>
+            </div>
+            <div class="p-6 flex flex-col items-center">
+              <div class="w-24 h-24 mb-4 flex items-center justify-center">
+                <img src="images/nav-icons/blood-bonus.png" alt="Blood Moon League" class="w-16 h-16">
+              </div>
+              <div class="text-center mb-4">
+                <p class="text-text-primary mb-1">Special Rules:</p>
+                <p class="text-sm text-text-primary">• 2x Combat Experience</p>
+                <p class="text-sm text-text-primary">• Enhanced Blood Magic</p>
+                <p class="text-sm text-text-primary">• Unique Blood Moon Rewards</p>
+              </div>
+              <div class="mt-2 bg-[#1E1E2F] p-2 rounded-md w-full">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <img src="images/players/sword.png" alt="Character" class="w-8 h-8 mr-2">
+                    <div>
+                      <p class="text-text-heading text-sm">Lvl 1 Warrior</p>
+                      <div class="w-full bg-gray-700 rounded-full h-1.5 mt-1">
+                        <div class="bg-button-bg h-1.5 rounded-full" style="width: 0%"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-text-primary text-xs">New</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 bg-button-bg hover:bg-button-bg-hover transition-colors duration-200">
+              <p class="text-button-text text-center font-medium">Enter Blood Moon</p>
+            </div>
+          </div>
+          
+          <!-- Eternal League -->
+          <div class="bg-[#2A2A40] border border-text-heading rounded-lg overflow-hidden hover:shadow-[0_0_15px_rgba(255,179,0,0.3)] transition-all duration-300 cursor-pointer">
+            <div class="p-4 border-b border-text-heading bg-[#1E1E2F]">
+              <h2 class="text-xl font-bold text-text-heading text-center">Eternal Realm</h2>
+              <p class="text-sm text-text-primary text-center">Standard Gameplay</p>
+            </div>
+            <div class="p-6 flex flex-col items-center">
+              <div class="w-24 h-24 mb-4 flex items-center justify-center">
+                <img src="images/nav-icons/time.png" alt="Eternal League" class="w-16 h-16">
+              </div>
+              <div class="text-center mb-4">
+                <p class="text-text-primary mb-1">Features:</p>
+                <p class="text-sm text-text-primary">• Standard Experience Rates</p>
+                <p class="text-sm text-text-primary">• Full Trading Capabilities</p>
+                <p class="text-sm text-text-primary">• Permanent Progress</p>
+              </div>
+              <div class="mt-2 bg-[#1E1E2F] p-2 rounded-md w-full">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <img src="images/players/mace.png" alt="Character" class="w-8 h-8 mr-2">
+                    <div>
+                      <p class="text-text-heading text-sm">Lvl 42 Cleric</p>
+                      <div class="w-full bg-gray-700 rounded-full h-1.5 mt-1">
+                        <div class="bg-button-bg h-1.5 rounded-full" style="width: 75%"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-text-primary text-xs">Active</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 bg-button-bg hover:bg-button-bg-hover transition-colors duration-200">
+              <p class="text-button-text text-center font-medium">Continue Journey</p>
+            </div>
+          </div>
+          
+          <!-- Ironman Mode -->
+          <div class="bg-[#2A2A40] border border-text-heading rounded-lg overflow-hidden hover:shadow-[0_0_15px_rgba(255,179,0,0.3)] transition-all duration-300 cursor-pointer">
+            <div class="p-4 border-b border-text-heading bg-[#1E1E2F]">
+              <h2 class="text-xl font-bold text-text-heading text-center">Solitary Path</h2>
+              <p class="text-sm text-text-primary text-center">Offline Mode</p>
+            </div>
+            <div class="p-6 flex flex-col items-center">
+              <div class="w-24 h-24 mb-4 flex items-center justify-center">
+                <img src="images/nav-icons/locked.png" alt="Ironman Mode" class="w-16 h-16">
+              </div>
+              <div class="text-center mb-4">
+                <p class="text-text-primary mb-1">Restrictions:</p>
+                <p class="text-sm text-text-primary">• No Trading with Players</p>
+                <p class="text-sm text-text-primary">• Self-Sufficient Gameplay</p>
+                <p class="text-sm text-text-primary">• Control Over Game Speed</p>
+              </div>
+              <div class="mt-2 bg-[#1E1E2F] p-2 rounded-md w-full">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center">
+                    <img src="images/players/bow.png" alt="Character" class="w-8 h-8 mr-2">
+                    <div>
+                      <p class="text-text-heading text-sm">Lvl 1 Ranger</p>
+                      <div class="w-full bg-gray-700 rounded-full h-1.5 mt-1">
+                        <div class="bg-button-bg h-1.5 rounded-full" style="width: 0%"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-text-primary text-xs">New</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 bg-button-bg hover:bg-button-bg-hover transition-colors duration-200">
+              <p class="text-button-text text-center font-medium">Begin Challenge</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load the navigation menu -->
+  <script src="scripts.js"></script>
+</body>
+</html>
