@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+
+</head>
+<body class="bg-bg-primary">
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <div>
+          <button id="hamburger" class="text-text-primary text-xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        </div>
+        <!-- Center section with title and progress -->
+        <div></div>
+        <!-- Right section with coins -->
+        <div class="flex items-center space-x-2 text-text-primary ml-auto">
+          <img src="images/coins.png" alt="Coins" class="h-6 w-6"/>
+          <span>16,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:items-start">
+          <div>
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-xl font-bold text-text-heading">Current Activity</h2>
+                <a href="auto-level.html" class="text-text-primary hover:text-text-heading"> 
+                  <img src="images/nav-icons/time.png" alt="Skill Planner" class="h-8 w-8"> 
+                </a>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <img src="images/skill-icons/woodcutting.png" alt="Woodcutting" class="h-8 w-8"/>
+                  <span class="text-text-primary">Woodcutting</span>
+                  <span class="text-text-primary font-bold">Lvl 82</span>
+                  <div class="w-12 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
+                    <div class="bg-button-bg h-full shadow-lg" style="width: 80%"></div>
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <img src="images/skill-icons/strength.png" alt="Strength" class="h-8 w-8"/>
+                  <span class="text-text-primary">Strength</span>
+                  <span class="text-text-primary font-bold">Lvl 82</span>
+                  <div class="w-12 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner">
+                    <div class="bg-button-bg h-full shadow-lg" style="width: 80%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading mt-4">
+              <div class="flex justify-between items-center mb-1 pb-1 border-b border-text-heading">
+                <h2 class="text-xl font-bold text-text-heading">Current Activity</h2>
+                <a href="auto-level.html" class="text-text-primary hover:text-text-heading"> 
+                  <img src="images/nav-icons/skill-planner.png" alt="Skill Planner" class="h-8 w-8"> 
+                </a>
+              </div>
+              <div class="space-y-2">
+                <div class="flex justify-between items-center">
+                  <img src="images/skill-icons/meditation.png" alt="Meditation" class="h-8 w-8"/>
+                  <span class="text-text-primary">Meditation</span>
+                  <span class="text-text-primary font-bold">82</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Skills Overview -->
+          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Primary Skills</h2>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/woodcutting.png" alt="Woodcutting" class="h-8 w-8"/>
+                <span class="text-text-primary">Woodcutting</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/firemaking.png" alt="firemaking" class="h-8 w-8"/>
+                <span class="text-text-primary">Firemaking</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/mining.png" alt="Mining" class="h-8 w-8"/>
+                <span class="text-text-primary">Mining</span>
+                <span class="text-text-primary font-bold">75</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/smelting.png" alt="Smelting" class="h-8 w-8"/>
+                <span class="text-text-primary">Smelting</span>
+                <span class="text-text-primary font-bold">87</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/smithing.png" alt="Smithing" class="h-8 w-8"/>
+                <span class="text-text-primary">Smithing</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/ashwrighting.png" alt="Ashwrighting" class="h-8 w-8"/>
+                <span class="text-text-primary">Ashwrighting</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/ashen-forging.png" alt="ashen-forging" class="h-8 w-8"/>
+                <span class="text-text-primary">Ashen Forging</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+            <h2 class="text-xl font-bold text-text-heading mb-1 pb-1 border-b border-text-heading">Secondary Skills</h2>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/strength.png" alt="Strength" class="h-8 w-8"/>
+                <span class="text-text-primary">Strength</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/meditation.png" alt="Meditation" class="h-8 w-8"/>
+                <span class="text-text-primary">Meditation</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/constitution.png" alt="constitution" class="h-8 w-8"/>
+                <span class="text-text-primary">Constitution</span>
+                <span class="text-text-primary font-bold">75</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/melee.png" alt="Melee" class="h-8 w-8"/>
+                <span class="text-text-primary">Melee</span>
+                <span class="text-text-primary font-bold">87</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/pugilism.png" alt="Pugilism" class="h-8 w-8"/>
+                <span class="text-text-primary">Pugilism</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/dexterity.png" alt="dexterity" class="h-8 w-8"/>
+                <span class="text-text-primary">Dexterity</span>
+                <span class="text-text-primary font-bold">82</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/skill-icons/mana-cycling.png" alt="Mana Cycling" class="h-8 w-8"/>
+                <span class="text-text-primary">Mana Cycling</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/equipment/iron-sword.png" alt="Sword Mastery" class="h-8 w-8"/>
+                <span class="text-text-primary">Sword Mastery</span>
+                <span class="text-text-primary font-bold">68</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/equipment/iron-m-body.png" alt="Medium Armor Mastery" class="h-8 w-8"/>
+                <span class="text-text-primary">Medium Armor Mastery</span>
+                <span class="text-text-primary font-bold">12</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <img src="images/equipment/iron-shield.png" alt="Shield Mastery" class="h-8 w-8"/>
+                <span class="text-text-primary">Shield Mastery</span>
+                <span class="text-text-primary font-bold">12</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme selector -->
+    <div class="fixed bottom-4 right-4">
+      <label for="theme-select" class="sr-only">Select Theme:</label>
+      <select id="theme-select" class="px-3 py-1 bg-gray-500 text-white rounded text-sm appearance-none cursor-pointer">
+        <option value="ancient-ruins">Ancient Ruins</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="retro-pixel">Retro Pixel</option>
+        <option value="dark-fantasy">Dark Fantasy</option>
+        <option value="mystic-winter">Mystic Winter</option>
+      </select>
+    </div>
+  </div>
+
+  <script src="scripts.js" defer></script>
+  <script src="NavBar.js" defer></script>
+</body>
+</html>
