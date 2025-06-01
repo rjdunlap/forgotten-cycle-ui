@@ -24,6 +24,7 @@
       }
     }
   </script>
+ 
 </head>
 <body class="bg-bg-primary">
   <!-- Sidebar navigation -->
@@ -49,167 +50,246 @@
     </div>
 
     <!-- Page content -->
-<!-- Page content -->
-<div class="p-4">
-  <div class="container mx-auto">
-    
-    <!-- Party Members Section -->
-    <div class="">
-      <h2 class="text-xl font-bold text-text-heading mb-3 pb-2 border-b border-text-heading">Current Party</h2>
-      
-      <!-- 2x3 Grid for Party Members -->
-      <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
-        <!-- Current Player -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
-             draggable="true" 
-             data-slot-id="0">
-          <img src="images/players/sword.png" alt="Player" class="h-12 w-12 mr-3">
-          <div class="flex-grow">
-            <p class="font-medium text-text-heading">YourUsername</p>
-            <p class="text-sm text-text-primary">Level 82</p>
-          </div>
-          <div class="text-text-heading font-bold">
-            <span class="bg-button-bg text-button-text px-2 py-1 rounded text-xs">Leader</span>
-          </div>
-        </div>
+    <div class="p-4">
+      <div class="container mx-auto">
         
-        <!-- Invite Slot 1 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
-             data-slot-id="1">
-          <div class="text-center">
-            <div class="text-4xl text-text-heading mb-1">+</div>
-            <p class="text-sm text-text-primary">Invite Player</p>
-          </div>
-        </div>
-        
-        <!-- Invite Slot 2 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
-             data-slot-id="2">
-          <div class="text-center">
-            <div class="text-4xl text-text-heading mb-1">+</div>
-            <p class="text-sm text-text-primary">Invite Player</p>
-          </div>
-        </div>
-        
-        <!-- Invite Slot 3 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
-             data-slot-id="3">
-          <div class="text-center">
-            <div class="text-4xl text-text-heading mb-1">+</div>
-            <p class="text-sm text-text-primary">Invite Player</p>
-          </div>
-        </div>
-        
-        <!-- Invite Slot 4 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
-             data-slot-id="4">
-          <div class="text-center">
-            <div class="text-4xl text-text-heading mb-1">+</div>
-            <p class="text-sm text-text-primary">Invite Player</p>
-          </div>
-        </div>
-        
-        <!-- Invite Slot 5 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
-             data-slot-id="5">
-          <div class="text-center">
-            <div class="text-4xl text-text-heading mb-1">+</div>
-            <p class="text-sm text-text-primary">Invite Player</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Party Settings Section -->
-    <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
-      <!-- Tabs -->
-      <div class="border-b border-text-heading mb-3">
-        <nav class="flex space-x-4" aria-label="Tabs">
-          <button id="partySettingsTab" class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
-            Party Settings
-          </button>
-          <button id="lootSettingsTab" class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
-            Loot Settings
-          </button>
-        </nav>
-      </div>
-      
-      <!-- Party Settings Tab Content -->
-      <div id="partySettingsContent">
-        <!-- Lobby Visibility -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold text-text-primary mb-2">Lobby Visibility</h3>
-          <div class="flex space-x-4">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="partyVisibility" value="public" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
-              <span class="text-text-primary">Public</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="partyVisibility" value="private" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-              <span class="text-text-primary">Private</span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="flex flex-col sm:flex-row sm:justify-between gap-2 mt-4">
-          <button class="bg-button-bg hover:bg-button-bg-hover text-button-text py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
-            Invite Your Clan
-          </button>
+        <!-- Party Members Section -->
+        <div class="">
+          <h2 class="text-xl font-bold text-text-heading mb-3 pb-2 border-b border-text-heading">Current Party</h2>
           
-          <div class="flex flex-col sm:flex-row gap-2">
-            <button class="bg-button-bg hover:bg-button-bg-hover text-button-text py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
-              View Join Requests
-            </button>
-            <button class="bg-gray-600 hover:bg-gray-700 text-text-primary py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
-              Disband Party
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Loot Settings Tab Content (Initially Hidden) -->
-      <div id="lootSettingsContent" class="hidden">
-        <!-- Loot Distribution -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold text-text-primary mb-2">Loot Distribution</h3>
-          <div class="flex space-x-4">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="lootDistribution" value="round-robin" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
-              <span class="text-text-primary">Round-robin</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="lootDistribution" value="kill-owner" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-              <span class="text-text-primary">Kill Ownership</span>
-            </label>
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="radio" name="lootDistribution" value="percentage" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-              <span class="text-text-primary">Percentage Based</span>
-            </label>
+          <!-- 2x3 Grid for Party Members -->
+          <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
+            <!-- Current Player -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
+                 draggable="true" 
+                 data-slot-id="0">
+              <img src="images/players/sword.png" alt="Player" class="h-12 w-12 mr-3">
+              <div class="flex-grow">
+                <p class="font-medium text-text-heading">YourUsername</p>
+                <p class="text-sm text-text-primary">Level 82</p>
+              </div>
+              <div class="text-text-heading font-bold">
+                <span class="bg-button-bg text-button-text px-2 py-1 rounded text-xs">Leader</span>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 1 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="1">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 2 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="2">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 3 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="3">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 4 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="4">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 5 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="5">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
           </div>
         </div>
         
-        <!-- Loot Quality Threshold -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold text-text-primary mb-2">Auto-distribute Threshold</h3>
-          <div class="flex items-center space-x-4">
-            <label class="flex items-center space-x-2 cursor-pointer">
-              <input type="checkbox" name="enableThreshold" class="form-checkbox text-button-bg bg-bg-primary border-text-heading rounded focus:ring-button-bg">
-              <span class="text-text-primary">Enable Quality Threshold</span>
-            </label>
-            <select class="bg-bg-primary text-text-primary border border-text-heading rounded p-1">
-              <option value="common">Common</option>
-              <option value="uncommon">Uncommon</option>
-              <option value="rare">Rare</option>
-              <option value="epic">Epic</option>
-            </select>
+        <!-- Party Settings Section -->
+        <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+          <!-- Tabs -->
+          <div class="border-b border-text-heading mb-3">
+            <nav class="flex space-x-4" aria-label="Tabs">
+              <button id="partySettingsTab" class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
+                Party Settings
+              </button>
+              <button id="lootSettingsTab" class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
+                Loot Settings
+              </button>
+            </nav>
+          </div>
+          
+          <!-- Party Settings Tab Content -->
+          <div id="partySettingsContent">
+            <!-- Lobby Visibility -->
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-text-primary mb-2">Lobby Visibility</h3>
+              <div class="flex space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="partyVisibility" value="public" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
+                  <span class="text-text-primary">Public</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="partyVisibility" value="private" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
+                  <span class="text-text-primary">Private</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row sm:justify-between gap-2 mt-4">
+              <div class="flex flex-col sm:flex-row gap-2">
+                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                  Invite Your Clan
+                </button>
+                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200" onclick="toggleLobbyModal(true)">
+                  View Open Lobbies
+                </button>
+              </div>
+              
+              <div class="flex flex-col sm:flex-row gap-2">
+                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                  View Join Requests
+                </button>
+                <button class="bg-gray-600 hover:bg-gray-700 text-text-primary py-2 px-4 rounded-lg font-semibold shadow-lg transition-colors duration-200">
+                  Disband Party
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Loot Settings Tab Content (Initially Hidden) -->
+          <div id="lootSettingsContent" class="hidden">
+            <!-- Loot Distribution -->
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-text-primary mb-2">Loot Distribution</h3>
+              <div class="flex space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="lootDistribution" value="round-robin" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
+                  <span class="text-text-primary">Round-robin</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="lootDistribution" value="kill-owner" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
+                  <span class="text-text-primary">Kill Ownership</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="lootDistribution" value="percentage" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
+                  <span class="text-text-primary">Percentage Based</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Loot Quality Threshold -->
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-text-primary mb-2">Auto-distribute Threshold</h3>
+              <div class="flex items-center space-x-4">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="checkbox" name="enableThreshold" class="form-checkbox text-button-bg bg-bg-primary border-text-heading rounded focus:ring-button-bg">
+                  <span class="text-text-primary">Enable Quality Threshold</span>
+                </label>
+                <select class="bg-bg-primary text-text-primary border border-text-heading rounded p-1">
+                  <option value="common">Common</option>
+                  <option value="uncommon">Uncommon</option>
+                  <option value="rare">Rare</option>
+                  <option value="epic">Epic</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
+        
       </div>
     </div>
-    
   </div>
-</div>
+
+  <!-- Open Lobbies Modal -->
+  <div class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50" id="lobbyModal">
+    <div class="bg-bg-primary w-4/5 max-w-4xl rounded-lg shadow-lg overflow-hidden">
+      <!-- Modal header -->
+      <div class="bg-button-bg text-button-text p-4 flex justify-between items-center">
+        <h2 class="m-0 text-xl font-semibold">Open Lobbies</h2>
+        <button class="bg-transparent border-none text-button-text text-xl cursor-pointer" onclick="toggleLobbyModal(false)">&times;</button>
+      </div>
+
+      <!-- Modal content -->
+      <div class="p-6 max-h-[70vh] overflow-y-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Lobby Name</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Leader (Lvl)</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Members</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Activity</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Lvl Range</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Loot System</th>
+              <th class="p-3 text-left border-b border-text-heading bg-bg-primary font-semibold text-text-heading">Join</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-800">
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Dragon's Den Run #3</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Aurora (25)</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">3 / 6</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Mistwood Ruins</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">20–30</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Need Before Greed</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">
+                <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Join</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-800">
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Shadow Drake World Boss</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Brom the Mighty (40)</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">1 / 6</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">World Boss</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">35–50</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Damage % Share</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">
+                <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Join</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-800">
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">PvP Arena Team A</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Lyra (30)</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">4 / 6</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">PvP Arena</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">25–35</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Personal Loot</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">
+                <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Join</button>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-800">
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Healer Needed: Tomb Raid</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Zenith (28)</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">2 / 6</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Crypt of Echoes</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">25–40</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">Round Robin</td>
+              <td class="p-3 text-left border-b border-text-heading text-text-primary">
+                <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Join</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script src="scripts.js" defer></script>
   
@@ -357,6 +437,13 @@
       `;
       document.head.appendChild(style);
     });
+  </script>
+  <!-- Open Lobbies Modal Script -->
+  <script>
+    function toggleLobbyModal(show) {
+      const overlay = document.getElementById('lobbyModal');
+      overlay.style.display = show ? 'flex' : 'none';
+    }
   </script>
 </body>
 </html>
