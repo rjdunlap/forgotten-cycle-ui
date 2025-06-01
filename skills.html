@@ -24,7 +24,31 @@
       }
     }
   </script>
-
+  <style>
+    /* Custom tooltip styling */
+    [title] {
+      position: relative;
+    }
+    
+    [title]:hover::after {
+      content: attr(title);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--color-bg-primary);
+      color: var(--color-text-primary);
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid var(--color-text-heading);
+      white-space: pre-line;
+      z-index: 10;
+      width: max-content;
+      max-width: 250px;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+  </style>
 </head>
 <body class="bg-bg-primary">
   <div id="nav-placeholder"></div>
@@ -90,7 +114,9 @@
                 <span class="text-text-primary">Ashen Forging</span>
                 <span class="text-text-primary font-bold">68</span>
               </div>
-              <div class="flex justify-between items-center bg-panel-bg p-2 rounded-lg shadow border border-text-heading cursor-pointer" onclick="openSkillModal('Strength', ['1 Flat Damage per 25 levels', '1 inventory slot per 10 levels'])">
+              <div class="flex justify-between items-center bg-panel-bg p-2 rounded-lg shadow border border-text-heading cursor-pointer" 
+                   onclick="openSkillModal('Strength', ['1 Flat Damage per 25 levels', '1 inventory slot per 10 levels'])" 
+                   title="Strength Benefits:\n• 1 Flat Damage per 25 levels\n• 1 inventory slot per 10 levels">
                 <img src="images/skill-icons/strength.png" alt="Strength" class="h-8 w-8"/>
                 <span class="text-text-primary">Strength</span>
                 <span class="text-text-primary font-bold">82</span>
