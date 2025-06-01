@@ -58,9 +58,11 @@
       <h2 class="text-xl font-bold text-text-heading mb-3 pb-2 border-b border-text-heading">Current Party</h2>
       
       <!-- 2x3 Grid for Party Members -->
-      <div class="grid grid-cols-2 gap-4 mb-4">
+      <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
         <!-- Current Player -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
+             draggable="true" 
+             data-slot-id="0">
           <img src="images/players/sword.png" alt="Player" class="h-12 w-12 mr-3">
           <div class="flex-grow">
             <p class="font-medium text-text-heading">YourUsername</p>
@@ -72,7 +74,8 @@
         </div>
         
         <!-- Invite Slot 1 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+             data-slot-id="1">
           <div class="text-center">
             <div class="text-4xl text-text-heading mb-1">+</div>
             <p class="text-sm text-text-primary">Invite Player</p>
@@ -80,7 +83,8 @@
         </div>
         
         <!-- Invite Slot 2 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+             data-slot-id="2">
           <div class="text-center">
             <div class="text-4xl text-text-heading mb-1">+</div>
             <p class="text-sm text-text-primary">Invite Player</p>
@@ -88,7 +92,8 @@
         </div>
         
         <!-- Invite Slot 3 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+             data-slot-id="3">
           <div class="text-center">
             <div class="text-4xl text-text-heading mb-1">+</div>
             <p class="text-sm text-text-primary">Invite Player</p>
@@ -96,7 +101,8 @@
         </div>
         
         <!-- Invite Slot 4 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+             data-slot-id="4">
           <div class="text-center">
             <div class="text-4xl text-text-heading mb-1">+</div>
             <p class="text-sm text-text-primary">Invite Player</p>
@@ -104,7 +110,8 @@
         </div>
         
         <!-- Invite Slot 5 -->
-        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200">
+        <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+             data-slot-id="5">
           <div class="text-center">
             <div class="text-4xl text-text-heading mb-1">+</div>
             <p class="text-sm text-text-primary">Invite Player</p>
@@ -241,6 +248,114 @@
         lootSettingsContent.classList.remove('hidden');
         partySettingsContent.classList.add('hidden');
       });
+    });
+  </script>
+  <!-- Drag and drop script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const partyGrid = document.getElementById('partyGrid');
+      const slots = document.querySelectorAll('.party-slot');
+      
+      let draggedElement = null;
+      let sourceSlot = null;
+      
+      // Add visual cue for draggable items
+      slots.forEach(slot => {
+        // Only make player slots draggable (not empty invite slots)
+        if (slot.querySelector('img')) {
+          slot.classList.add('cursor-move');
+          
+          // Drag start event
+          slot.addEventListener('dragstart', function(e) {
+            draggedElement = this;
+            sourceSlot = this.getAttribute('data-slot-id');
+            
+            // Add a class to show it's being dragged
+            setTimeout(() => {
+              this.classList.add('opacity-50');
+            }, 0);
+            
+            // Set data for drag operation
+            e.dataTransfer.setData('text/plain', this.innerHTML);
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          
+          // Drag end event
+          slot.addEventListener('dragend', function() {
+            this.classList.remove('opacity-50');
+          });
+        }
+      });
+      
+      // Set up drop targets (all slots)
+      slots.forEach(slot => {
+        // Prevent default to allow drop
+        slot.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          this.classList.add('bg-gray-700');
+        });
+        
+        // Handle drag leave
+        slot.addEventListener('dragleave', function() {
+          this.classList.remove('bg-gray-700');
+        });
+        
+        // Handle drop event
+        slot.addEventListener('drop', function(e) {
+          e.preventDefault();
+          this.classList.remove('bg-gray-700');
+          
+          if (draggedElement !== this) {
+            const targetSlot = this.getAttribute('data-slot-id');
+            
+            // Store the target's content before replacing it
+            const targetContent = this.innerHTML;
+            const targetHasPlayer = this.querySelector('img') !== null;
+            
+            // Replace target with dragged content
+            this.innerHTML = draggedElement.innerHTML;
+            
+            // If target was an empty slot, make it draggable now
+            if (!targetHasPlayer) {
+              this.setAttribute('draggable', 'true');
+              this.classList.add('cursor-move');
+              this.classList.remove('justify-center');
+            }
+            
+            // If target had content (another player or invite button)
+            if (targetHasPlayer) {
+              // Replace source with target's content
+              draggedElement.innerHTML = targetContent;
+            } else {
+              // Target was an empty slot, so make source an invite slot
+              draggedElement.innerHTML = `
+                <div class="text-center">
+                  <div class="text-4xl text-text-heading mb-1">+</div>
+                  <p class="text-sm text-text-primary">Invite Player</p>
+                </div>
+              `;
+              draggedElement.removeAttribute('draggable');
+              draggedElement.classList.remove('cursor-move');
+              draggedElement.classList.add('justify-center');
+            }
+            
+            // Log the move (for debugging or server updates)
+            console.log(`Moved player from slot ${sourceSlot} to slot ${targetSlot}`);
+          }
+        });
+      });
+      
+      // Add some CSS for drag and drop visual feedback
+      const style = document.createElement('style');
+      style.textContent = `
+        .cursor-move {
+          cursor: move;
+        }
+        .party-slot.opacity-50 {
+          opacity: 0.5;
+        }
+      `;
+      document.head.appendChild(style);
     });
   </script>
 </body>
