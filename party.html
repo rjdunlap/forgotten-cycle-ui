@@ -446,4 +446,135 @@
     }
   </script>
 </body>
+
+<!-- Invite Player Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50" id="invitePlayerModal">
+  <div class="bg-bg-primary w-11/12 max-w-md rounded-lg shadow-lg overflow-hidden">
+    <!-- Modal header -->
+    <div class="bg-button-bg text-button-text p-4 flex justify-between items-center">
+      <h2 class="m-0 text-xl font-semibold">Invite Player</h2>
+      <button class="bg-transparent border-none text-button-text text-xl cursor-pointer" onclick="toggleInviteModal(false)">&times;</button>
+    </div>
+
+    <!-- Modal content -->
+    <div class="p-6">
+      <!-- Username input -->
+      <div class="mb-4">
+        <label for="usernameInput" class="block text-text-heading mb-2">Username:</label>
+        <input type="text" id="usernameInput" placeholder="Type a username..." class="w-full bg-bg-primary text-text-primary border border-text-heading rounded p-2 focus:outline-none focus:ring-1 focus:ring-button-bg">
+      </div>
+      
+      <!-- Send invite button -->
+      <button class="w-full py-2 px-4 bg-button-bg hover:bg-button-bg-hover text-button-text rounded cursor-pointer mb-6">Send Invite</button>
+      
+      <!-- Tabs -->
+      <div class="border-b border-text-heading mb-3">
+        <nav class="flex space-x-4" aria-label="Invite Tabs">
+          <button id="recentPlayersTab" class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
+            Recent Players
+          </button>
+          <button id="hirableNPCsTab" class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
+            Hirable NPCs
+          </button>
+        </nav>
+      </div>
+      
+      <!-- Recent Players Tab Content -->
+      <div id="recentPlayersContent" class="max-h-64 overflow-y-auto">
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerOne</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerTwo</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerThree</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerFour</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerFive</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+      </div>
+      
+      <!-- Hirable NPCs Tab Content -->
+      <div id="hirableNPCsContent" class="max-h-64 overflow-y-auto hidden">
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Mercenary (Level 20)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Healer (Level 18)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Tank (Level 22)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Archer (Level 19)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Invite Player Modal Script -->
+<script>
+  function toggleInviteModal(show) {
+    const overlay = document.getElementById('invitePlayerModal');
+    overlay.style.display = show ? 'flex' : 'none';
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add click event to all invite player slots
+    const inviteSlots = document.querySelectorAll('.party-slot:not([draggable="true"])');
+    inviteSlots.forEach(slot => {
+      slot.addEventListener('click', function() {
+        toggleInviteModal(true);
+      });
+    });
+    
+    // Tab switching for invite modal
+    const recentPlayersTab = document.getElementById('recentPlayersTab');
+    const hirableNPCsTab = document.getElementById('hirableNPCsTab');
+    const recentPlayersContent = document.getElementById('recentPlayersContent');
+    const hirableNPCsContent = document.getElementById('hirableNPCsContent');
+    
+    // Recent Players Tab
+    recentPlayersTab.addEventListener('click', function() {
+      // Update tab styles
+      recentPlayersTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      recentPlayersTab.classList.add('border-button-bg', 'text-text-heading');
+      
+      hirableNPCsTab.classList.remove('border-button-bg', 'text-text-heading');
+      hirableNPCsTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      
+      // Show/hide content
+      recentPlayersContent.classList.remove('hidden');
+      hirableNPCsContent.classList.add('hidden');
+    });
+    
+    // Hirable NPCs Tab
+    hirableNPCsTab.addEventListener('click', function() {
+      // Update tab styles
+      hirableNPCsTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      hirableNPCsTab.classList.add('border-button-bg', 'text-text-heading');
+      
+      recentPlayersTab.classList.remove('border-button-bg', 'text-text-heading');
+      recentPlayersTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      
+      // Show/hide content
+      hirableNPCsContent.classList.remove('hidden');
+      recentPlayersContent.classList.add('hidden');
+    });
+  });
+</script>
 </html>
