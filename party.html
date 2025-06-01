@@ -59,17 +59,18 @@
           
           <!-- 2x3 Grid for Party Members -->
           <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
-            <!-- Current Player -->
-            <div class="bg-bg-primary p-3 rounded border border-text-heading flex justify-between items-center party-slot" draggable="true" data-slot-id="0">
+            <div class="relative bg-bg-primary p-3 rounded border border-text-heading flex justify-center items-center party-slot" draggable="true" data-slot-id="0">
               <div class="flex items-center gap-3">
                 <img src="images/players/sword.png" alt="Player" class="h-12 w-12">
-                <div class="leading-tight">
+                <div class="leading-tight text-center">
                   <p class="font-medium text-text-heading">YourUsername</p>
                   <p class="text-sm text-text-primary">Level 82</p>
                 </div>
               </div>
-              <div>
-                <span class="bg-button-bg text-button-text px-2 py-1 rounded text-xs font-bold">Leader</span>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                <div class="flex flex-col space-y-1">
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Leader</button>
+                </div>
               </div>
             </div>
             
@@ -83,20 +84,20 @@
             </div>
             
             <!-- Player Slot 2 (Filled) -->
-            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
-                 draggable="true" 
-                 data-slot-id="2">
-              <div class="flex items-center flex-grow">
+            <div class="relative bg-bg-primary p-3 rounded border border-text-heading flex justify-center items-center party-slot" draggable="true" data-slot-id="2">
+              <div class="flex items-center gap-3">
                 <img src="images/players/fire.png" alt="Player" class="h-12 w-12 mr-3">
                 <div>
                   <p class="font-medium text-text-heading">TestPlayer 2</p>
                   <p class="text-sm text-text-primary">Level 45</p>
                 </div>
               </div>
-              <div class="flex flex-col space-y-1">
-                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Profile</button>
-                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Make Leader</button>
-                <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-xs">Kick</button>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                <div class="flex flex-col space-y-1">
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Profile</button>
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Make Leader</button>
+                  <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-xs">Kick</button>
+                </div>
               </div>
             </div>
             
