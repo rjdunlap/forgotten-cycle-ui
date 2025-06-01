@@ -60,16 +60,16 @@
           <!-- 2x3 Grid for Party Members -->
           <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
             <!-- Current Player -->
-            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
-                 draggable="true" 
-                 data-slot-id="0">
-              <img src="images/players/sword.png" alt="Player" class="h-12 w-12 mr-3">
-              <div class="flex-grow">
-                <p class="font-medium text-text-heading">YourUsername</p>
-                <p class="text-sm text-text-primary">Level 82</p>
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex justify-between items-center party-slot" draggable="true" data-slot-id="0">
+              <div class="flex items-center gap-3">
+                <img src="images/players/sword.png" alt="Player" class="h-12 w-12">
+                <div class="leading-tight">
+                  <p class="font-medium text-text-heading">YourUsername</p>
+                  <p class="text-sm text-text-primary">Level 82</p>
+                </div>
               </div>
-              <div class="text-text-heading font-bold">
-                <span class="bg-button-bg text-button-text px-2 py-1 rounded text-xs">Leader</span>
+              <div>
+                <span class="bg-button-bg text-button-text px-2 py-1 rounded text-xs font-bold">Leader</span>
               </div>
             </div>
             
@@ -82,12 +82,21 @@
               </div>
             </div>
             
-            <!-- Invite Slot 2 -->
-            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+            <!-- Player Slot 2 (Filled) -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center party-slot" 
+                 draggable="true" 
                  data-slot-id="2">
-              <div class="text-center">
-                <div class="text-4xl text-text-heading mb-1">+</div>
-                <p class="text-sm text-text-primary">Invite Player</p>
+              <div class="flex items-center flex-grow">
+                <img src="images/players/fire.png" alt="Player" class="h-12 w-12 mr-3">
+                <div>
+                  <p class="font-medium text-text-heading">TestPlayer 2</p>
+                  <p class="text-sm text-text-primary">Level 45</p>
+                </div>
+              </div>
+              <div class="flex flex-col space-y-1">
+                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Profile</button>
+                <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Make Leader</button>
+                <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-xs">Kick</button>
               </div>
             </div>
             
