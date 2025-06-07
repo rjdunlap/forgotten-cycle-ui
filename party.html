@@ -138,26 +138,65 @@
               <button id="partySettingsTab" class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
                 Party Settings
               </button>
-              <button id="lootSettingsTab" class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
-                Loot Settings
-              </button>
             </nav>
           </div>
           
           <!-- Party Settings Tab Content -->
           <div id="partySettingsContent">
-            <!-- Lobby Visibility -->
-            <div class="mb-4">
-              <h3 class="text-lg font-semibold text-text-primary mb-2">Lobby Visibility</h3>
-              <div class="flex space-x-4">
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="radio" name="partyVisibility" value="public" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
-                  <span class="text-text-primary">Public</span>
-                </label>
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="radio" name="partyVisibility" value="private" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-                  <span class="text-text-primary">Private</span>
-                </label>
+            <!-- Settings Row - Lobby Visibility and Loot Distribution side by side -->
+            <div class="flex flex-col md:flex-row md:space-x-6 md:items-start">
+              <!-- Lobby Visibility -->
+              <div class="mb-4 flex-1">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Lobby Visibility</h3>
+                <div class="flex space-x-4">
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="partyVisibility" value="public" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
+                    <span class="text-text-primary">Public</span>
+                  </label>
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="partyVisibility" value="private" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
+                    <span class="text-text-primary">Private</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Loot Distribution -->
+              <div class="mb-4 flex-1">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Loot Distribution</h3>
+                <div class="flex items-center space-x-4">
+                  <select class="bg-bg-primary text-text-primary border border-text-heading rounded p-1">
+                    <option value="round-robin">Round-robin</option>
+                    <option value="kill-owner">Kill Ownership</option>
+                    <option value="percentage">Percentage Based</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-4 flex-1">
+                <h3 class="text-lg font-semibold text-text-primary mb-2">Level Range</h3>
+                <div class="flex flex-col space-y-2">
+                  <div class="flex justify-between">
+                    <span class="text-text-primary text-sm" id="minLevelDisplay">Min: 1</span>
+                    <span class="text-text-primary text-sm" id="maxLevelDisplay">Max: 200</span>
+                  </div>
+                  <div class="relative h-6 w-full">
+                    <!-- Track -->
+                    <div class="absolute h-2 w-full bg-bg-secondary rounded-full top-1/2 transform -translate-y-1/2"></div>
+                    <!-- Selected Range -->
+                    <div class="absolute h-2 bg-button-bg rounded-full top-1/2 transform -translate-y-1/2" id="selectedRange" style="left: 0%; right: 0%"></div>
+                    <!-- Min Handle -->
+                    <div class="absolute w-5 h-5 bg-button-bg rounded-full top-1/2 transform -translate-y-1/2 -ml-2.5 cursor-pointer shadow-md" id="minHandle" style="left: 0%"></div>
+                    <!-- Max Handle -->
+                    <div class="absolute w-5 h-5 bg-button-bg rounded-full top-1/2 transform -translate-y-1/2 -ml-2.5 cursor-pointer shadow-md" id="maxHandle" style="left: 100%"></div>
+                  </div>
+                  <div class="flex justify-between text-xs text-text-primary">
+                    <span>1</span>
+                    <span>50</span>
+                    <span>100</span>
+                    <span>150</span>
+                    <span>200</span>
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -182,44 +221,6 @@
               </div>
             </div>
           </div>
-          
-          <!-- Loot Settings Tab Content (Initially Hidden) -->
-          <div id="lootSettingsContent" class="hidden">
-            <!-- Loot Distribution -->
-            <div class="mb-4">
-              <h3 class="text-lg font-semibold text-text-primary mb-2">Loot Distribution</h3>
-              <div class="flex space-x-4">
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="radio" name="lootDistribution" value="round-robin" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg" checked>
-                  <span class="text-text-primary">Round-robin</span>
-                </label>
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="radio" name="lootDistribution" value="kill-owner" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-                  <span class="text-text-primary">Kill Ownership</span>
-                </label>
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="radio" name="lootDistribution" value="percentage" class="form-radio text-button-bg bg-bg-primary border-text-heading focus:ring-button-bg">
-                  <span class="text-text-primary">Percentage Based</span>
-                </label>
-              </div>
-            </div>
-            
-            <!-- Loot Quality Threshold -->
-            <div class="mb-4">
-              <h3 class="text-lg font-semibold text-text-primary mb-2">Auto-distribute Threshold</h3>
-              <div class="flex items-center space-x-4">
-                <label class="flex items-center space-x-2 cursor-pointer">
-                  <input type="checkbox" name="enableThreshold" class="form-checkbox text-button-bg bg-bg-primary border-text-heading rounded focus:ring-button-bg">
-                  <span class="text-text-primary">Enable Quality Threshold</span>
-                </label>
-                <select class="bg-bg-primary text-text-primary border border-text-heading rounded p-1">
-                  <option value="common">Common</option>
-                  <option value="uncommon">Uncommon</option>
-                  <option value="rare">Rare</option>
-                  <option value="epic">Epic</option>
-                </select>
-              </div>
-            </div>
           </div>
         </div>
         
@@ -544,6 +545,27 @@
   }
   
   document.addEventListener('DOMContentLoaded', function() {
+  // Handle visibility of level range based on party visibility setting
+  const publicRadio = document.querySelector('input[name="partyVisibility"][value="public"]');
+    const privateRadio = document.querySelector('input[name="partyVisibility"][value="private"]');
+    const levelRangeContainer = document.getElementById('levelRangeContainer');
+    
+    // Set initial state
+    levelRangeContainer.style.display = publicRadio.checked ? 'block' : 'none';
+    
+    // Add event listeners to radio buttons
+    publicRadio.addEventListener('change', function() {
+      if (this.checked) {
+        levelRangeContainer.style.display = 'block';
+      }
+    });
+    
+    privateRadio.addEventListener('change', function() {
+      if (this.checked) {
+        levelRangeContainer.style.display = 'none';
+      }
+    });
+
     // Add click event to all invite player slots
     const inviteSlots = document.querySelectorAll('.party-slot:not([draggable="true"])');
     inviteSlots.forEach(slot => {
@@ -585,6 +607,77 @@
       hirableNPCsContent.classList.remove('hidden');
       recentPlayersContent.classList.add('hidden');
     });
+  });
+
+    // Level Range Slider functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const minHandle = document.getElementById('minHandle');
+    const maxHandle = document.getElementById('maxHandle');
+    const selectedRange = document.getElementById('selectedRange');
+    const minLevelDisplay = document.getElementById('minLevelDisplay');
+    const maxLevelDisplay = document.getElementById('maxLevelDisplay');
+    
+    let minValue = 1;
+    let maxValue = 100;
+    const min = 1;
+    const max = 100;
+    
+    function updateRange() {
+      const minPercent = ((minValue - min) / (max - min)) * 100;
+      const maxPercent = ((maxValue - min) / (max - min)) * 100;
+      
+      // Update the position of handles
+      minHandle.style.left = minPercent + '%';
+      maxHandle.style.left = maxPercent + '%';
+      
+      // Update the selected range visual
+      selectedRange.style.left = minPercent + '%';
+      selectedRange.style.right = (100 - maxPercent) + '%';
+      
+      // Update text displays
+      minLevelDisplay.textContent = 'Min: ' + minValue;
+      maxLevelDisplay.textContent = 'Max: ' + maxValue;
+    }
+    
+    function handleDrag(handle, event) {
+      event.preventDefault();
+      const slider = handle.parentElement;
+      const sliderRect = slider.getBoundingClientRect();
+      
+      function onMove(moveEvent) {
+        const newX = moveEvent.clientX - sliderRect.left;
+        let newPercent = Math.max(0, Math.min(100, (newX / sliderRect.width) * 100));
+        let newValue = Math.round(min + (newPercent / 100) * (max - min));
+        
+        if (handle === minHandle) {
+          minValue = Math.min(newValue, maxValue - 1);
+        } else {
+          maxValue = Math.max(newValue, minValue + 1);
+        }
+        
+        updateRange();
+      }
+      
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+      
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    }
+    
+    minHandle.addEventListener('mousedown', function(event) {
+      handleDrag(minHandle, event);
+    });
+
+    maxHandle.addEventListener('mousedown', function(event) {
+      handleDrag(maxHandle, event);
+    });
+
+    // Initialize
+    updateRange();
+
   });
 </script>
 </html>
