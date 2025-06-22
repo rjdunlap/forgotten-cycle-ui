@@ -15,7 +15,7 @@
       border: 2px solid #4a4a4a;
       background: #1a1a1a;
       max-width: 100%;
-      overflow: auto;
+      overflow: hidden;
     }
     .tile {
       width: 16px;
@@ -37,7 +37,7 @@
     }
     #game-canvas {
       flex: 3;
-      overflow: auto;
+      overflow: hidden;
     }
     #info-panel {
       flex: 1;
@@ -127,14 +127,6 @@
     <!-- Page content -->
     <div class="p-4">
       <div class="container mx-auto">
-        <!-- Welcome Message and Date/Timer -->
-        <div class="text-center mb-6">
-          <h1 class="text-3xl font-bold text-text-heading mb-2">Welcome Adventurer!</h1>
-          <p class="text-text-primary text-sm">Today is Friday, April 25, 2025</p>
-          <p class="text-text-primary text-sm flex items-center justify-center">
-            🕑 Reset in 12h 45m 03s
-          </p>
-        </div>
 
         <div class="flex flex-col lg:flex-row gap-4">
           <!-- Main Content Area -->
@@ -159,47 +151,6 @@
                 </div>
               </div>
             </div>
-
-            <!-- Discord Panel -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading flex items-center justify-between">
-              <div class="flex items-center">
-                <img src="images/icons/discord.png" alt="Discord" class="h-8 w-8 mr-3"> <!-- Placeholder icon -->
-                <div>
-                  <h3 class="text-lg font-semibold text-text-heading">Join our Discord community!</h3>
-                  <p class="text-sm text-text-primary">Trade, patch notes, and feedback!</p>
-                </div>
-              </div>
-              <button class="bg-button-bg hover:bg-button-bg-hover text-button-text font-bold py-2 px-4 rounded transition duration-150">
-                Join
-              </button>
-            </div>
-
-            <!-- Patch Notes Panel -->
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-xl font-semibold text-text-heading mb-2 flex items-center">
-                <img src="images/icons/patchnotes.png" alt="Patch Notes" class="h-5 w-5 mr-2 opacity-80"> <!-- Placeholder icon -->
-                Patch Notes - v0.3.2
-              </h2>
-              <p class="text-sm text-text-primary mb-3">Deployed on April 25th 2025</p>
-              <ul class="list-disc list-inside text-text-primary space-y-1 text-sm">
-                <li>Live</li>
-                <!-- Add more patch notes here -->
-              </ul>
-            </div>
-          </div>
-
-          <!-- Events Sidebar -->
-          <div class="w-full lg:w-1/4">
-            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
-              <h2 class="text-xl font-semibold text-text-heading mb-3 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Events
-              </h2>
-              <p class="text-text-primary text-sm">No current events</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -226,7 +177,7 @@
       
       try {
         // Load the map data
-        const response = await fetch('images/tiled/map1.json');
+        const response = await fetch('images/tiled/map2.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -234,12 +185,65 @@
         
         // Clear any existing tiles
         tilemap.innerHTML = '';
-        
-        // Set the grid template columns based on map width
+        // Set tilemap to relative for absolute tiles
+        tilemap.style.position = 'relative';
+        tilemap.style.width = `${mapData.width * tileSize}px`;
+        tilemap.style.height = `${mapData.height * tileSize}px`;
+        // Set the grid template columns based on map width (not needed for absolute, but keep for fallback)
         tilemap.style.gridTemplateColumns = `repeat(${mapData.width}, ${tileSize}px)`;
         
+        // Helper function to render a tile layer with z-index
+        function renderTileLayer(layer, zIndex = 1) {
+          const mapWidth = mapData.width;
+          const mapHeight = mapData.height;
+          const tileData = layer.data;
+          for (let y = 0; y < mapHeight; y++) {
+            for (let x = 0; x < mapWidth; x++) {
+              const index = y * mapWidth + x;
+              const tileId = tileData[index];
+              if (tileId === 0) continue;
+              // For debugging
+              // console.log(`Tile at (${x},${y}): ID=${tileId} (Layer: ${layer.name})`);
+              const tile = document.createElement('div');
+              tile.className = 'tile';
+              tile.dataset.x = x;
+              tile.dataset.y = y;
+              tile.dataset.type = tileId;
+              // Absolute positioning for proper stacking
+              tile.style.position = 'absolute';
+              tile.style.left = `${x * tileSize}px`;
+              tile.style.top = `${y * tileSize}px`;
+              tile.style.zIndex = zIndex;
+              // Tiled uses 1-based indexing, and our tileset starts at firstgid=1
+              const tileIndex = tileId - 1;
+              if (tileIndex < 0) {
+                console.warn(`Invalid tile ID: ${tileId} at (${x},${y})`);
+                continue;
+              }
+              // Calculate row and column in the tileset
+              const row = Math.floor(tileIndex / tilesetCols);
+              const col = tileIndex % tilesetCols;
+              // Calculate background position (in pixels)
+              const bgX = -col * tileSize;
+              const bgY = -row * tileSize;
+              // Set the background image and position
+              tile.style.backgroundImage = `url('${tilesetImage}')`;
+              tile.style.backgroundPosition = `${bgX}px ${bgY}px`;
+              tile.style.width = `${tileSize}px`;
+              tile.style.height = `${tileSize}px`;
+              tile.style.backgroundRepeat = 'no-repeat';
+              tile.style.backgroundSize = '192px 336px'; // Match the tileset dimensions
+              // Add hover effect
+              tile.addEventListener('mouseover', function() {
+                updateTileInfo(x, y, tileId);
+              });
+              tilemap.appendChild(tile);
+            }
+          }
+        }
+
         // Find the main tile layer (Kachelebene 1 means Tile Layer 1 in German)
-        const mainLayer = mapData.layers.find(layer => layer.name === 'Kachelebene 1');
+        let mainLayer = mapData.layers.find(layer => layer.name === 'Kachelebene 1');
         if (!mainLayer) {
           // If the German name isn't found, try the first layer with data
           mainLayer = mapData.layers.find(layer => layer.data && layer.data.length > 0);
@@ -247,69 +251,17 @@
             throw new Error('Could not find any tile layer with data in map');
           }
         }
-        
-        const mapWidth = mapData.width;
-        const mapHeight = mapData.height;
-        const tileData = mainLayer.data;
-        
-        // Create tiles
-        for (let y = 0; y < mapHeight; y++) {
-          for (let x = 0; x < mapWidth; x++) {
-            const index = y * mapWidth + x;
-            const tileId = tileData[index];
-            
-            // Skip empty tiles (0 means no tile in Tiled)
-            if (tileId === 0) continue;
-            
-            // For debugging
-            console.log(`Tile at (${x},${y}): ID=${tileId}`);
-            
-            const tile = document.createElement('div');
-            tile.className = 'tile';
-            tile.dataset.x = x;
-            tile.dataset.y = y;
-            tile.dataset.type = tileId;
-            
-            // Debug: Log the tile ID and its position
-            console.log(`Rendering tile at (${x},${y}): ID=${tileId}`);
-            
-            // Tiled uses 1-based indexing, and our tileset starts at firstgid=1
-            // So we subtract 1 to get 0-based index for calculations
-            const tileIndex = tileId - 1;
-            
-            if (tileIndex < 0) {
-              console.warn(`Invalid tile ID: ${tileId} at (${x},${y})`);
-              continue;
-            }
-            
-            // Calculate row and column in the tileset
-            const row = Math.floor(tileIndex / tilesetCols);
-            const col = tileIndex % tilesetCols;
-            
-            console.log(`  - Tile index: ${tileIndex}, Row: ${row}, Col: ${col}`);
-            
-            // Calculate background position (in pixels)
-            const bgX = -col * tileSize;
-            const bgY = -row * tileSize;
-            
-            console.log(`  - Background position: ${bgX}px ${bgY}px`);
-            
-            // Set the background image and position
-            tile.style.backgroundImage = `url('${tilesetImage}')`;
-            tile.style.backgroundPosition = `${bgX}px ${bgY}px`;
-            tile.style.width = `${tileSize}px`;
-            tile.style.height = `${tileSize}px`;
-            tile.style.backgroundRepeat = 'no-repeat';
-            tile.style.backgroundSize = '192px 336px'; // Match the tileset dimensions
-            
-            // Add hover effect
-            tile.addEventListener('mouseover', function() {
-              updateTileInfo(x, y, tileId);
-            });
-            
-            tilemap.appendChild(tile);
-          }
+
+        // Render the main layer with zIndex 1
+        renderTileLayer(mainLayer, 1);
+
+        // Find a second tile layer (id !== 0, e.g. 'Kachelebene 2' or 'Tile Layer 2')
+        const layer2 = mapData.layers.find(layer => (layer.name === 'Kachelebene 2' || layer.name === 'Tile Layer 2' || layer.id === 2) && layer.id !== 0);
+        if (layer2) {
+          // Render layer 2 on top with zIndex 2
+          renderTileLayer(layer2, 2);
         }
+
         
         console.log('Map loaded successfully:', mapData);
       } catch (error) {
@@ -318,22 +270,43 @@
       }
       
       function updateTileInfo(x, y, tileId) {
-        // Tile descriptions - you can expand this based on your game's needs
+        // Tile descriptions based on the new map design
         const tileTypes = {
-          1: { name: 'Grass', desc: 'Lush green fields' },
-          2: { name: 'Dirt', desc: 'Soft brown earth' },
-          3: { name: 'Water', desc: 'Shallow water' },
-          4: { name: 'Deep Water', desc: 'Deep blue water' },
-          5: { name: 'Sand', desc: 'Warm golden sand' },
-          13: { name: 'Stone', desc: 'Rough stone surface' },
-          14: { name: 'Grass Edge', desc: 'Edge of grassy area' },
-          15: { name: 'Flowers', desc: 'Colorful wildflowers' },
-          25: { name: 'Dark Grass', desc: 'Dense, dark grass' },
-          26: { name: 'Light Grass', desc: 'Patchy light grass' },
-          27: { name: 'Dry Grass', desc: 'Yellowed, dry grass' },
-          37: { name: 'Mossy Stone', desc: 'Stone covered in moss' },
-          38: { name: 'Rocky Ground', desc: 'Rocky terrain' },
-          39: { name: 'Gravel', desc: 'Loose gravel' }
+          1: { name: 'Grass', desc: 'Lush green grass' },
+          2: { name: 'Grass', desc: 'Lush green grass' },
+          3: { name: 'Grass', desc: 'Lush green grass' },
+          4: { name: 'Grass', desc: 'Lush green grass' },
+          5: { name: 'Grass', desc: 'Lush green grass' },
+          14: { name: 'Grass', desc: 'Lush green grass' },
+          15: { name: 'Grass', desc: 'Lush green grass' },
+          26: { name: 'Grass', desc: 'Lush green grass' },
+          27: { name: 'Grass', desc: 'Lush green grass' },
+          38: { name: 'Grass', desc: 'Lush green grass' },
+          39: { name: 'Grass', desc: 'Lush green grass' },
+          49: { name: 'Shore', desc: 'Sandy shoreline' },
+          50: { name: 'Shore', desc: 'Sandy shoreline' },
+          51: { name: 'Shore', desc: 'Sandy shoreline' },
+          58: { name: 'Forest', desc: 'Dense forest' },
+          59: { name: 'Forest', desc: 'Dense forest' },
+          62: { name: 'Water', desc: 'Deep blue water' },
+          63: { name: 'Shore', desc: 'Sandy shoreline' },
+          70: { name: 'Forest', desc: 'Dense forest' },
+          71: { name: 'Forest', desc: 'Dense forest' },
+          72: { name: 'Forest', desc: 'Dense forest' },
+          73: { name: 'Shore', desc: 'Sandy shoreline' },
+          74: { name: 'Shore', desc: 'Sandy shoreline' },
+          75: { name: 'Shore', desc: 'Sandy shoreline' },
+          82: { name: 'Forest', desc: 'Dense forest' },
+          83: { name: 'Forest', desc: 'Dense forest' },
+          84: { name: 'Forest', desc: 'Dense forest' },
+          85: { name: 'Shore', desc: 'Sandy shoreline' },
+          86: { name: 'Shore', desc: 'Sandy shoreline' },
+          94: { name: 'Forest', desc: 'Dense forest' },
+          95: { name: 'Forest', desc: 'Dense forest' },
+          97: { name: 'Shore', desc: 'Sandy shoreline' },
+          98: { name: 'Shore', desc: 'Sandy shoreline' },
+          106: { name: 'Forest', desc: 'Dense forest' },
+          107: { name: 'Forest', desc: 'Dense forest' }
         };
         
         const tile = tileTypes[tileId] || { 
