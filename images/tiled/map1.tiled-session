@@ -1,0 +1,27 @@
+{
+    "activeFile": "map1.json",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "map1.json": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 405.81818181818187,
+                "y": 263
+            }
+        },
+        "overworld_grass.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 2
+        }
+    },
+    "openFiles": [
+        "map1.json"
+    ],
+    "recentFiles": [
+        "map1.json",
+        "overworld_grass.tsx"
+    ]
+}

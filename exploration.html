@@ -1,0 +1,351 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <title>Forgotten Cycle - Exploration</title>
+  <style>
+    .tilemap {
+      display: grid;
+      grid-template-columns: repeat(50, 32px);
+      gap: 0;
+      border: 2px solid #4a4a4a;
+      background: #1a1a1a;
+      max-width: 100%;
+      overflow: auto;
+    }
+    .tile {
+      width: 16px;
+      height: 16px;
+      background-size: 384px 672px; /* 12 columns * 32px, 21 rows * 32px */
+      image-rendering: pixelated;
+    }
+    .tile:hover {
+      outline: 2px solid yellow;
+      outline-offset: -2px;
+      z-index: 1;
+      position: relative;
+    }
+    #game-container {
+      display: flex;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    #game-canvas {
+      flex: 3;
+      overflow: auto;
+    }
+    #info-panel {
+      flex: 1;
+      background: var(--color-panel-bg);
+      border: 2px solid #4a4a4a;
+      border-radius: 4px;
+      padding: 1rem;
+      color: var(--color-text-primary);
+      min-width: 250px;
+    }
+    .tile-info {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+  </style>
+  <style>
+    #game-container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1rem;
+    }
+    #game-canvas {
+      flex: 3;
+      background: #1a1a1a;
+      border: 2px solid #4a4a4a;
+      border-radius: 4px;
+    }
+    #info-panel {
+      flex: 1;
+      background: var(--color-panel-bg);
+      border: 2px solid #4a4a4a;
+      border-radius: 4px;
+      padding: 1rem;
+      color: var(--color-text-primary);
+      min-width: 250px;
+    }
+    .tile-info {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+    }
+  </style>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Navigation placeholder -->
+  <div id="nav-placeholder"></div>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <button id="hamburger" class="text-text-primary text-2xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        <!-- Center section with title and progress -->
+        <div class="flex items-center space-x-4">
+        </div>
+
+        <!-- Right section with bonus indicators -->
+        <div class="flex items-center space-x-2 text-text-primary">
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <!-- Welcome Message and Date/Timer -->
+        <div class="text-center mb-6">
+          <h1 class="text-3xl font-bold text-text-heading mb-2">Welcome Adventurer!</h1>
+          <p class="text-text-primary text-sm">Today is Friday, April 25, 2025</p>
+          <p class="text-text-primary text-sm flex items-center justify-center">
+            🕑 Reset in 12h 45m 03s
+          </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-4">
+          <!-- Main Content Area -->
+          <div class="flex-grow space-y-4">
+            <!-- Map Exploration Area -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-3">World Map</h2>
+              <div id="game-container" class="mt-4">
+                <div id="game-canvas">
+                  <div id="tilemap" class="tilemap">
+                    <!-- Tiles will be inserted here by JavaScript -->
+                  </div>
+                </div>
+                <div id="info-panel">
+                  <h3 class="text-lg font-semibold text-text-heading mb-2">Tile Information</h3>
+                  <p class="text-sm text-text-primary">Hover over a tile to see details</p>
+                  <div id="tile-details" class="tile-info">
+                    <p class="font-medium text-text-heading" id="tile-name">No tile selected</p>
+                    <p class="text-sm text-text-primary" id="tile-desc">Hover over a tile to see details</p>
+                    <p class="text-xs text-text-primary mt-1" id="tile-coords">X: -, Y: -</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Discord Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading flex items-center justify-between">
+              <div class="flex items-center">
+                <img src="images/icons/discord.png" alt="Discord" class="h-8 w-8 mr-3"> <!-- Placeholder icon -->
+                <div>
+                  <h3 class="text-lg font-semibold text-text-heading">Join our Discord community!</h3>
+                  <p class="text-sm text-text-primary">Trade, patch notes, and feedback!</p>
+                </div>
+              </div>
+              <button class="bg-button-bg hover:bg-button-bg-hover text-button-text font-bold py-2 px-4 rounded transition duration-150">
+                Join
+              </button>
+            </div>
+
+            <!-- Patch Notes Panel -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-2 flex items-center">
+                <img src="images/icons/patchnotes.png" alt="Patch Notes" class="h-5 w-5 mr-2 opacity-80"> <!-- Placeholder icon -->
+                Patch Notes - v0.3.2
+              </h2>
+              <p class="text-sm text-text-primary mb-3">Deployed on April 25th 2025</p>
+              <ul class="list-disc list-inside text-text-primary space-y-1 text-sm">
+                <li>Live</li>
+                <!-- Add more patch notes here -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Events Sidebar -->
+          <div class="w-full lg:w-1/4">
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-semibold text-text-heading mb-3 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Events
+              </h2>
+              <p class="text-text-primary text-sm">No current events</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load the navigation menu -->
+  <script src="navbar-loader.js"></script>
+  <script src="scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      const tilemap = document.getElementById('tilemap');
+      const tileName = document.getElementById('tile-name');
+      const tileDesc = document.getElementById('tile-desc');
+      const tileCoords = document.getElementById('tile-coords');
+      
+      // Tileset information
+      const tileSize = 16; // pixels (from Tiled)
+      const tilesetCols = 12; // number of columns in the tileset
+      const tilesetImage = 'images/tiled/overworld_tileset_grass.png';
+      // Tileset has a margin and spacing that might need to be accounted for
+      const tilesetMargin = 0;
+      const tilesetSpacing = 0;
+      const tilesetRows = 21; // 252 tiles / 12 columns = 21 rows
+      
+      try {
+        // Load the map data
+        const response = await fetch('images/tiled/map1.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const mapData = await response.json();
+        
+        // Clear any existing tiles
+        tilemap.innerHTML = '';
+        
+        // Set the grid template columns based on map width
+        tilemap.style.gridTemplateColumns = `repeat(${mapData.width}, ${tileSize}px)`;
+        
+        // Find the main tile layer (Kachelebene 1 means Tile Layer 1 in German)
+        const mainLayer = mapData.layers.find(layer => layer.name === 'Kachelebene 1');
+        if (!mainLayer) {
+          // If the German name isn't found, try the first layer with data
+          mainLayer = mapData.layers.find(layer => layer.data && layer.data.length > 0);
+          if (!mainLayer) {
+            throw new Error('Could not find any tile layer with data in map');
+          }
+        }
+        
+        const mapWidth = mapData.width;
+        const mapHeight = mapData.height;
+        const tileData = mainLayer.data;
+        
+        // Create tiles
+        for (let y = 0; y < mapHeight; y++) {
+          for (let x = 0; x < mapWidth; x++) {
+            const index = y * mapWidth + x;
+            const tileId = tileData[index];
+            
+            // Skip empty tiles (0 means no tile in Tiled)
+            if (tileId === 0) continue;
+            
+            // For debugging
+            console.log(`Tile at (${x},${y}): ID=${tileId}`);
+            
+            const tile = document.createElement('div');
+            tile.className = 'tile';
+            tile.dataset.x = x;
+            tile.dataset.y = y;
+            tile.dataset.type = tileId;
+            
+            // Debug: Log the tile ID and its position
+            console.log(`Rendering tile at (${x},${y}): ID=${tileId}`);
+            
+            // Tiled uses 1-based indexing, and our tileset starts at firstgid=1
+            // So we subtract 1 to get 0-based index for calculations
+            const tileIndex = tileId - 1;
+            
+            if (tileIndex < 0) {
+              console.warn(`Invalid tile ID: ${tileId} at (${x},${y})`);
+              continue;
+            }
+            
+            // Calculate row and column in the tileset
+            const row = Math.floor(tileIndex / tilesetCols);
+            const col = tileIndex % tilesetCols;
+            
+            console.log(`  - Tile index: ${tileIndex}, Row: ${row}, Col: ${col}`);
+            
+            // Calculate background position (in pixels)
+            const bgX = -col * tileSize;
+            const bgY = -row * tileSize;
+            
+            console.log(`  - Background position: ${bgX}px ${bgY}px`);
+            
+            // Set the background image and position
+            tile.style.backgroundImage = `url('${tilesetImage}')`;
+            tile.style.backgroundPosition = `${bgX}px ${bgY}px`;
+            tile.style.width = `${tileSize}px`;
+            tile.style.height = `${tileSize}px`;
+            tile.style.backgroundRepeat = 'no-repeat';
+            tile.style.backgroundSize = '192px 336px'; // Match the tileset dimensions
+            
+            // Add hover effect
+            tile.addEventListener('mouseover', function() {
+              updateTileInfo(x, y, tileId);
+            });
+            
+            tilemap.appendChild(tile);
+          }
+        }
+        
+        console.log('Map loaded successfully:', mapData);
+      } catch (error) {
+        console.error('Error loading map:', error);
+        tilemap.innerHTML = `<div class="text-red-500 p-4">Error loading map: ${error.message}</div>`;
+      }
+      
+      function updateTileInfo(x, y, tileId) {
+        // Tile descriptions - you can expand this based on your game's needs
+        const tileTypes = {
+          1: { name: 'Grass', desc: 'Lush green fields' },
+          2: { name: 'Dirt', desc: 'Soft brown earth' },
+          3: { name: 'Water', desc: 'Shallow water' },
+          4: { name: 'Deep Water', desc: 'Deep blue water' },
+          5: { name: 'Sand', desc: 'Warm golden sand' },
+          13: { name: 'Stone', desc: 'Rough stone surface' },
+          14: { name: 'Grass Edge', desc: 'Edge of grassy area' },
+          15: { name: 'Flowers', desc: 'Colorful wildflowers' },
+          25: { name: 'Dark Grass', desc: 'Dense, dark grass' },
+          26: { name: 'Light Grass', desc: 'Patchy light grass' },
+          27: { name: 'Dry Grass', desc: 'Yellowed, dry grass' },
+          37: { name: 'Mossy Stone', desc: 'Stone covered in moss' },
+          38: { name: 'Rocky Ground', desc: 'Rocky terrain' },
+          39: { name: 'Gravel', desc: 'Loose gravel' }
+        };
+        
+        const tile = tileTypes[tileId] || { 
+          name: `Tile ${tileId}`, 
+          desc: 'Unknown terrain type' 
+        };
+        
+        tileName.textContent = tile.name;
+        tileDesc.textContent = tile.desc;
+        tileCoords.textContent = `X: ${x}, Y: ${y} (ID: ${tileId})`;
+      }
+    });
+  </script>
+</body>
+</html>
