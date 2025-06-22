@@ -1,0 +1,883 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Forgotten Cycle</title>
+  <script>
+    // Track the currently selected allotment
+    let selectedAllotmentId = null;
+    
+    // Function to update the crop details panel with allotment information
+    function updateCropDetailsPanel(allotmentId) {
+      const panel = document.getElementById('cropDetailsPanel');
+      const allotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      
+      if (!allotment || allotment.classList.contains('empty')) {
+        panel.classList.add('hidden');
+        return;
+      }
+      
+      // Show the panel
+      panel.classList.remove('hidden');
+      
+      // Get crop data
+      const plantType = allotment.querySelector('img')?.alt || 'Unknown Crop';
+      const growthBar = allotment.querySelector('.grow-progress');
+      const healthBar = allotment.querySelector('.health-bar');
+      const timer = allotment.querySelector('.timer');
+      
+      // Update panel content
+      document.getElementById('cropName').textContent = plantType.charAt(0).toUpperCase() + plantType.slice(1);
+      
+      if (growthBar) {
+        const growthPercent = growthBar.style.width || '0%';
+        document.getElementById('growthValue').textContent = growthPercent;
+        document.getElementById('growthBar').style.width = growthPercent;
+      }
+      
+      if (healthBar) {
+        const healthPercent = healthBar.style.width || '100%';
+        document.getElementById('healthValue').textContent = healthPercent;
+        document.getElementById('healthBar').style.width = healthPercent;
+      }
+      
+      if (timer) {
+        document.getElementById('cropTimer').textContent = timer.textContent;
+      }
+    }
+    
+    // Function to handle allotment selection
+    function selectAllotment(allotmentId) {
+      // Update the selected state
+      document.querySelectorAll('.allotment').forEach(a => {
+        a.classList.remove('ring-2', 'ring-blue-500');
+      });
+      const selectedAllotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      if (selectedAllotment) {
+        selectedAllotment.classList.add('ring-2', 'ring-blue-500');
+        selectedAllotmentId = allotmentId;
+        
+        // Show the crop details panel and hide reclamation panel
+        const reclamationPanel = document.getElementById('reclamationPanel');
+        if (reclamationPanel) {
+          reclamationPanel.classList.add('hidden');
+        }
+        updateCropDetailsPanel(allotmentId);
+      }
+    }
+    
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-light': 'var(--color-button-light)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <div>
+          <button id="hamburger" class="text-text-primary text-xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        </div>
+        <!-- Center section with title and progress -->
+        <div class="flex items-center">
+          <span class="text-text-heading font-bold">Farming Level: </span>
+          <span class="text-text-primary ml-2">1</span>
+          <div class="w-32 bg-bg-primary rounded-full h-2 ml-4">
+            <div class="bg-button-bg h-2 rounded-full" style="width: 25%"></div>
+          </div>
+        </div>
+        <!-- Right section with coins -->
+        <div class="flex items-center space-x-2 text-text-primary ml-auto">
+          <img src="images/coins.png" alt="Coins" class="h-6 w-6"/>
+          <span>16,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto flex flex-col lg:flex-row gap-4">
+        <!-- Left side: Allotments -->
+        <div class="flex-1">
+          <!-- Farming allotments -->
+          <div class="space-y-4">
+            <div class="bg-panel-bg p-2 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-2 pb-2 border-b border-text-heading">Farming Allotments</h2>
+            <div class="flex items-center mb-2">
+              <input type="checkbox" id="autoReplant" class="mr-2" />
+              <label for="autoReplant" class="text-text-primary text-sm">Auto-replant</label>
+            </div>
+              <div class="grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-2" id="allotmentsContainer">
+                <!-- Allotments will be dynamically populated here -->
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="1">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="2">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="3">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="4">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="5">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="6">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="7">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="8">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="9">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <div class="relative bg-bg-primary p-1.5 rounded border border-text-heading hover:border-button-bg cursor-pointer allotment empty" data-allotment-id="10">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <span class="text-text-primary text-center">Empty Allotment</span>
+                    <span class="text-text-primary text-xs mt-1">Click to plant</span>
+                  </div>
+                </div>
+                <!-- Reclaim Wilderness Button -->
+                <div class="relative bg-bg-primary p-1.5 rounded border-2 border-dashed border-yellow-500 hover:border-yellow-400 cursor-pointer" id="reclaimWilderness">
+                  <div class="flex flex-col items-center justify-center h-24">
+                    <i class="fas fa-tree text-yellow-500 text-2xl"></i>
+                    <span class="text-text-primary font-medium text-center w-full">Reclaim Wilderness</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right side: Crop Details Panel (BDO Style) -->
+        <div id="cropDetailsPanel" class="hidden w-full lg:w-80 bg-panel-bg rounded-lg shadow-lg border border-text-heading p-4 h-fit">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-text-heading" id="cropName">No Crop Selected</h3>
+            <div class="flex space-x-2">
+              <button class="text-text-primary hover:text-text-heading">
+                <i class="fas fa-question-circle"></i>
+              </button>
+              <button id="closeCropPanel" class="text-text-primary hover:text-text-heading">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <!-- Timer Section -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading">
+              <div class="flex items-center text-text-primary text-sm mb-2">
+                <i class="far fa-clock mr-2"></i>
+                <span>Estimated Time</span>
+              </div>
+              <div id="cropTimer" class="text-2xl font-mono text-text-heading">--:--:--</div>
+            </div>
+            
+            <!-- Environmental Factors -->
+            <div class="space-y-3">
+              <h4 class="text-sm font-semibold text-text-heading border-b border-text-heading pb-1">Environmental Factors</h4>
+              
+              <div class="space-y-2">
+                <div class="flex items-center">
+                  <span class="w-24 text-sm text-text-primary">Temperature</span>
+                  <div class="flex-1 bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="tempBar" class="h-full bg-red-500" style="width: 0%"></div>
+                  </div>
+                  <span id="tempValue" class="w-12 text-right text-xs text-text-primary">0%</span>
+                </div>
+                
+                <div class="flex items-center">
+                  <span class="w-24 text-sm text-text-primary">Humidity</span>
+                  <div class="flex-1 bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="humidityBar" class="h-full bg-blue-500" style="width: 0%"></div>
+                  </div>
+                  <span id="humidityValue" class="w-12 text-right text-xs text-text-primary">0%</span>
+                </div>
+                
+                <div class="flex items-center">
+                  <span class="w-24 text-sm text-text-primary">Water</span>
+                  <div class="flex-1 bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="waterBar" class="h-full bg-cyan-500" style="width: 0%"></div>
+                  </div>
+                  <span id="waterValue" class="w-12 text-right text-xs text-text-primary">0%</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Crop Status -->
+            <div class="space-y-3">
+              <h4 class="text-sm font-semibold text-text-heading border-b border-text-heading pb-1">Crop Status</h4>
+              
+              <div class="space-y-2">
+                <div>
+                  <div class="flex justify-between text-xs text-text-primary mb-1">
+                    <span>Growth</span>
+                    <span id="growthValue">0%</span>
+                  </div>
+                  <div class="w-full bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="growthBar" class="h-full bg-green-500" style="width: 0%"></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between text-xs text-text-primary mb-1">
+                    <span>Health</span>
+                    <span id="healthValue">100%</span>
+                  </div>
+                  <div class="w-full bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="healthBar" class="h-full bg-orange-500" style="width: 100%"></div>
+                  </div>
+                </div>
+                
+                <div>
+                  <div class="flex justify-between text-xs text-text-primary mb-1">
+                    <span>Moisture</span>
+                    <span id="moistureValue">0%</span>
+                  </div>
+                  <div class="w-full bg-bg-primary h-2 rounded-full overflow-hidden">
+                    <div id="moistureBar" class="h-full bg-blue-500" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="space-y-2">
+              <h4 class="text-sm font-semibold text-text-heading border-b border-text-heading pb-1">Actions</h4>
+              <div class="grid grid-cols-2 gap-2">
+                <button id="pruneBtn" class="flex items-center justify-center space-x-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-1 px-2 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                  <i class="fas fa-cut"></i>
+                  <span>Prune</span>
+                </button>
+                <button id="pestControlBtn" class="flex items-center justify-center space-x-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-1 px-2 rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                  <i class="fas fa-bug"></i>
+                  <span>Kill Pests</span>
+                </button>
+                <button id="waterBtn" class="flex items-center justify-center space-x-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-1 px-2 rounded text-sm">
+                  <i class="fas fa-tint"></i>
+                  <span>Water</span>
+                </button>
+                <button id="fertilizeBtn" class="flex items-center justify-center space-x-1 bg-button-bg hover:bg-button-bg-hover text-button-text py-1 px-2 rounded text-sm">
+                  <i class="fas fa-leaf"></i>
+                  <span>Fertilize</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Reclamation Panel (Hidden by default, positioned in the same spot as crop details) -->
+        <div id="reclamationPanel" class="hidden w-full lg:w-80 bg-panel-bg rounded-lg shadow-lg border border-text-heading p-4 h-fit">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-bold text-text-heading">Wilderness Reclamation</h3>
+            <div class="flex space-x-2">
+              <button class="text-text-primary hover:text-text-heading">
+                <i class="fas fa-question-circle"></i>
+              </button>
+              <button id="closeReclamationPanel" class="text-text-primary hover:text-text-heading">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        
+        <div class="space-y-4">
+          <div class="bg-bg-primary p-3 rounded border border-text-heading">
+            <div class="flex items-center text-text-primary text-sm mb-2">
+              <i class="fas fa-mountain mr-2"></i>
+              <span>Terrain Type: <span id="terrainType" class="font-medium">Dense Forest</span></span>
+            </div>
+            <div class="w-full bg-bg-primary h-2 rounded-full overflow-hidden mb-2">
+              <div id="terrainProgress" class="h-full bg-button-bg transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <div class="text-xs text-text-primary text-right"><span id="progressText">0%</span> Reclaimed</div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <div class="bg-bg-primary p-2 rounded border border-text-heading">
+              <div class="text-text-heading font-medium mb-1">
+                <i class="fas fa-tools mr-1"></i> Required Tools
+              </div>
+              <div id="requiredTools" class="text-text-primary text-xs space-y-1">
+                <div class="flex items-center">
+                  <i class="fas fa-axe mr-1"></i>
+                  <span>Axe</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-shovel mr-1"></i>
+                  <span>Shovel</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="bg-bg-primary p-2 rounded border border-text-heading">
+              <div class="text-text-heading font-medium mb-1">
+                <i class="far fa-clock mr-1"></i> Time Required
+              </div>
+              <div class="text-text-primary text-sm">
+                <i class="far fa-hourglass-half mr-1"></i> 30 minutes
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-bg-primary p-3 rounded border border-text-heading">
+            <div class="text-text-heading font-medium mb-2">
+              <i class="fas fa-box-open mr-1"></i> Potential Resources
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="flex items-center bg-panel-bg p-1 rounded">
+                <i class="fas fa-tree text-text-heading mr-1"></i>
+                <span class="text-white">Wood</span>
+              </div>
+              <div class="flex items-center bg-panel-bg p-1 rounded">
+                <i class="fas fa-mountain text-text-heading mr-1"></i>
+                <span class="text-white">Stone</span>
+              </div>
+              <div class="flex items-center bg-panel-bg p-1 rounded">
+                <i class="fas fa-leaf text-text-heading mr-1"></i>
+                <span class="text-white">Herbs</span>
+              </div>
+              <div class="flex items-center bg-panel-bg p-1 rounded">
+                <i class="fas fa-seedling text-text-heading mr-1"></i>
+                <span class="text-white">Seeds</span>
+              </div>
+            </div>
+          </div>
+          
+          <button id="startReclamation" class="w-full bg-button-bg hover:bg-button-bg-hover text-button-text font-medium py-2 px-4 rounded transition-colors duration-200 flex items-center justify-center">
+            <i class="fas fa-hammer mr-2"></i>
+            Begin Reclamation
+          </button>
+          
+          <div class="text-xs text-yellow-400 text-center mt-2">
+            <i class="fas fa-info-circle mr-1"></i> Reclaiming land will unlock new farming plots
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plant Selection Modal (Hidden by default) -->
+  <div id="plantModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-bg-primary p-4 rounded-lg shadow-lg border border-text-heading max-w-2xl w-full max-h-[80vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-2 pb-2 border-b border-text-heading">
+        <h2 id="modalTitle" class="text-xl font-bold text-text-heading">Select Plant</h2>
+        <button id="closeModal" class="text-text-primary hover:text-text-heading">✕</button>
+      </div>
+      <div id="modalContent" class="space-y-4">
+        <!-- Plant selection options -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="plant-option bg-bg-primary p-2 rounded border border-text-heading hover:border-button-bg cursor-pointer" data-plant="carrot">
+            <div class="flex flex-col items-center">
+              <img src="images/farming/carrot.png" alt="Carrot" class="h-16 w-16 mb-2">
+              <span class="text-text-primary font-medium">Carrot</span>
+              <span class="text-text-primary text-xs">Growth time: 30 min</span>
+              <span class="text-text-primary text-xs">Yield: 3-5</span>
+              <button class="mt-2 px-3 py-1 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm">Plant</button>
+            </div>
+          </div>
+          <div class="plant-option bg-bg-primary p-2 rounded border border-text-heading hover:border-button-bg cursor-pointer" data-plant="onion">
+            <div class="flex flex-col items-center">
+              <img src="images/farming/onion.png" alt="Onion" class="h-16 w-16 mb-2">
+              <span class="text-text-primary font-medium">Onion</span>
+              <span class="text-text-primary text-xs">Growth time: 45 min</span>
+              <span class="text-text-primary text-xs">Yield: 2-4</span>
+              <button class="mt-2 px-3 py-1 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm">Plant</button>
+            </div>
+          </div>
+          <div class="plant-option bg-bg-primary p-2 rounded border border-text-heading hover:border-button-bg cursor-pointer" data-plant="tomatoe">
+            <div class="flex flex-col items-center">
+              <img src="images/farming/tomatoe.png" alt="Tomato" class="h-16 w-16 mb-2">
+              <span class="text-text-primary font-medium">Tomato</span>
+              <span class="text-text-primary text-xs">Growth time: 60 min</span>
+              <span class="text-text-primary text-xs">Yield: 4-7</span>
+              <button class="mt-2 px-3 py-1 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm">Plant</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts.js" defer></script>
+  <script>
+    // Farming functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      let currentAllotmentId = null;
+      
+      // Initialize panels - ensure both are hidden at start
+      const initCropDetailsPanel = document.getElementById('cropDetailsPanel');
+      const initReclamationPanel = document.getElementById('reclamationPanel');
+      if (initCropDetailsPanel) initCropDetailsPanel.classList.add('hidden');
+      if (initReclamationPanel) initReclamationPanel.classList.add('hidden');
+      
+      // Add click handlers to all allotments
+      const allotmentElements = document.querySelectorAll('.allotment');
+      allotmentElements.forEach(allotment => {
+        allotment.addEventListener('click', function() {
+          const allotmentId = this.dataset.allotmentId;
+          currentAllotmentId = allotmentId;
+          
+          // If the allotment is empty, open the plant modal
+          if (this.classList.contains('empty')) {
+            openPlantModal(allotmentId);
+          } else {
+            // Otherwise, select it to show details in the panel
+            selectAllotment(allotmentId);
+          }
+        });
+      });
+      
+      
+      // Close modal when clicking outside of it
+      const plantModal = document.getElementById('plantModal');
+      if (plantModal) {
+        plantModal.addEventListener('click', function(event) {
+          if (event.target === this) {
+            closePlantModal();
+          }
+        });
+      }
+      
+      // Close button functionality
+      const closeButton = document.getElementById('closeModal');
+      if (closeButton) {
+        closeButton.addEventListener('click', closePlantModal);
+      }
+      
+      // Plant selection functionality
+      const plantButtons = document.querySelectorAll('.plant-option button');
+      plantButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+          event.stopPropagation(); // Prevent the click from bubbling up
+          const plantType = this.closest('.plant-option').dataset.plant;
+          plantCrop(currentAllotmentId, plantType);
+          closePlantModal();
+        });
+      });
+
+      // Pre-plant demonstration crops
+      plantCrop('1', 'carrot');
+      plantCrop('2', 'carrot');
+      
+      // Select the first allotment by default
+      selectAllotment('1');
+      
+      // Reclaim Wilderness button
+      const reclaimBtn = document.getElementById('reclaimWilderness');
+      const reclamationPanel = document.getElementById('reclamationPanel');
+      const cropDetailsPanel = document.getElementById('cropDetailsPanel');
+      
+      if (reclaimBtn) {
+        reclaimBtn.addEventListener('click', function() {
+          // Toggle reclamation panel
+          reclamationPanel.classList.toggle('hidden');
+          // Hide crop details panel when showing reclamation
+          if (!reclamationPanel.classList.contains('hidden')) {
+            cropDetailsPanel.classList.add('hidden');
+          }
+        });
+      }
+      
+      // Start reclamation button
+      const startReclamationBtn = document.getElementById('startReclamation');
+      if (startReclamationBtn) {
+        startReclamationBtn.addEventListener('click', function() {
+          // Start the reclamation process
+          const progressBar = document.getElementById('terrainProgress');
+          let progress = 0;
+          
+          const interval = setInterval(() => {
+            progress += 1;
+            progressBar.style.width = `${progress}%`;
+            
+            if (progress >= 100) {
+              clearInterval(interval);
+              alert('Land successfully reclaimed! New allotments are now available.');
+              // Here you would add the new allotments to the grid
+            }
+          }, 100); // Just for demo - in real game this would be server-side with proper timing
+        });
+      }
+      
+      // Reclamation Wilderness button
+      const reclaimWildernessBtn = document.getElementById('reclaimWilderness');
+      const closeReclamationPanel = document.getElementById('closeReclamationPanel');
+      
+      if (reclaimWildernessBtn) {
+        reclaimWildernessBtn.addEventListener('click', function() {
+          // Hide crop details panel and show reclamation panel
+          const cropDetailsPanel = document.getElementById('cropDetailsPanel');
+          if (cropDetailsPanel) {
+            cropDetailsPanel.classList.add('hidden');
+          }
+          // Show reclamation panel
+          const reclamationPanel = document.getElementById('reclamationPanel');
+          if (reclamationPanel) {
+            reclamationPanel.classList.remove('hidden');
+          }
+          // Remove selection from any allotment
+          document.querySelectorAll('.allotment').forEach(a => {
+            a.classList.remove('ring-2', 'ring-blue-500');
+          });
+          selectedAllotmentId = null;
+        });
+      }
+      
+      if (closeReclamationPanel) {
+        closeReclamationPanel.addEventListener('click', function() {
+          const reclamationPanel = document.getElementById('reclamationPanel');
+          if (reclamationPanel) {
+            reclamationPanel.classList.add('hidden');
+          }
+          // Show crop details panel if an allotment is selected
+          if (selectedAllotmentId) {
+            const cropDetailsPanel = document.getElementById('cropDetailsPanel');
+            if (cropDetailsPanel) {
+              cropDetailsPanel.classList.remove('hidden');
+            }
+          }
+        });
+      }
+      
+      if (startReclamationBtn) {
+        startReclamationBtn.addEventListener('click', function() {
+          const progressBar = document.getElementById('terrainProgress');
+          const progressText = document.getElementById('progressText');
+          let progress = 0;
+          
+          // Disable button during reclamation
+          startReclamationBtn.disabled = true;
+          startReclamationBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Reclaiming...';
+          
+          // Simulate reclamation progress
+          const interval = setInterval(() => {
+            progress += 1;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${progress}%`;
+            
+            if (progress >= 100) {
+              clearInterval(interval);
+              // Re-enable button and change text
+              startReclamationBtn.disabled = false;
+              startReclamationBtn.innerHTML = '<i class="fas fa-check mr-1"></i> Complete!';
+              
+              // Show completion message
+              setTimeout(() => {
+                alert('Land successfully reclaimed! New farming plots are now available.');
+                // Here you would add the new allotments to the grid
+                // For now, we'll just reset the UI
+                progressBar.style.width = '0%';
+                progressText.textContent = '0%';
+                startReclamationBtn.innerHTML = '<i class="fas fa-hammer mr-1"></i> Begin Reclamation';
+              }, 500);
+            }
+          }, 50); // Speed up for demo purposes
+        });
+      }
+      
+      // Water button functionality
+      const waterBtn = document.getElementById('waterBtn');
+      if (waterBtn) {
+        waterBtn.addEventListener('click', function() {
+          if (selectedAllotmentId) {
+            const allotment = document.querySelector(`.allotment[data-allotment-id="${selectedAllotmentId}"]`);
+            if (allotment && !allotment.classList.contains('empty')) {
+              // Reset moisture to 100%
+              const moistureBar = document.getElementById('moistureBar');
+              const moistureValue = document.getElementById('moistureValue');
+              if (moistureBar && moistureValue) {
+                moistureBar.style.width = '100%';
+                moistureValue.textContent = '100%';
+                
+                // Update the moisture bar in the allotment as well if it exists
+                const allotmentMoistureBar = allotment.querySelector('.moisture-bar');
+                if (allotmentMoistureBar) {
+                  allotmentMoistureBar.style.width = '100%';
+                }
+              }
+            }
+          }
+        });
+      }
+    });
+
+    /**
+     * Opens the plant selection modal
+     * @param {string} allotmentId - The ID of the allotment to plant in
+     */
+    function openPlantModal(allotmentId) {
+      const modalTitle = document.getElementById('modalTitle');
+      const plantModal = document.getElementById('plantModal');
+
+      if (modalTitle && plantModal) {
+        modalTitle.textContent = `Select Plant for Allotment ${allotmentId}`;
+        plantModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    /**
+     * Closes the plant selection modal
+     */
+    function closePlantModal() {
+      const plantModal = document.getElementById('plantModal');
+      if (plantModal) {
+        plantModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+    }
+
+    /**
+     * Plants a crop in the specified allotment
+     * @param {string} allotmentId - The ID of the allotment to plant in
+     * @param {string} plantType - The type of plant to grow (carrot, onion, tomatoe)
+     * @param {number} growTime   - Seconds until the crop is ready (default 300 ~ 5 min)
+     */
+    function plantCrop(allotmentId, plantType, growTime = 300) {
+      // Select the newly planted allotment
+      selectAllotment(allotmentId);
+      const allotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      if (allotment) {
+        // Remove empty class
+        allotment.classList.remove('empty');
+
+        // Update the content to show the planted crop
+        allotment.innerHTML = `
+          <div class="flex flex-col items-center justify-center h-24">
+            <img src="images/farming/${plantType}.png" alt="${plantType}" class="h-12 w-12 mb-1">
+            <span class="text-text-primary font-medium capitalize">${plantType}</span>
+            <span class="text-text-primary text-xs timer">${formatTime(growTime)}</span>
+            <div class="w-full bg-bg-primary rounded-full h-1 mt-1">
+              <div class="bg-button-bg h-1 rounded-full grow-progress" style="width: 10%"></div>
+            </div>
+            <div class="w-full bg-red-800 rounded-full h-1 mt-1">
+              <div class="bg-green-500 h-1 rounded-full health-bar" style="width: 100%"></div>
+            </div>
+          </div>
+        `;
+
+        // Start countdown timer & growth simulation
+        startCountdown(allotmentId, growTime);
+        simulateGrowth(allotmentId, plantType);
+      }
+    }
+
+    /** Formats seconds as mm:ss */
+    function formatTime(seconds) {
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    /** Starts a per-second countdown for the given allotment */
+    function startCountdown(allotmentId, duration) {
+      let remaining = duration;
+      const allotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      if (!allotment) return;
+      const timerSpan = allotment.querySelector('.timer');
+      const interval = setInterval(() => {
+        remaining--;
+        if (!timerSpan) return clearInterval(interval);
+        if (remaining <= 0) {
+          timerSpan.textContent = '00:00';
+          clearInterval(interval);
+        } else {
+          timerSpan.textContent = formatTime(remaining);
+        }
+      }, 1000);
+    }
+
+    /**
+     * Simulates the growth of a plant (for demonstration purposes)
+     * @param {string} allotmentId - The ID of the allotment
+     * @param {string} plantType - The type of plant
+     */
+    function simulateGrowth(allotmentId, plantType) {
+      // Update the crop details panel if this allotment is selected
+      if (selectedAllotmentId === allotmentId) {
+        updateCropDetailsPanel(allotmentId);
+      }
+      const allotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      if (!allotment) return;
+      
+      // Get UI elements
+      const progressBar = allotment.querySelector('.grow-progress');
+      const healthBar = allotment.querySelector('.health-bar');
+
+      // Set initial progress & health
+      let progress = 10;
+      let health   = 100;
+      let pests    = false;
+
+      // Pest and compost management is now handled in the crop details panel
+      
+      // Update progress every few seconds (for demonstration)
+      const growthInterval = setInterval(() => {
+        progress += Math.floor(Math.random() * 5) + 1;
+        
+        if (progress >= 100) {
+          // Plant is fully grown
+          progress = 100;
+          clearInterval(growthInterval);
+          
+          // Update the allotment to show the fully grown plant
+          allotment.innerHTML = `
+            <div class="flex flex-col items-center justify-center h-24">
+              <img src="images/farming/${plantType}.png" alt="${plantType}" class="h-12 w-12 mb-1">
+              <span class="text-text-primary font-medium capitalize">${plantType}</span>
+              <button class="mt-1 px-2 py-0.5 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-xs">Harvest</button>
+            </div>
+          `;
+          
+          // Add harvest functionality
+          const harvestButton = allotment.querySelector('button');
+          if (harvestButton) {
+            harvestButton.addEventListener('click', function(event) {
+              event.stopPropagation(); // Prevent opening the modal
+              harvestCrop(allotmentId, plantType);
+            });
+          }
+        } else {
+          // Update the progress bar
+          progressBar.style.width = `${progress}%`;
+        }
+      }, 3000); // Update every 3 seconds for demonstration
+
+      // Health degradation over time
+      const healthInterval = setInterval(() => {
+        // 10% chance of health decrease (pests are now handled in the panel)
+        if (Math.random() < 0.1) {
+          health = Math.max(0, health - 2);
+          if (healthBar) healthBar.style.width = `${health}%`;
+          
+          // Update the crop details panel if this allotment is selected
+          if (selectedAllotmentId === allotmentId) {
+            document.getElementById('healthValue').textContent = `${health}%`;
+            document.getElementById('healthBar').style.width = `${health}%`;
+          }
+          
+          if (health <= 0) {
+            clearInterval(growthInterval);
+            clearInterval(healthInterval);
+            allotment.innerHTML = `
+              <div class="flex flex-col items-center justify-center h-24">
+                <span class="text-red-500 text-center">Crop Died</span>
+              </div>`;
+              
+            // Update the crop details panel if this allotment is selected
+            if (selectedAllotmentId === allotmentId) {
+              document.getElementById('cropDetailsPanel').classList.add('hidden');
+              selectedAllotmentId = null;
+            }
+          }
+        }
+      }, 3000);
+    }
+
+    /**
+     * Harvests a fully grown crop
+     * @param {string} allotmentId - The ID of the allotment
+     * @param {string} plantType - The type of plant
+     */
+    function harvestCrop(allotmentId, plantType) {
+      // Hide the crop details panel if this allotment is selected
+      if (selectedAllotmentId === allotmentId) {
+        document.getElementById('cropDetailsPanel').classList.add('hidden');
+        selectedAllotmentId = null;
+      }
+      const allotment = document.querySelector(`.allotment[data-allotment-id="${allotmentId}"]`);
+      if (allotment) {
+        // Calculate yield based on plant type
+        let minYield = 3;
+        let maxYield = 5;
+        
+        if (plantType === 'onion') {
+          minYield = 2;
+          maxYield = 4;
+        } else if (plantType === 'tomatoe') {
+          minYield = 4;
+          maxYield = 7;
+        }
+        
+        const yield = Math.floor(Math.random() * (maxYield - minYield + 1)) + minYield;
+        
+        // Show harvest notification (in a real app, you would add to inventory)
+        alert(`Harvested ${yield} ${plantType}(s)!`);
+        
+        // Reset the allotment to empty
+        allotment.classList.add('empty');
+
+        // Check auto-replant toggle
+        const autoReplant = document.getElementById('autoReplant');
+        if (autoReplant && autoReplant.checked) {
+          plantCrop(allotmentId, plantType);
+          return;
+        }
+
+        allotment.innerHTML = `
+          <div class="flex flex-col items-center justify-center h-24">
+            <span class="text-text-primary text-center">Empty Allotment</span>
+            <span class="text-text-primary text-xs mt-1">Click to plant</span>
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

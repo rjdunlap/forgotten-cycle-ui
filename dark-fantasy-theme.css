@@ -12,9 +12,13 @@
 }
 
 .section-content {
-  max-height: 1000px; /* Start expanded */
-  overflow: hidden;
+  max-height: 1000px;
+  /*Startexpanded*/overflow: hidden;
   transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: max-height 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .section-content.collapsed {
   max-height: 0;

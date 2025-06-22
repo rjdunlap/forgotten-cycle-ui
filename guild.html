@@ -1,0 +1,718 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <title>Forgotten Cycle - Guild</title>
+  <style>
+    /* Add CSS variables directly */
+    :root {
+      --color-bg-primary: #1E1E2F;
+      --color-text-primary: #E0E0E0;
+      --color-text-heading: #FFB300;
+      --color-button-bg: #B71C1C;
+      --color-button-bg-hover: #D32F2F;
+      --color-button-text: #E0E0E0;
+      --color-panel-bg: #2A2A40;
+      --color-scroll: #2A2A40;
+      --color-pill-bg: #2A2A40;
+    }
+  </style>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'panel-bg': 'var(--color-panel-bg)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          },
+          backgroundColor: theme => ({
+            ...theme('colors'),
+            'panel': 'var(--color-panel-bg)',
+          })
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <button id="hamburger" class="text-text-primary text-xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        <!-- Center section with title -->
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center">
+            <img src="images/guild.png" alt="Guild" class="h-8 w-8 mr-2"/>
+            <span class="text-text-primary font-semibold">Guild Hall</span>
+          </div>
+        </div>
+
+        <!-- Right section with guild level -->
+        <div class="flex items-center space-x-2 text-text-primary">
+          <span>Guild Level: 5</span>
+          <div class="w-24 bg-bg-primary rounded-full h-4 overflow-hidden border border-text-heading shadow-inner ml-2">
+            <div class="bg-button-bg h-full shadow-lg" style="width: 65%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        <!-- Buildings Panel -->
+        <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-6">
+          <h2 class="text-xl font-bold text-text-heading mb-4 pb-2 border-b border-text-heading">Guild Buildings</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-2">
+            <!-- Building Cards -->
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="guild-hall">
+              <div class="h-12 w-12 mx-auto mb-1">🏛️</div>
+              <div class="text-xs text-text-primary">Guild Hall</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 1</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="walls">
+              <div class="h-12 w-12 mx-auto mb-1">🏰</div>
+              <div class="text-xs text-text-primary">Walls</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 1</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="bank">
+              <div class="h-12 w-12 mx-auto mb-1">🏦</div>
+              <div class="text-xs text-text-primary">Bank</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 1</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="arcane-library">
+              <div class="h-12 w-12 mx-auto mb-1">📚</div>
+              <div class="text-xs text-text-primary">Arcane Library</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="mineshaft">
+              <div class="h-12 w-12 mx-auto mb-1">⛏️</div>
+              <div class="text-xs text-text-primary">Mineshaft</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="lumber-yard">
+              <div class="h-12 w-12 mx-auto mb-1">🌲</div>
+              <div class="text-xs text-text-primary">Lumber Yard</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="barracks">
+              <div class="h-12 w-12 mx-auto mb-1">🏛️</div>
+              <div class="text-xs text-text-primary">Barracks</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="tavern">
+              <div class="h-12 w-12 mx-auto mb-1">🏮</div>
+              <div class="text-xs text-text-primary">Tavern</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="fishermans-wharf">
+              <div class="h-12 w-12 mx-auto mb-1">🎣</div>
+              <div class="text-xs text-text-primary">Fisherman's Wharf</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="apothecary">
+              <div class="h-12 w-12 mx-auto mb-1">🧪</div>
+              <div class="text-xs text-text-primary">Apothecary</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="tannery">
+              <div class="h-12 w-12 mx-auto mb-1">🏗️</div>
+              <div class="text-xs text-text-primary">Tannery</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="grist-mill">
+              <div class="h-12 w-12 mx-auto mb-1">🌾</div>
+              <div class="text-xs text-text-primary">Grist Mill</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="marketplace">
+              <div class="h-12 w-12 mx-auto mb-1">🏪</div>
+              <div class="text-xs text-text-primary">Marketplace</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="cartographers-study">
+              <div class="h-12 w-12 mx-auto mb-1">🗺️</div>
+              <div class="text-xs text-text-primary">Cartographer's Study</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="church">
+              <div class="h-12 w-12 mx-auto mb-1">🛕</div>
+              <div class="text-xs text-text-primary">Church</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+            <div class="building-card bg-bg-primary p-2 rounded border border-text-heading text-center cursor-pointer hover:bg-opacity-50 transition-colors" data-building="watchtower">
+              <div class="h-12 w-12 mx-auto mb-1">🗼</div>
+              <div class="text-xs text-text-primary">Watchtower</div>
+              <div class="text-xs font-bold text-text-heading">Lvl 0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Left Column - Current Parties -->
+          <div class="lg:col-span-1">
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <div class="flex justify-between items-center mb-4 pb-2 border-b border-text-heading">
+                <h2 class="text-xl font-bold text-text-heading">Active Parties</h2>
+                <button class="text-xs bg-button-bg hover:bg-button-bg-hover text-button-text px-3 py-1 rounded">
+                  New Party
+                </button>
+              </div>
+              <div class="space-y-3">
+                <!-- Party 1 -->
+                <div class="border border-text-heading/20 rounded-lg overflow-hidden">
+                  <div class="bg-bg-primary/50 p-2 flex justify-between items-center">
+                    <span class="font-medium text-text-primary">Dragon's Lair</span>
+                    <span class="text-xs bg-green-900/50 text-green-300 px-2 py-0.5 rounded">3/6</span>
+                  </div>
+                  <div class="p-2 space-y-1">
+                    <div class="flex items-center justify-between text-sm">
+                      <div class="flex items-center">
+                        <span class="w-4">👑</span>
+                        <span class="text-text-primary">GuildMaster</span>
+                      </div>
+                      <span class="text-text-primary/70">Leader</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                      <div class="flex items-center">
+                        <span class="w-4">⚔️</span>
+                        <span class="text-text-primary">Aragorn</span>
+                      </div>
+                      <span class="text-text-primary/70">Tank</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                      <div class="flex items-center">
+                        <span class="w-4">✨</span>
+                        <span class="text-text-primary">Gandalf</span>
+                      </div>
+                      <span class="text-text-primary/70">Mage</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm opacity-50">
+                      <div class="flex items-center">
+                        <span class="w-4">👤</span>
+                        <span class="text-text-primary">Empty Slot</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm opacity-50">
+                      <div class="flex items-center">
+                        <span class="w-4">👤</span>
+                        <span class="text-text-primary">Empty Slot</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm opacity-50">
+                      <div class="flex items-center">
+                        <span class="w-4">👤</span>
+                        <span class="text-text-primary">Empty Slot</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-2 bg-bg-primary/30 border-t border-text-heading/10">
+                    <button class="w-full bg-green-700 hover:bg-green-600 text-white text-sm py-1 px-3 rounded">
+                      Join Party
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Party 2 (Full) -->
+                <div class="border border-text-heading/20 rounded-lg overflow-hidden opacity-70">
+                  <div class="bg-bg-primary/50 p-2 flex justify-between items-center">
+                    <span class="font-medium text-text-primary">Ancient Ruins</span>
+                    <span class="text-xs bg-gray-700 text-gray-300 px-2 py-0.5 rounded">6/6</span>
+                  </div>
+                  <div class="p-2 space-y-1">
+                    <div class="flex items-center justify-between text-sm">
+                      <div class="flex items-center">
+                        <span class="w-4">👑</span>
+                        <span class="text-text-primary">Legolas</span>
+                      </div>
+                      <span class="text-text-primary/70">Leader</span>
+                    </div>
+                    <!-- Other party members -->
+                    <div class="text-center py-2 text-sm text-text-primary/50">
+                      Party is full
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Middle Column - Guild Info -->
+          <div class="lg:col-span-2 space-y-4">
+            <!-- Guild Announcements -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-2">Announcements</h2>
+              <div class="bg-bg-primary p-3 rounded border border-text-heading">
+                <p class="text-text-primary">Welcome to our guild! Check back for updates and events.</p>
+              </div>
+            </div>
+
+            <!-- Guild Stats -->
+            <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading">
+              <h2 class="text-xl font-bold text-text-heading mb-4 pb-2 border-b border-text-heading">Guild Stats</h2>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-bg-primary p-3 rounded border border-text-heading">
+                  <p class="text-text-primary text-sm">Total Members</p>
+                  <p class="text-text-heading text-2xl font-bold">1/50</p>
+                </div>
+                <div class="bg-bg-primary p-3 rounded border border-text-heading">
+                  <p class="text-text-primary text-sm">Guild Level</p>
+                  <p class="text-text-heading text-2xl font-bold">5</p>
+                </div>
+                <div class="bg-bg-primary p-3 rounded border border-text-heading">
+                  <p class="text-text-primary text-sm">Weekly EXP</p>
+                  <p class="text-text-heading text-2xl font-bold">0</p>
+                </div>
+                <div class="bg-bg-primary p-3 rounded border border-text-heading">
+                  <p class="text-text-primary text-sm">Weekly Rank</p>
+                  <p class="text-text-heading text-2xl font-bold">#-</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Building Investment Modal -->
+  <div id="buildingModal" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 hidden transition-opacity duration-300 p-4">
+    <div class="bg-panel-bg rounded-lg shadow-2xl w-full max-w-2xl border-2 border-gold-500 transform transition-all duration-300 scale-95 opacity-0" id="modalContent">
+      <div class="p-4 border-b border-text-heading flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+          <h3 id="modalBuildingName" class="text-xl font-bold text-text-heading">Guild Hall</h3>
+          <button id="setFocusBtn" class="text-sm bg-button-bg hover:bg-button-bg-hover text-button-text font-medium py-1 px-3 rounded focus:outline-none focus:ring-1 focus:ring-button-bg">
+            Set as Guild Focus
+          </button>
+        </div>
+        <button id="closeModal" class="text-text-primary hover:text-text-heading">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Current Level -->
+      <div class="p-4 border-b border-text-heading">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-text-primary">Current Level: <span id="currentLevel" class="font-bold text-text-heading">1</span></span>
+        </div>
+        <div id="discountTooltip" class="text-xs text-green-400 text-right pr-1 mb-2"></div>
+      </div>
+
+      <!-- Benefits Preview -->
+      <div class="p-4 border-b border-text-heading">
+        <h5 class="font-semibold text-text-heading mb-2">Building Benefits</h5>
+        <ul id="benefits-list" class="text-sm text-text-primary space-y-1 list-disc list-inside">
+          <!-- Populated by JS -->
+        </ul>
+      </div>
+
+      <!-- Investment Section -->
+      <div class="p-4">
+        <!-- Tabs -->
+        <div class="border-b border-text-heading/20">
+          <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <button id="tab-invest" class="text-text-primary tab-button active-tab">
+              Invest
+            </button>
+            <button id="tab-investors" class="text-text-primary tab-button">
+              Investors
+            </button>
+          </nav>
+        </div>
+
+        <!-- Tab Panels -->
+        <div id="panel-invest" class="tab-panel py-4">
+          <div id="investmentProgress" class="mb-4">
+            <!-- Guild progress only -->
+          </div>
+  
+          <div class="mt-4 text-center">
+            <div class="flex items-center justify-center space-x-2">
+                <button id="decreaseAmount" class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-button-bg hover:bg-button-bg-hover text-button-text rounded focus:outline-none text-lg font-bold">-</button>
+                
+                <div class="relative flex-grow bg-bg-primary rounded-full h-8 border border-text-heading/50 max-w-xs">
+                    <div id="investment-fill" class="bg-green-600/50 h-full rounded-full transition-all duration-300" style="width: 0%;"></div>
+                    <div class="absolute inset-0 flex items-center justify-center text-sm font-medium text-text-primary">
+                        <span id="investmentAmountDisplay">1</span>
+                        <span class="text-text-primary mx-1">/</span>
+                        <span id="maxInvestmentDisplay">...</span>
+                    </div>
+                </div>
+                
+                <button id="increaseAmount" class="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-button-bg hover:bg-button-bg-hover text-button-text rounded focus:outline-none text-lg font-bold">+</button>
+            </div>
+    
+            <div class="text-sm text-text-primary mt-3">
+                Invest to receive: <span id="creditsToReceiveDisplay" class="font-semibold text-text-primary">+1 credit</span>
+            </div>
+    
+            <button id="investButton" class="mt-3 bg-button-bg hover:bg-button-bg-hover text-button-text font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-button-bg text-text-primary">
+                Invest <span id="investmentCostDisplay">0</span>
+            </button>
+            
+            <input type="hidden" id="investmentAmount" value="1">
+          </div>
+        </div>
+
+        <div id="panel-investors" class="tab-panel hidden py-4">
+          <h5 class="font-semibold text-text-heading mb-4">Top Investors</h5>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+              <thead class="text-xs text-text-primary uppercase bg-bg-primary">
+                <tr>
+                  <th scope="col" class="px-4 py-3">Rank</th>
+                  <th scope="col" class="px-4 py-3">Member</th>
+                  <th scope="col" class="px-4 py-3 text-right">Credits</th>
+                  <th scope="col" class="px-4 py-3 text-right">Gold Value</th>
+                </tr>
+              </thead>
+              <tbody id="investors-leaderboard">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Benefits tab content is now shown in the main view -->
+        <div id="panel-benefits" class="tab-panel hidden py-4">
+          <p class="text-sm text-text-primary">Viewing benefits in the main panel above.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // Move all script to the bottom of the body to ensure DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // --- App State ---
+      let currentBuildingId = null;
+      let playerGold = 50000; // Player's starting gold
+      let guildFocus = 'guild-hall';
+      let creditsOwnedByPlayer = 0; // Total credits player has ever purchased
+
+      // --- DOM Elements ---
+      const modal = document.getElementById('buildingModal');
+      const closeButton = document.getElementById('closeModal');
+      const modalBuildingName = document.getElementById('modalBuildingName');
+      const currentLevel = document.getElementById('currentLevel');
+      const buildingCards = document.querySelectorAll('[data-building]');
+      const investButton = document.getElementById('investButton');
+      const investmentAmountInput = document.getElementById('investmentAmount');
+      const decreaseBtn = document.getElementById('decreaseAmount');
+      const increaseBtn = document.getElementById('increaseAmount');
+      const setFocusBtn = document.getElementById('setFocusBtn');
+
+      // --- Building Data ---
+      const buildings = {
+        'guild-hall': {
+          name: 'Guild Hall', icon: '🏛️', level: 1, guildCredits: 80, maxCredits: 250,
+          benefits: ['+1 member slot per level', '+1% XP from all sources per level'],
+          investors: [
+            { name: 'Rj', rank: 'Leader', credits: 40, gold: 4570 },
+            { name: 'Gandalf', rank: 'Officer', credits: 25, gold: 2890 },
+            { name: 'Aragorn', rank: 'Member', credits: 15, gold: 1250 },
+          ]
+        },
+        'bank': { name: 'Bank', icon: '🏦', level: 0, guildCredits: 0, maxCredits: 100, benefits: ['+1 guild stash tab per 10 levels', '5% reduced item repair cost per 20 levels'], investors: [] },
+        'foundry': { name: 'Foundry', icon: '🔨', level: 0, guildCredits: 0, maxCredits: 100, benefits: ['+1% crafting success chance per 5 levels', 'Access to guild-exclusive blueprints'], investors: [] },
+        'cartographer': { name: 'Cartographer', icon: '🗺️', level: 0, guildCredits: 0, maxCredits: 100, benefits: ['Unlocks guild expeditions', '1% increased map drop rate per 10 levels'], investors: [] },
+        'barracks': { name: 'Barracks', icon: '⚔️', level: 0, guildCredits: 0, maxCredits: 100, benefits: ['Unlocks guild PvP events', '+1% damage in PvP per 10 levels'], investors: [] },
+        'library': { name: 'Library', icon: '📚', level: 0, guildCredits: 0, maxCredits: 100, benefits: ['Unlocks guild research tree', '1% faster research speed per 10 levels'], investors: [] }
+      };
+
+      // --- Core Functions ---
+      function calculateCreditCost(quantity, buildingId) {
+        let totalCost = 0;
+        const baseCost = 100;
+        const playerName = 'Rj'; // Hardcoded player name as per request
+        
+        // Find player's current investment in this building
+        let playerInvestment = 0;
+        const building = buildings[buildingId];
+        if (building && building.investors) {
+          const player = building.investors.find(inv => inv.name === playerName);
+          if (player) {
+            playerInvestment = player.credits || 0;
+          }
+        }
+        
+        // Calculate cost with player's total investment
+        for (let i = 0; i < quantity; i++) {
+          totalCost += Math.round(baseCost * Math.pow(1.1, playerInvestment + i) / 5) * 5;
+        }
+        
+        // Apply 10% discount if this is the focused building
+        if (buildingId === guildFocus) {
+          totalCost = Math.floor(totalCost * 0.9);
+        }
+        
+        return totalCost;
+      }
+
+      function openInvestmentModal(buildingId) {
+        const building = buildings[buildingId];
+        if (!building) return;
+
+        currentBuildingId = buildingId;
+        modalBuildingName.textContent = building.name;
+        currentLevel.textContent = building.level;
+
+        // Update focus button state
+        const isFocus = buildingId === guildFocus;
+        setFocusBtn.textContent = isFocus ? '★ Current Focus' : 'Set as Guild Focus';
+        setFocusBtn.disabled = isFocus;
+        setFocusBtn.style.opacity = isFocus ? '0.7' : '1';
+
+        investmentAmountInput.value = '1';
+        updateAllModalTabs(building);
+        
+        // Show the modal with animation
+        modal.classList.remove('hidden');
+        const modalContent = document.getElementById('modalContent');
+        modalContent.classList.remove('scale-95', 'opacity-0');
+        modalContent.classList.add('scale-100', 'opacity-100');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function closeModal() {
+        const modalContent = document.getElementById('modalContent');
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modalContent.classList.remove('scale-95', 'opacity-0');
+        }, 300);
+        document.body.style.overflow = 'auto';
+      }
+
+      function updateAllModalTabs(building) {
+        updateInvestTab(building);
+        populateInvestorsLeaderboard(building);
+        populateBenefitsList(building);
+      }
+
+      // --- UI Update Functions ---
+      function updateInvestTab(building) {
+        updateInvestmentUI();
+      }
+
+      function populateInvestorsLeaderboard(building) {
+        const leaderboardBody = document.getElementById('investors-leaderboard');
+        const sortedInvestors = [...building.investors].sort((a, b) => b.credits - a.credits);
+        leaderboardBody.innerHTML = sortedInvestors.map((investor, index) => {
+            const isCurrentUser = investor.name === 'Rj';
+            return `
+                <tr class="${isCurrentUser ? 'bg-button-bg/20' : ''}">
+                    <td class="px-4 py-3 font-medium text-text-heading">${index + 1}</td>
+                    <td class="px-4 py-3"><div class="flex items-center"><div class="font-medium text-text-primary">${investor.name}</div><span class="text-xs text-text-primary ml-2">(${investor.rank})</span></div></td>
+                    <td class="px-4 py-3 text-right text-text-primary">${investor.credits.toLocaleString()}</td>
+                    <td class="px-4 py-3 text-right text-text-primary">${investor.gold.toLocaleString()} GP</td>
+                </tr>
+            `;
+        }).join('');
+      }
+
+      function populateBenefitsList(building) {
+        const benefitsList = document.getElementById('benefits-list');
+        benefitsList.innerHTML = building.benefits.map(benefit => `<li>${benefit}</li>`).join('');
+      }
+
+      function updateInvestmentUI() {
+        const building = buildings[currentBuildingId];
+        if (!building) return;
+        
+        const investmentFill = document.getElementById('investment-fill');
+        const investmentAmountDisplay = document.getElementById('investmentAmountDisplay');
+        const maxInvestmentDisplay = document.getElementById('maxInvestmentDisplay');
+        const creditsToReceiveDisplay = document.getElementById('creditsToReceiveDisplay');
+        const investmentCostDisplay = document.getElementById('investmentCostDisplay');
+        
+        let creditsToBuy = parseInt(investmentAmountInput.value) || 1;
+        const currentInvestment = building.guildCredits;
+        const remainingInBuilding = building.maxCredits - currentInvestment;
+        const percentageFilled = ((currentInvestment + creditsToBuy) / building.maxCredits) * 100;
+        
+        // Update progress bar
+        if (investmentFill) investmentFill.style.width = `${percentageFilled}%`;
+        
+        if (remainingInBuilding <= 0) {
+          if (investmentAmountDisplay) investmentAmountDisplay.textContent = 'MAX';
+          if (maxInvestmentDisplay) maxInvestmentDisplay.textContent = '';
+          if (creditsToReceiveDisplay) creditsToReceiveDisplay.textContent = 'Building fully upgraded';
+          if (investmentCostDisplay) investmentCostDisplay.textContent = '---';
+          investButton.disabled = true;
+          if (decreaseBtn) decreaseBtn.disabled = true;
+          if (increaseBtn) increaseBtn.disabled = true;
+          return;
+        }
+        
+        // Cap at remaining credits needed
+        creditsToBuy = Math.min(creditsToBuy, remainingInBuilding);
+        investmentAmountInput.value = creditsToBuy;
+        
+        // Calculate costs
+        const cost = calculateCreditCost(creditsToBuy, currentBuildingId);
+        
+        // Update UI elements
+        if (investmentAmountDisplay) {
+          investmentAmountDisplay.textContent = 
+            creditsToBuy > 0 ? 
+            `${currentInvestment} (+${creditsToBuy})` : 
+            currentInvestment;
+        }
+        if (maxInvestmentDisplay) maxInvestmentDisplay.textContent = `${building.maxCredits}`;
+        if (creditsToReceiveDisplay) creditsToReceiveDisplay.textContent = `+${creditsToBuy} Guild Credit${creditsToBuy !== 1 ? 's' : ''}`;
+        if (investmentCostDisplay) investmentCostDisplay.textContent = `${cost.toLocaleString()} GP`;
+        // Enable/disable buttons based on affordability and max
+        investButton.disabled = cost > playerGold || creditsToBuy === 0;
+        if (increaseBtn) increaseBtn.disabled = creditsToBuy >= remainingInBuilding;
+        if (decreaseBtn) decreaseBtn.disabled = creditsToBuy <= 1;
+      }
+
+      function setGuildFocus(buildingId, skipUIUpdate = false) {
+        // Only proceed if focus is actually changing
+        if (buildingId === guildFocus && !skipUIUpdate) return;
+        
+        // Remove old focus
+        const oldFocusCard = document.querySelector('.building-card.focused');
+        if (oldFocusCard && oldFocusCard.getAttribute('data-building') !== buildingId) {
+          oldFocusCard.classList.remove('focused');
+          const indicator = oldFocusCard.querySelector('.focused-indicator');
+          if (indicator) indicator.remove();
+        }
+        
+        // Set new focus if it's different from current focus
+        guildFocus = buildingId;
+        const newFocusCard = document.querySelector(`[data-building="${buildingId}"]`);
+        if (newFocusCard) {
+          newFocusCard.classList.add('focused');
+          // Only create a new indicator if one doesn't already exist
+          if (!newFocusCard.querySelector('.focused-indicator')) {
+            const nameElement = newFocusCard.querySelector('.text-xs:not(.text-text-heading)');
+            if (nameElement) {
+              const star = document.createElement('span');
+              star.className = 'focused-indicator';
+              star.innerHTML = '★';
+              nameElement.appendChild(star);
+            }
+          }
+        }
+        
+        // Update modal if it's open for any building
+        if (modal.classList.contains('show') && !skipUIUpdate) {
+          updateInvestmentUI();
+          const isFocus = currentBuildingId === guildFocus;
+          setFocusBtn.textContent = isFocus ? '★ Current Focus' : 'Set as Guild Focus';
+          setFocusBtn.disabled = isFocus;
+          setFocusBtn.style.opacity = isFocus ? '0.7' : '1';
+        }
+      }
+
+      // Initialize Guild Hall as focused
+      setGuildFocus('guild-hall', true);
+
+      // --- Event Listeners ---
+      buildingCards.forEach(card => card.addEventListener('click', () => openInvestmentModal(card.getAttribute('data-building'))));
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      
+      // Focus button click handler
+      setFocusBtn.addEventListener('click', () => setGuildFocus(currentBuildingId));
+
+      document.querySelectorAll('.tab-button').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active-tab'));
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+          tab.classList.add('active-tab');
+          document.getElementById(tab.id.replace('tab-', 'panel-')).classList.remove('hidden');
+        });
+      });
+
+      investButton.addEventListener('click', () => {
+        const creditsToBuy = parseInt(investmentAmountInput.value) || 0;
+        if (creditsToBuy <= 0) return;
+        const building = buildings[currentBuildingId];
+        if (!building) return;
+        const totalCost = calculateCreditCost(creditsToBuy);
+        if (playerGold < totalCost) { alert("You don't have enough gold!"); return; }
+
+        playerGold -= totalCost;
+        creditsOwnedByPlayer += creditsToBuy;
+        building.guildCredits += creditsToBuy;
+        let player = building.investors.find(i => i.name === 'Rj');
+        if (player) { 
+          player.credits += creditsToBuy; 
+          player.gold += totalCost; 
+        } else { 
+          building.investors.push({ name: 'Rj', rank: 'Leader', credits: creditsToBuy, gold: totalCost }); 
+        }
+        
+        updateAllModalTabs(building);
+      });
+      
+      increaseBtn.addEventListener('click', () => { 
+        investmentAmountInput.value = (parseInt(investmentAmountInput.value) || 0) + 1; 
+        updateInvestmentUI(); 
+      });
+      decreaseBtn.addEventListener('click', () => { 
+        if (parseInt(investmentAmountInput.value) > 1) { 
+          investmentAmountInput.value--; 
+          updateInvestmentUI(); 
+        } 
+      });
+
+      if (setFocusBtn) {
+        setFocusBtn.addEventListener('click', () => {
+            setGuildFocus(currentBuildingId);
+        });
+      }
+
+      // --- Initial App Setup ---
+      setGuildFocus(guildFocus); // Set initial focus visuals
+    });
+  </script>
+
+  <script>
+    // Add any guild-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const sidebar = document.getElementById('nav-placeholder');
+      
+      if (hamburger) {
+        hamburger.addEventListener('click', function() {
+          const mainContent = document.getElementById('mainContent');
+          if (mainContent.classList.contains('ml-0')) {
+            mainContent.classList.remove('ml-0');
+            mainContent.classList.add('ml-64');
+          } else {
+            mainContent.classList.remove('ml-64');
+            mainContent.add('ml-0');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
