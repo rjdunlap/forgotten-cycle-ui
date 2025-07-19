@@ -83,6 +83,11 @@
           <!-- 2x3 Grid for Party Members -->
           <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
             <div class="relative bg-bg-primary p-3 rounded border border-text-heading flex justify-center items-center party-slot" draggable="true" data-slot-id="0">
+              <div class="absolute left-3 top-1/2 -translate-y-1/2">
+                <div class="flex flex-col space-y-1">
+                  <div class="bg-green-500 text-white px-2 py-1 rounded text-xs cursor-default">Ready</div>
+                </div>
+              </div>
               <div class="flex items-center gap-3">
                 <img src="images/players/sword.png" alt="Player" class="h-12 w-12">
                 <div class="leading-tight text-center">
@@ -157,6 +162,104 @@
         <div class="mb-6">
           <h2 class="text-2xl font-bold text-text-heading mb-4 pb-2 border-b border-text-heading">Camp Settings</h2>
           
+          <!-- Readiness Settings -->
+          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+            <h3 class="text-xl font-semibold text-text-heading mb-3">Readiness Settings</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Party Ready Status -->
+              <div class="col-span-2">
+                <div id="partyReadyStatus" class="flex items-center justify-center p-3 rounded-lg bg-bg-primary border border-text-heading">
+                  <span id="readyStatusText" class="text-text-primary text-center">Waiting on party to ready</span>
+                  <span id="readyTimer" class="hidden ml-2 text-button-bg font-mono">00:30</span>
+                </div>
+              </div>
+
+              <!-- Ready Check Health -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="readyHealth">
+                  Minimum Health for Ready (%)
+                </label>
+                <div class="flex items-center">
+                  <style>
+  /* Custom thumb for all sliders */
+  input[type=range].custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c; /* Tailwind red-700 */
+    border: 2px solid #991b1b; /* Tailwind red-800 */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  input[type=range].custom-slider:focus::-webkit-slider-thumb,
+  input[type=range].custom-slider:hover::-webkit-slider-thumb {
+    background: #dc2626; /* Tailwind red-600 */
+    transform: scale(1.1);
+  }
+  input[type=range].custom-slider::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c;
+    border: 2px solid #991b1b;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  input[type=range].custom-slider:focus::-moz-range-thumb,
+  input[type=range].custom-slider:hover::-moz-range-thumb {
+    background: #dc2626;
+    transform: scale(1.1);
+  }
+  input[type=range].custom-slider::-ms-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c;
+    border: 2px solid #991b1b;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  input[type=range].custom-slider:focus::-ms-thumb,
+  input[type=range].custom-slider:hover::-ms-thumb {
+    background: #dc2626;
+    transform: scale(1.1);
+  }
+  input[type=range].custom-slider:focus {
+    outline: none;
+  }
+</style>
+<div class="relative w-full">
+  <input type="range" id="readyHealth" min="1" max="100" value="80" 
+         class="w-full h-2.5 bg-bg-secondary rounded-full cursor-pointer custom-slider">
+</div>
+                  <span id="readyHealthValue" class="ml-3 text-text-heading w-12 text-center">80%</span>
+                </div>
+              </div>
+              
+              <!-- Ready Check Mana -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="readyMana">
+                  Minimum Mana for Ready (%)
+                </label>
+                <div class="flex items-center">
+                  <div class="relative w-full">
+  <input type="range" id="readyMana" min="1" max="100" value="50" 
+         class="w-full h-2.5 bg-bg-secondary rounded-full cursor-pointer custom-slider">
+</div>
+                  <span id="readyManaValue" class="ml-3 text-text-heading w-12 text-center">50%</span>
+                </div>
+              </div>
+              
+
+            </div>
+          </div>
+
           <!-- Auto-Eating Settings -->
           <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
             <h3 class="text-xl font-semibold text-text-heading mb-3">Auto-Eating</h3>
@@ -168,8 +271,64 @@
                   Health Threshold (%)
                 </label>
                 <div class="flex items-center">
-                  <input type="range" id="healthThreshold" min="0" max="100" value="30" 
-                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <style>
+  /* Custom thumb for healthThreshold slider */
+  #healthThreshold::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c; /* Tailwind red-700 */
+    border: 2px solid #991b1b; /* Tailwind red-800 */
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  #healthThreshold:focus::-webkit-slider-thumb,
+  #healthThreshold:hover::-webkit-slider-thumb {
+    background: #dc2626; /* Tailwind red-600 */
+    transform: scale(1.1);
+  }
+  #healthThreshold::-moz-range-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c;
+    border: 2px solid #991b1b;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  #healthThreshold:focus::-moz-range-thumb,
+  #healthThreshold:hover::-moz-range-thumb {
+    background: #dc2626;
+    transform: scale(1.1);
+  }
+  #healthThreshold::-ms-thumb {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background: #b91c1c;
+    border: 2px solid #991b1b;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  #healthThreshold:focus::-ms-thumb,
+  #healthThreshold:hover::-ms-thumb {
+    background: #dc2626;
+    transform: scale(1.1);
+  }
+  /* Remove outline for Firefox */
+  #healthThreshold:focus {
+    outline: none;
+  }
+</style>
+<div class="relative w-full">
+  <input type="range" id="healthThreshold" min="0" max="100" value="30"
+         class="w-full h-2.5 bg-bg-secondary rounded-full cursor-pointer">
+</div>
                   <span id="healthValue" class="ml-3 text-text-heading w-12 text-center">30%</span>
                 </div>
                 <p class="text-xs text-text-primary mt-1">Eat food when health is below this percentage</p>
@@ -181,8 +340,10 @@
                   Mana Threshold (%)
                 </label>
                 <div class="flex items-center">
-                  <input type="range" id="manaThreshold" min="0" max="100" value="20" 
-                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <div class="relative w-full">
+  <input type="range" id="manaThreshold" min="0" max="100" value="20" 
+         class="w-full h-2.5 bg-bg-secondary rounded-full cursor-pointer custom-slider">
+</div>
                   <span id="manaValue" class="ml-3 text-text-heading w-12 text-center">20%</span>
                 </div>
                 <p class="text-xs text-text-primary mt-1">Use mana potions when mana is below this percentage</p>
@@ -223,45 +384,6 @@
               </label>
             </div>
           </div>
-          
-          <!-- Readiness Settings -->
-          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
-            <h3 class="text-xl font-semibold text-text-heading mb-3">Readiness Settings</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Ready Check Health -->
-              <div class="mb-4">
-                <label class="block text-text-primary text-sm font-medium mb-2" for="readyHealth">
-                  Minimum Health for Ready (%)
-                </label>
-                <div class="flex items-center">
-                  <input type="range" id="readyHealth" min="1" max="100" value="80" 
-                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
-                  <span id="readyHealthValue" class="ml-3 text-text-heading w-12 text-center">80%</span>
-                </div>
-              </div>
-              
-              <!-- Ready Check Mana -->
-              <div class="mb-4">
-                <label class="block text-text-primary text-sm font-medium mb-2" for="readyMana">
-                  Minimum Mana for Ready (%)
-                </label>
-                <div class="flex items-center">
-                  <input type="range" id="readyMana" min="1" max="100" value="50" 
-                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
-                  <span id="readyManaValue" class="ml-3 text-text-heading w-12 text-center">50%</span>
-                </div>
-              </div>
-              
-              <!-- Auto-Ready -->
-              <div class="col-span-2">
-                <label class="flex items-center space-x-2">
-                  <input type="checkbox" id="autoReadyEnabled" class="form-checkbox text-button-bg">
-                  <span class="text-text-primary">Auto-Accept Ready Check when conditions are met</span>
-                </label>
-              </div>
-            </div>
-          </div>
 
           <!-- Attack Strategy -->
           <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
@@ -280,19 +402,7 @@
                 <option value="lowest_health">Lowest Health %</option>
               </select>
             </div>
-            
-            <!-- Attack Range -->
-            <div class="mb-4">
-              <label class="block text-text-primary text-sm font-medium mb-2" for="attackRange">
-                Maximum Attack Range
-              </label>
-              <div class="flex items-center">
-                <input type="range" id="attackRange" min="1" max="10" value="5" 
-                       class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
-                <span id="attackRangeValue" class="ml-3 text-text-heading w-12 text-center">5m</span>
-              </div>
-            </div>
-            
+                        
             <!-- Attack Style -->
             <div class="mb-4">
               <label class="block text-text-primary text-sm font-medium mb-2">
@@ -522,6 +632,93 @@
       const overlay = document.getElementById('lobbyModal');
       overlay.style.display = show ? 'flex' : 'none';
     }
+  </script>
+  
+  <!-- Party Ready Status Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Party ready status and timer logic
+      const partyReadyStatus = document.getElementById('partyReadyStatus');
+      const readyStatusText = document.getElementById('readyStatusText');
+      const readyTimer = document.getElementById('readyTimer');
+      let countdownInterval;
+      let secondsRemaining = 30;
+
+      // Function to update the timer display
+      function updateTimerDisplay() {
+        const minutes = Math.floor(secondsRemaining / 60);
+        const seconds = secondsRemaining % 60;
+        readyTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      // Function to start the countdown
+      function startCountdown() {
+        // Reset timer
+        secondsRemaining = 30;
+        updateTimerDisplay();
+        
+        // Show timer and update status text
+        readyStatusText.textContent = 'Party is ready! Starting in:';
+        readyTimer.classList.remove('hidden');
+        partyReadyStatus.classList.remove('border-yellow-500');
+        partyReadyStatus.classList.add('border-green-500');
+        
+        // Clear any existing interval
+        if (countdownInterval) clearInterval(countdownInterval);
+        
+        // Start new countdown
+        countdownInterval = setInterval(() => {
+          secondsRemaining--;
+          updateTimerDisplay();
+          
+          if (secondsRemaining <= 0) {
+            clearInterval(countdownInterval);
+            // Here you would typically trigger the ready action
+            console.log('Ready check completed!');
+            resetReadyStatus();
+          }
+        }, 1000);
+      }
+      
+      // Function to reset the ready status
+      function resetReadyStatus() {
+        clearInterval(countdownInterval);
+        readyStatusText.textContent = 'Waiting on party to ready';
+        readyTimer.classList.add('hidden');
+        partyReadyStatus.classList.remove('border-green-500');
+        partyReadyStatus.classList.add('border-yellow-500');
+        
+        // Check again after a delay
+        setTimeout(checkPartyReady, 5000);
+      }
+      
+      // Function to check if party is ready (mock implementation)
+      function checkPartyReady() {
+        // In a real implementation, this would check the actual party status
+        // For now, we'll simulate a ready check with a 30% chance of being ready
+        const isPartyReady = Math.random() < 0.3; // 30% chance of being ready
+        
+        if (isPartyReady) {
+          startCountdown();
+        } else {
+          // If not ready, check again in 5 seconds
+          setTimeout(checkPartyReady, 5000);
+        }
+      }
+      
+      // Initial styling and check
+      partyReadyStatus.classList.add('border-yellow-500', 'transition-colors', 'duration-300');
+      checkPartyReady();
+      
+      // Clean up interval when page unloads
+      window.addEventListener('beforeunload', () => {
+        if (countdownInterval) clearInterval(countdownInterval);
+      });
+      
+      // Expose functions for testing (can be removed in production)
+      window.startCountdown = startCountdown;
+      window.resetReadyStatus = resetReadyStatus;
+    });
   </script>
 </body>
 
