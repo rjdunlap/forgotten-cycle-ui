@@ -1,0 +1,827 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link id="theme-style" rel="stylesheet" href="dark-fantasy-theme.css">
+  <title>Camp - Forgotten Cycle</title>
+  <script>
+    // Configure Tailwind to use CSS variables
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'bg-primary': 'var(--color-bg-primary)',
+            'text-primary': 'var(--color-text-primary)',
+            'text-heading': 'var(--color-text-heading)',
+            'button-bg': 'var(--color-button-bg)',
+            'button-bg-hover': 'var(--color-button-bg-hover)',
+            'button-text': 'var(--color-button-text)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom dropdown styling */
+    select option[value="add"] {
+      color: var(--button-bg);
+      font-weight: 500;
+      padding: 0.5rem;
+    }
+    
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 0 1px var(--button-bg);
+    }
+    
+    select option:checked {
+      background-color: var(--button-bg);
+      color: var(--button-text);
+    }
+    
+    select option:hover {
+      background-color: #333; /* Darker background */
+      color: var(--button-text);
+      font-weight: 600; /* Better visual feedback */
+    }
+  </style>
+</head>
+<body class="bg-bg-primary">
+  <!-- Sidebar navigation -->
+  <div id="nav-placeholder"></div>
+  <script src="navbar-loader.js"></script>
+
+  <!-- Main content wrapper -->
+  <div id="mainContent" class="transition-all duration-300 ml-0 xl:ml-64">
+    <!-- Toolbar -->
+    <div class="w-full bg-panel-bg p-2 shadow-md border-b border-text-heading">
+      <div class="flex items-center justify-between">
+        <div>
+          <button id="hamburger" class="text-text-primary text-xl px-2 hover:text-text-heading xl:hidden">☰</button>
+        </div>
+        <!-- Center section with title and progress -->
+        <div></div>
+        <!-- Right section with coins -->
+        <div class="flex items-center space-x-2 text-text-primary ml-auto">
+          <img src="images/coins.png" alt="Coins" class="h-6 w-6"/>
+          <span>16,000</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="p-4">
+      <div class="container mx-auto">
+        
+        <!-- Party Members Section -->
+        <div class="">
+          <h2 class="text-xl font-bold text-text-heading mb-3 pb-2 border-b border-text-heading">Current Party</h2>
+          
+          <!-- 2x3 Grid for Party Members -->
+          <div class="grid grid-cols-2 gap-4 mb-4" id="partyGrid">
+            <div class="relative bg-bg-primary p-3 rounded border border-text-heading flex justify-center items-center party-slot" draggable="true" data-slot-id="0">
+              <div class="flex items-center gap-3">
+                <img src="images/players/sword.png" alt="Player" class="h-12 w-12">
+                <div class="leading-tight text-center">
+                  <p class="font-medium text-text-heading">YourUsername</p>
+                  <p class="text-sm text-text-primary">Level 82</p>
+                </div>
+              </div>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                <div class="flex flex-col space-y-1">
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Leader</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 1 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="1">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Player Slot 2 (Filled) -->
+            <div class="relative bg-bg-primary p-3 rounded border border-text-heading flex justify-center items-center party-slot" draggable="true" data-slot-id="2">
+              <div class="flex items-center gap-3">
+                <img src="images/players/fire.png" alt="Player" class="h-12 w-12 mr-3">
+                <div>
+                  <p class="font-medium text-text-heading">TestPlayer 2</p>
+                  <p class="text-sm text-text-primary">Level 45</p>
+                </div>
+              </div>
+              <div class="absolute right-3 top-1/2 -translate-y-1/2">
+                <div class="flex flex-col space-y-1">
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Profile</button>
+                  <button class="bg-button-bg hover:bg-button-bg-hover text-button-text px-2 py-1 rounded text-xs">Make Leader</button>
+                  <button class="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded text-xs">Kick</button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 3 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="3">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 4 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="4">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+            
+            <!-- Invite Slot 5 -->
+            <div class="bg-bg-primary p-3 rounded border border-text-heading flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors duration-200 party-slot"
+                 data-slot-id="5">
+              <div class="text-center">
+                <div class="text-4xl text-text-heading mb-1">+</div>
+                <p class="text-sm text-text-primary">Invite Player</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Camp Settings Section -->
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-text-heading mb-4 pb-2 border-b border-text-heading">Camp Settings</h2>
+          
+          <!-- Auto-Eating Settings -->
+          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+            <h3 class="text-xl font-semibold text-text-heading mb-3">Auto-Eating</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Health Threshold -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="healthThreshold">
+                  Health Threshold (%)
+                </label>
+                <div class="flex items-center">
+                  <input type="range" id="healthThreshold" min="0" max="100" value="30" 
+                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <span id="healthValue" class="ml-3 text-text-heading w-12 text-center">30%</span>
+                </div>
+                <p class="text-xs text-text-primary mt-1">Eat food when health is below this percentage</p>
+              </div>
+              
+              <!-- Mana Threshold -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="manaThreshold">
+                  Mana Threshold (%)
+                </label>
+                <div class="flex items-center">
+                  <input type="range" id="manaThreshold" min="0" max="100" value="20" 
+                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <span id="manaValue" class="ml-3 text-text-heading w-12 text-center">20%</span>
+                </div>
+                <p class="text-xs text-text-primary mt-1">Use mana potions when mana is below this percentage</p>
+              </div>
+              
+              <!-- Food Selection -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="foodItem">
+                  Preferred Food
+                </label>
+                <select id="foodItem" class="bg-bg-primary text-text-primary border border-text-heading rounded p-2 w-full">
+                  <option value="bread">Bread (+50 HP)</option>
+                  <option value="meat">Roasted Meat (+100 HP)</option>
+                  <option value="fish">Grilled Fish (+75 HP)</option>
+                  <option value="stew">Hearty Stew (+150 HP)</option>
+                  <option value="feast">Hero's Feast (+300 HP)</option>
+                </select>
+              </div>
+              
+              <!-- Potion Selection -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="potionItem">
+                  Preferred Mana Potion
+                </label>
+                <select id="potionItem" class="bg-bg-primary text-text-primary border border-text-heading rounded p-2 w-full">
+                  <option value="minor_mana">Minor Mana Potion (+50 MP)</option>
+                  <option value="mana">Mana Potion (+100 MP)</option>
+                  <option value="greater_mana">Greater Mana Potion (+200 MP)</option>
+                  <option value="superior_mana">Superior Mana Potion (+400 MP)</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" id="autoEatEnabled" class="form-checkbox text-button-bg" checked>
+                <span class="text-text-primary">Enable Auto-Eating</span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Readiness Settings -->
+          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+            <h3 class="text-xl font-semibold text-text-heading mb-3">Readiness Settings</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Ready Check Health -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="readyHealth">
+                  Minimum Health for Ready (%)
+                </label>
+                <div class="flex items-center">
+                  <input type="range" id="readyHealth" min="1" max="100" value="80" 
+                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <span id="readyHealthValue" class="ml-3 text-text-heading w-12 text-center">80%</span>
+                </div>
+              </div>
+              
+              <!-- Ready Check Mana -->
+              <div class="mb-4">
+                <label class="block text-text-primary text-sm font-medium mb-2" for="readyMana">
+                  Minimum Mana for Ready (%)
+                </label>
+                <div class="flex items-center">
+                  <input type="range" id="readyMana" min="1" max="100" value="50" 
+                         class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                  <span id="readyManaValue" class="ml-3 text-text-heading w-12 text-center">50%</span>
+                </div>
+              </div>
+              
+              <!-- Auto-Ready -->
+              <div class="col-span-2">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="autoReadyEnabled" class="form-checkbox text-button-bg">
+                  <span class="text-text-primary">Auto-Accept Ready Check when conditions are met</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Attack Strategy -->
+          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+            <h3 class="text-xl font-semibold text-text-heading mb-3">Attack Strategy</h3>
+            
+            <!-- Target Selection -->
+            <div class="mb-4">
+              <label class="block text-text-primary text-sm font-medium mb-2" for="targetPriority">
+                Target Priority
+              </label>
+              <select id="targetPriority" class="w-full bg-bg-primary text-text-primary border border-text-heading rounded p-2">
+                <option value="weakest">Weakest First (Lowest HP)</option>
+                <option value="strongest">Strongest First (Highest HP)</option>
+                <option value="nearest">Nearest Target</option>
+                <option value="farthest">Farthest Target</option>
+                <option value="lowest_health">Lowest Health %</option>
+              </select>
+            </div>
+            
+            <!-- Attack Range -->
+            <div class="mb-4">
+              <label class="block text-text-primary text-sm font-medium mb-2" for="attackRange">
+                Maximum Attack Range
+              </label>
+              <div class="flex items-center">
+                <input type="range" id="attackRange" min="1" max="10" value="5" 
+                       class="w-full h-2 bg-bg-primary rounded-lg appearance-none cursor-pointer">
+                <span id="attackRangeValue" class="ml-3 text-text-heading w-12 text-center">5m</span>
+              </div>
+            </div>
+            
+            <!-- Attack Style -->
+            <div class="mb-4">
+              <label class="block text-text-primary text-sm font-medium mb-2">
+                Combat Style
+              </label>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="combatStyle" value="melee" class="form-radio text-button-bg" checked>
+                  <span class="text-text-primary">Melee Focus</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="combatStyle" value="ranged" class="form-radio text-button-bg">
+                  <span class="text-text-primary">Ranged Focus</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="radio" name="combatStyle" value="hybrid" class="form-radio text-button-bg">
+                  <span class="text-text-primary">Hybrid (Adaptive)</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Special Abilities -->
+            <div class="mb-4">
+              <label class="block text-text-primary text-sm font-medium mb-2">
+                Special Abilities
+              </label>
+              <div class="space-y-2">
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="useAoe" class="form-checkbox text-button-bg" checked>
+                  <span class="text-text-primary">Use Area of Effect Abilities</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="useCrowdControl" class="form-checkbox text-button-bg" checked>
+                  <span class="text-text-primary">Use Crowd Control Abilities</span>
+                </label>
+                <label class="flex items-center space-x-2">
+                  <input type="checkbox" id="useDefensive" class="form-checkbox text-button-bg">
+                  <span class="text-text-primary">Use Defensive Cooldowns</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Idle Activity -->
+          <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold text-text-heading">Idle Activity</h3>
+              <button id="addActivityBtn" class="p-1.5 bg-button-bg hover:bg-button-bg-hover text-button-text rounded">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+              </button>
+            </div>
+            
+            <!-- Activity List -->
+            <div id="activityList" class="space-y-4">
+              <!-- Activity items will be added here -->
+                <div class="relative w-full">
+                  <select class="w-full bg-bg-primary text-text-primary border border-text-heading rounded p-2">
+                    <option value="firemaking">Firemaking</option>
+                    <option value="smelting">Smelting</option>
+                    <option value="smithing">Smithing</option>
+                    <option value="add" class="text-button-bg font-medium">+ Add New Activity</option>
+                  </select>
+              </div>
+            </div>
+            
+            <!-- Add Activity Modal (hidden by default) -->
+            <div id="activityModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div class="bg-panel-bg p-6 rounded-lg w-96">
+                <h3 class="text-xl font-semibold text-text-heading mb-4">Add New Activity</h3>
+                <div class="space-y-4">
+                  <div>
+                    <label class="block text-text-primary text-sm font-medium mb-1">Activity Type</label>
+                    <select class="w-full bg-panel-bg-darker border border-panel-border rounded px-3 py-2 text-text-primary">
+                      <option value="firemaking">Firemaking</option>
+                      <option value="smelting">Smelting</option>
+                      <option value="smithing">Smithing</option>
+                    </select>
+                  </div>
+                  <div class="flex justify-end space-x-3 mt-6">
+                    <button id="cancelActivityBtn" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">
+                      Cancel
+                    </button>
+                    <button id="saveActivityBtn" class="px-4 py-2 bg-button-bg hover:bg-button-bg-hover text-button-text rounded">
+                      Add Activity
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const activitySelect = document.querySelector('.activity-item select');
+            const activityModal = document.getElementById('activityModal');
+            const addActivityBtn = document.getElementById('addActivityBtn');
+            const cancelActivityBtn = document.getElementById('cancelActivityBtn');
+            const saveActivityBtn = document.getElementById('saveActivityBtn');
+            
+            // Handle dropdown selection
+            if (activitySelect) {
+              activitySelect.addEventListener('change', function(e) {
+                if (e.target.value === 'add') {
+                  activityModal.classList.remove('hidden');
+                  // Reset to first option
+                  e.target.value = 'firemaking';
+                }
+              });
+            }
+            
+            // Add Activity button
+            if (addActivityBtn) {
+              addActivityBtn.addEventListener('click', function() {
+                activityModal.classList.remove('hidden');
+              });
+            }
+            
+            // Cancel button in modal
+            if (cancelActivityBtn) {
+              cancelActivityBtn.addEventListener('click', function() {
+                activityModal.classList.add('hidden');
+              });
+            }
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+              if (event.target === activityModal) {
+                activityModal.classList.add('hidden');
+              }
+            });
+            
+            // Save new activity
+            if (saveActivityBtn) {
+              saveActivityBtn.addEventListener('click', function() {
+                const activityType = document.querySelector('#activityModal select').value;
+                // Here you would typically add the new activity to the list
+                // For now, we'll just close the modal
+                activityModal.classList.add('hidden');
+              });
+            }
+          });
+          </script>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+ 
+
+  <script src="scripts.js" defer></script>
+  
+  <!-- Tab switching script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const partySettingsTab = document.getElementById('partySettingsTab');
+      const lootSettingsTab = document.getElementById('lootSettingsTab');
+      const partySettingsContent = document.getElementById('partySettingsContent');
+      const lootSettingsContent = document.getElementById('lootSettingsContent');
+      
+      // Party Settings Tab
+      partySettingsTab.addEventListener('click', function() {
+        // Update tab styles
+        partySettingsTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+        partySettingsTab.classList.add('border-button-bg', 'text-text-heading');
+        
+        lootSettingsTab.classList.remove('border-button-bg', 'text-text-heading');
+        lootSettingsTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+        
+        // Show/hide content
+        partySettingsContent.classList.remove('hidden');
+        lootSettingsContent.classList.add('hidden');
+      });
+      
+      // Loot Settings Tab
+      lootSettingsTab.addEventListener('click', function() {
+        // Update tab styles
+        lootSettingsTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+        lootSettingsTab.classList.add('border-button-bg', 'text-text-heading');
+        
+        partySettingsTab.classList.remove('border-button-bg', 'text-text-heading');
+        partySettingsTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+        
+        // Show/hide content
+        lootSettingsContent.classList.remove('hidden');
+        partySettingsContent.classList.add('hidden');
+      });
+    });
+  </script>
+  <!-- Drag and drop script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const partyGrid = document.getElementById('partyGrid');
+      const slots = document.querySelectorAll('.party-slot');
+      
+      let draggedElement = null;
+      let sourceSlot = null;
+      
+      // Add visual cue for draggable items
+      slots.forEach(slot => {
+        // Only make player slots draggable (not empty invite slots)
+        if (slot.querySelector('img')) {
+          slot.classList.add('cursor-move');
+          
+          // Drag start event
+          slot.addEventListener('dragstart', function(e) {
+            draggedElement = this;
+            sourceSlot = this.getAttribute('data-slot-id');
+            
+            // Add a class to show it's being dragged
+            setTimeout(() => {
+              this.classList.add('opacity-50');
+            }, 0);
+            
+            // Set data for drag operation
+            e.dataTransfer.setData('text/plain', this.innerHTML);
+            e.dataTransfer.effectAllowed = 'move';
+          });
+          
+          // Drag end event
+          slot.addEventListener('dragend', function() {
+            this.classList.remove('opacity-50');
+          });
+        }
+      });
+      
+      // Set up drop targets (all slots)
+      slots.forEach(slot => {
+        // Prevent default to allow drop
+        slot.addEventListener('dragover', function(e) {
+          e.preventDefault();
+          this.classList.add('bg-gray-700');
+        });
+        
+        // Handle drag leave
+        slot.addEventListener('dragleave', function() {
+          this.classList.remove('bg-gray-700');
+        });
+        
+        // Handle drop event
+        slot.addEventListener('drop', function(e) {
+          e.preventDefault();
+          this.classList.remove('bg-gray-700');
+          
+          if (draggedElement !== this) {
+            const targetSlot = this.getAttribute('data-slot-id');
+            
+            // Store the target's content before replacing it
+            const targetContent = this.innerHTML;
+            const targetHasPlayer = this.querySelector('img') !== null;
+            
+            // Replace target with dragged content
+            this.innerHTML = draggedElement.innerHTML;
+            
+            // If target was an empty slot, make it draggable now
+            if (!targetHasPlayer) {
+              this.setAttribute('draggable', 'true');
+              this.classList.add('cursor-move');
+              this.classList.remove('justify-center');
+            }
+            
+            // If target had content (another player or invite button)
+            if (targetHasPlayer) {
+              // Replace source with target's content
+              draggedElement.innerHTML = targetContent;
+            } else {
+              // Target was an empty slot, so make source an invite slot
+              draggedElement.innerHTML = `
+                <div class="text-center">
+                  <div class="text-4xl text-text-heading mb-1">+</div>
+                  <p class="text-sm text-text-primary">Invite Player</p>
+                </div>
+              `;
+              draggedElement.removeAttribute('draggable');
+              draggedElement.classList.remove('cursor-move');
+              draggedElement.classList.add('justify-center');
+            }
+            
+            // Log the move (for debugging or server updates)
+            console.log(`Moved player from slot ${sourceSlot} to slot ${targetSlot}`);
+          }
+        });
+      });
+      
+      // Add some CSS for drag and drop visual feedback
+      const style = document.createElement('style');
+      style.textContent = `
+        .cursor-move {
+          cursor: move;
+        }
+        .party-slot.opacity-50 {
+          opacity: 0.5;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+  <!-- Open Lobbies Modal Script -->
+  <script>
+    function toggleLobbyModal(show) {
+      const overlay = document.getElementById('lobbyModal');
+      overlay.style.display = show ? 'flex' : 'none';
+    }
+  </script>
+</body>
+
+<!-- Invite Player Modal -->
+<div class="hidden fixed inset-0 bg-black bg-opacity-60 items-center justify-center z-50" id="invitePlayerModal">
+  <div class="bg-bg-primary w-11/12 max-w-md rounded-lg shadow-lg overflow-hidden">
+    <!-- Modal header -->
+    <div class="bg-button-bg text-button-text p-4 flex justify-between items-center">
+      <h2 class="m-0 text-xl font-semibold">Invite Player</h2>
+      <button class="bg-transparent border-none text-button-text text-xl cursor-pointer" onclick="toggleInviteModal(false)">&times;</button>
+    </div>
+
+    <!-- Modal content -->
+    <div class="p-6">
+      <!-- Username input -->
+      <div class="mb-4">
+        <label for="usernameInput" class="block text-text-heading mb-2">Username:</label>
+        <input type="text" id="usernameInput" placeholder="Type a username..." class="w-full bg-bg-primary text-text-primary border border-text-heading rounded p-2 focus:outline-none focus:ring-1 focus:ring-button-bg">
+      </div>
+      
+      <!-- Send invite button -->
+      <button class="w-full py-2 px-4 bg-button-bg hover:bg-button-bg-hover text-button-text rounded cursor-pointer mb-6">Send Invite</button>
+      
+      <!-- Tabs -->
+      <div class="border-b border-text-heading mb-3">
+        <nav class="flex space-x-4" aria-label="Invite Tabs">
+          <button id="recentPlayersTab" class="border-button-bg text-xl font-bold text-text-heading whitespace-nowrap px-1 border-b-2">
+            Recent Players
+          </button>
+          <button id="hirableNPCsTab" class="border-transparent text-xl font-bold text-text-primary hover:text-text-heading hover:border-gray-500 whitespace-nowrap px-1 border-b-2">
+            Hirable NPCs
+          </button>
+        </nav>
+      </div>
+      
+      <!-- Recent Players Tab Content -->
+      <div id="recentPlayersContent" class="max-h-64 overflow-y-auto">
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerOne</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerTwo</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerThree</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerFour</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">PlayerFive</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Invite</button>
+        </div>
+      </div>
+      
+      <!-- Hirable NPCs Tab Content -->
+      <div id="hirableNPCsContent" class="max-h-64 overflow-y-auto hidden">
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Mercenary (Level 20)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Healer (Level 18)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Tank (Level 22)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+        <div class="flex justify-between items-center py-2 border-b border-text-heading">
+          <span class="text-text-primary">Archer (Level 19)</span>
+          <button class="py-1 px-3 bg-button-bg hover:bg-button-bg-hover text-button-text rounded text-sm cursor-pointer">Hire</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Invite Player Modal Script -->
+<script>
+  function toggleInviteModal(show) {
+    const overlay = document.getElementById('invitePlayerModal');
+    overlay.style.display = show ? 'flex' : 'none';
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+  // Handle visibility of level range based on party visibility setting
+  const publicRadio = document.querySelector('input[name="partyVisibility"][value="public"]');
+    const privateRadio = document.querySelector('input[name="partyVisibility"][value="private"]');
+    const levelRangeContainer = document.getElementById('levelRangeContainer');
+    
+    // Set initial state
+    levelRangeContainer.style.display = publicRadio.checked ? 'block' : 'none';
+    
+    // Add event listeners to radio buttons
+    publicRadio.addEventListener('change', function() {
+      if (this.checked) {
+        levelRangeContainer.style.display = 'block';
+      }
+    });
+    
+    privateRadio.addEventListener('change', function() {
+      if (this.checked) {
+        levelRangeContainer.style.display = 'none';
+      }
+    });
+
+    // Add click event to all invite player slots
+    const inviteSlots = document.querySelectorAll('.party-slot:not([draggable="true"])');
+    inviteSlots.forEach(slot => {
+      slot.addEventListener('click', function() {
+        toggleInviteModal(true);
+      });
+    });
+    
+    // Tab switching for invite modal
+    const recentPlayersTab = document.getElementById('recentPlayersTab');
+    const hirableNPCsTab = document.getElementById('hirableNPCsTab');
+    const recentPlayersContent = document.getElementById('recentPlayersContent');
+    const hirableNPCsContent = document.getElementById('hirableNPCsContent');
+    
+    // Recent Players Tab
+    recentPlayersTab.addEventListener('click', function() {
+      // Update tab styles
+      recentPlayersTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      recentPlayersTab.classList.add('border-button-bg', 'text-text-heading');
+      
+      hirableNPCsTab.classList.remove('border-button-bg', 'text-text-heading');
+      hirableNPCsTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      
+      // Show/hide content
+      recentPlayersContent.classList.remove('hidden');
+      hirableNPCsContent.classList.add('hidden');
+    });
+    
+    // Hirable NPCs Tab
+    hirableNPCsTab.addEventListener('click', function() {
+      // Update tab styles
+      hirableNPCsTab.classList.remove('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      hirableNPCsTab.classList.add('border-button-bg', 'text-text-heading');
+      
+      recentPlayersTab.classList.remove('border-button-bg', 'text-text-heading');
+      recentPlayersTab.classList.add('border-transparent', 'text-text-primary', 'hover:text-text-heading', 'hover:border-gray-500');
+      
+      // Show/hide content
+      hirableNPCsContent.classList.remove('hidden');
+      recentPlayersContent.classList.add('hidden');
+    });
+  });
+
+    // Level Range Slider functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const minHandle = document.getElementById('minHandle');
+    const maxHandle = document.getElementById('maxHandle');
+    const selectedRange = document.getElementById('selectedRange');
+    const minLevelDisplay = document.getElementById('minLevelDisplay');
+    const maxLevelDisplay = document.getElementById('maxLevelDisplay');
+    
+    let minValue = 1;
+    let maxValue = 100;
+    const min = 1;
+    const max = 100;
+    
+    function updateRange() {
+      const minPercent = ((minValue - min) / (max - min)) * 100;
+      const maxPercent = ((maxValue - min) / (max - min)) * 100;
+      
+      // Update the position of handles
+      minHandle.style.left = minPercent + '%';
+      maxHandle.style.left = maxPercent + '%';
+      
+      // Update the selected range visual
+      selectedRange.style.left = minPercent + '%';
+      selectedRange.style.right = (100 - maxPercent) + '%';
+      
+      // Update text displays
+      minLevelDisplay.textContent = 'Min: ' + minValue;
+      maxLevelDisplay.textContent = 'Max: ' + maxValue;
+    }
+    
+    function handleDrag(handle, event) {
+      event.preventDefault();
+      const slider = handle.parentElement;
+      const sliderRect = slider.getBoundingClientRect();
+      
+      function onMove(moveEvent) {
+        const newX = moveEvent.clientX - sliderRect.left;
+        let newPercent = Math.max(0, Math.min(100, (newX / sliderRect.width) * 100));
+        let newValue = Math.round(min + (newPercent / 100) * (max - min));
+        
+        if (handle === minHandle) {
+          minValue = Math.min(newValue, maxValue - 1);
+        } else {
+          maxValue = Math.max(newValue, minValue + 1);
+        }
+        
+        updateRange();
+      }
+      
+      function onUp() {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+      
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    }
+    
+    minHandle.addEventListener('mousedown', function(event) {
+      handleDrag(minHandle, event);
+    });
+
+    maxHandle.addEventListener('mousedown', function(event) {
+      handleDrag(maxHandle, event);
+    });
+
+    // Initialize
+    updateRange();
+
+  });
+</script>
+</html>
