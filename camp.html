@@ -340,103 +340,26 @@
           <div class="bg-panel-bg p-4 rounded-lg shadow border border-text-heading mb-4">
             <div class="flex justify-between items-center mb-4">
               <h3 class="text-xl font-semibold text-text-heading">Idle Activity</h3>
-              <button id="addActivityBtn" class="p-1.5 bg-button-bg hover:bg-button-bg-hover text-button-text rounded">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
-              </button>
             </div>
             
             <!-- Activity List -->
             <div id="activityList" class="space-y-4">
               <!-- Activity items will be added here -->
-                <div class="relative w-full">
-                  <select class="w-full bg-bg-primary text-text-primary border border-text-heading rounded p-2">
+                <div class="relative w-full flex gap-4">
+                  <select class="flex-1 bg-bg-primary text-text-primary border border-text-heading rounded p-2">
                     <option value="firemaking">Firemaking</option>
                     <option value="smelting">Smelting</option>
                     <option value="smithing">Smithing</option>
-                    <option value="add" class="text-button-bg font-medium">+ Add New Activity</option>
                   </select>
-              </div>
-            </div>
-            
-            <!-- Add Activity Modal (hidden by default) -->
-            <div id="activityModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-              <div class="bg-panel-bg p-6 rounded-lg w-96">
-                <h3 class="text-xl font-semibold text-text-heading mb-4">Add New Activity</h3>
-                <div class="space-y-4">
-                  <div>
-                    <label class="block text-text-primary text-sm font-medium mb-1">Activity Type</label>
-                    <select class="w-full bg-panel-bg-darker border border-panel-border rounded px-3 py-2 text-text-primary">
-                      <option value="firemaking">Firemaking</option>
-                      <option value="smelting">Smelting</option>
-                      <option value="smithing">Smithing</option>
-                    </select>
-                  </div>
-                  <div class="flex justify-end space-x-3 mt-6">
-                    <button id="cancelActivityBtn" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded">
-                      Cancel
-                    </button>
-                    <button id="saveActivityBtn" class="px-4 py-2 bg-button-bg hover:bg-button-bg-hover text-button-text rounded">
-                      Add Activity
-                    </button>
-                  </div>
+                  <select class="flex-1 bg-bg-primary text-text-primary border border-text-heading rounded p-2">
+                    <option value="">Select Recipe</option>
+                    <option value="fir_charcoal">Fir Charcoal</option>
+                    <option value="elm_charcoal">Elm Charcoal</option>
+                    <option value="beech_charcoal">Beech Charcoal</option>
+                  </select>
                 </div>
-              </div>
             </div>
           </div>
-
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const activitySelect = document.querySelector('.activity-item select');
-            const activityModal = document.getElementById('activityModal');
-            const addActivityBtn = document.getElementById('addActivityBtn');
-            const cancelActivityBtn = document.getElementById('cancelActivityBtn');
-            const saveActivityBtn = document.getElementById('saveActivityBtn');
-            
-            // Handle dropdown selection
-            if (activitySelect) {
-              activitySelect.addEventListener('change', function(e) {
-                if (e.target.value === 'add') {
-                  activityModal.classList.remove('hidden');
-                  // Reset to first option
-                  e.target.value = 'firemaking';
-                }
-              });
-            }
-            
-            // Add Activity button
-            if (addActivityBtn) {
-              addActivityBtn.addEventListener('click', function() {
-                activityModal.classList.remove('hidden');
-              });
-            }
-            
-            // Cancel button in modal
-            if (cancelActivityBtn) {
-              cancelActivityBtn.addEventListener('click', function() {
-                activityModal.classList.add('hidden');
-              });
-            }
-            
-            // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
-              if (event.target === activityModal) {
-                activityModal.classList.add('hidden');
-              }
-            });
-            
-            // Save new activity
-            if (saveActivityBtn) {
-              saveActivityBtn.addEventListener('click', function() {
-                const activityType = document.querySelector('#activityModal select').value;
-                // Here you would typically add the new activity to the list
-                // For now, we'll just close the modal
-                activityModal.classList.add('hidden');
-              });
-            }
-          });
-          </script>
           
         </div>
         
